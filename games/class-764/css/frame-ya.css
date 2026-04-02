@@ -1,0 +1,33 @@
+html, body {
+    height:100%;
+    width:100%;
+    margin:0;
+}
+.body-frame {
+    height: inherit;
+    width: inherit;
+    background-image: url(../assets/frame/frameBorder.png); /* Путь к фоновому рисунку */
+    background-position: center; /* Положение фона */
+    background-repeat: no-repeat; /* Повторение */
+    background-size: calc(1600 * (100vh / 1700));
+}
+.root {
+    background-color: white;
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    height: inherit;
+    width: inherit;
+    max-height: calc(2300 * (100vw / 1100));
+    max-width: calc(1500 * (100vh / 1700));
+}
+.body-space {
+    background-image: url(../assets/frame/frameBack.jpg);
+}
+.waiter {
+    display: block;
+    position: relative;
+    width: 20%;
+    margin: auto;
+    top: 40%;
+}

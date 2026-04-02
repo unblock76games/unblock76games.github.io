@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta http-equiv="pragma" content="no-cache" />
+
+    
+    <title>Amazing Bubble Breaker</title>
+    
+
+    <meta name="description" content="<game.desc>">
+    <meta name="keywords" content="<game.keywords>">
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+
+    <!-- IOS full screen -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+
+    <!-- APPLE META TAGS -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-mobile-web-app-title" content="<game.name>">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!-- APPLE ICONS -->
+    <link rel="apple-touch-icon" sizes="60x60" href="https://<game.domain>.amazinghedgehog.com/assets/web/60.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://<game.domain>.amazinghedgehog.com/assets/web/76.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="https://<game.domain>.amazinghedgehog.com/assets/web/120.png" />
+    <link rel="apple-touch-icon" sizes="196x196" href="https://<game.domain>.amazinghedgehog.com/assets/web/196.png" />
+
+    <!-- GOOGLE META TAGS -->
+    <meta name="google" content="notranslate" />
+    <meta name="theme-color" content="#317EFB" />
+
+
+    <!--TWITTER CARD-->
+    <link rel="me" href="https://twitter.com/hedgehogamazing">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@hedgehogamazing">
+    <meta name="twitter:creator" content="@hedgehogamazing">
+    <meta name="twitter:title" content="Play <game.title>" /> <!--twitter_title-->
+    <meta name="twitter:description" content="Play <game.title> - best word search game for mobile and web"> <!--twitter_description-->
+    <meta name="twitter:app:name:iphone" content="<game.title>">
+    <meta name="twitter:app:id:iphone" content="<game.iphoneid>">
+    <meta name="twitter:app:url:iphone" content="<game.iphonelink>">
+    <meta name="twitter:app:name:ipad" content="<game.title>">
+    <meta name="twitter:app:id:ipad" content="<game.iphoneid>">
+    <meta name="twitter:app:name:googleplay" content="<game.title>">
+    <meta name="twitter:app:id:googleplay" content="<game.title>">
+    <meta name="twitter:app:url:googleplay" content="<game.androidbundle>">
+    <meta name="twitter:image" content="https://amazinghedgehog.com/images/games/bubble-connect.png" />
+    <meta name="twitter:data2" content="Black">
+    <meta name="twitter:label2" content="Color">
+
+    <!--OPEN GRAPH-->
+    <meta property="og:title" content="<game.title>" />
+    <meta property="og:description" content="<game.desc>" />
+    <meta property="og:site_name" content="<game.title>" />
+    <meta property="og:url" content="https://<game.domain>.amazinghedgehog.com/" />
+    <meta property="og:type" content="game" />
+    <meta property="og:locale" content="en" />
+    <meta property="og:image" content="https://amazinghedgehog.com/images/games/bubble-connect.png" />
+    <meta property="fb:app_id" content="#" />
+
+    <script src="scripts/GameAnalytics.js"></script>
+    <script src="/poki-sdk.js"></script>
+
+    <script type="text/javascript">
+        function addScript(src, buster, callback) {
+            var s = document.createElement('script');
+            s.setAttribute('src', src + '?v=' + buster);
+            if (typeof callback === 'function') {
+                s.onload = callback;
+            }
+            document.body.appendChild(s);
+        }
+    </script>
+</head>
+<body>
+
+    <div id="spinner"></div>
+    <div id="content"></div>
+    <div id="orientation"></div>
+
+    <script type="text/javascript">
+        addScript('build.js', Date.now(), function () {
+            addScript('amazing.min.js', build, function () {
+                WordGame.Game.CFG.APP_VERSION = build;
+                WordGame.Game.CFG.POKI = true;
+                var game = new WordGame.Game();
+                console.log('Game has been loaded : ' + WordGame.Game.CFG.APP_VERSION);
+            });
+        });
+
+    </script>
+
+    <noscript style="position: absolute; top: 0; background-color: #FFF; width: 100%; padding: 2%;">
+        <content itemscope="" itemtype="https://schema.org/VideoGame">
+            <h1 itemprop="name"><game.title></h1>
+            <meta itemprop="url" content="https://<game.domain>.amazinghedgehog.com/">
+            <metadata>
+                <meta itemprop="playMode" content="SinglePlayer">
+
+                <p>Genre: <span itemprop="genre">Arcade Game / Puzzle </span></p>
+                <div itemscope itemtype="http://schema.org/AggregateRating" itemprop="aggregateRating">
+                    <div>Average Rating: <b itemprop="ratingValue">4.76</b>/<b itemprop="bestRating">5</b></div>
+                    <meta itemprop="reviewCount" content="64">
+                </div>
+                <link itemprop="applicationCategory" content="Game">
+                <link itemprop="applicationSubCategory" content="bubble,connect,dots">
+                <meta itemprop="contentRating" content="Everyone">
+                <meta itemprop="playMode" content="SinglePlayer">
+            </metadata>
+
+            <p>Play in the most popular word search game in the word! Computer, Tablet, Phone, iPad, iPhone, and iPod.</p>
+            <p>Play 100% free on Computer, Tablet, Phone, iPad, iPhone, and iPod.</p>
+            <div itemprop="description">
+                <p>Highly addictive puzzle game about connecting the bubbles.</p>
+                <p>Connect same colored bublbles to get points. Connect four horizontally, vertically or in a shape of a squre to score even more.</p>
+                <p>Connect five bubbles to get wildbubble powerup.</p>
+                <p>Watch out for ticking bombs, if not defused in time they can make you lose.</p>
+            </div>
+
+            <p>Features</p>
+            <ul>
+                <li>★100% free</li>
+                <li>★Classic, fun and entertaining gameplay </li>
+                <li>★Colorful graphics</li>
+                <li>★Online ranking system  </li>
+                <li>★In-game statistics </li>
+                <li>★Works great on mobile devices with full iOS, Android and Windows Phone support.</li>
+            </ul>
+
+            <p><a href=".">Please enable JavaScript to play now!</a></p>
+
+            <h2>More information</h2>
+            <ul>
+                <li><a href="http://amazinghedgehog.com/">Amazing Hedgehog Studio Website</a></li>
+                <li><a href="https://twitter.com/hedgehogamazing">Amazing Hedgehog Studio on Twitter</a></li>
+                <li><a href="https://www.facebook.com/AmazingHedgehogStudio/">Amazing Hedgehog Studio on Facebook</a></li>
+            </ul>
+            <h2>More platforms</h2>
+            <ul>
+
+                <li><a href="https://itunes.apple.com/app/id1464228524">Play Amazing Bubble Connect on iPhone, iPad and iPod.</a></li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.amazinghedgehog.amazingbubbleconnect">Play Amazing Bubble Connect on Android phone and tablet.</a></li>
+                <li><a href="https://www.microsoft.com/store/apps/9nnbjqrb715j">Play Bubble Connect on Windows.</a></li>
+
+
+            </ul>
+
+        </content>
+    </noscript>
+
+    <div class="bg-modal">
+        <div class="modal-contents">
+            <div id="header">
+                <h2>Change Name</h2>
+                <div class="close">+</div>
+            </div>
+
+            <form action="" class="form">
+                <input id="name" type="text" placeholder="Name">
+
+            </form>
+            <div class="buttons">
+                <button id="btnCancel" class="material-button-raised red">Cancel</button>
+                <button id="btnOK" class="material-button-raised">OK</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<div class="bg-modal">
+    <div class="modal-contents">
+        <div id="header">
+            <h2>Change Name</h2>
+            <div class="close">+</div>
+        </div>
+
+        <form action="" class="form">
+            <input id="name" type="text" placeholder="Name">
+
+        </form>
+        <div class="buttons">
+            <button id="btnCancel" class="material-button-raised red">Cancel</button>
+            <button id="btnOK" class="material-button-raised">OK</button>
+        </div>
+    </div>
+</div>
+</html>

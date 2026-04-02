@@ -1,0 +1,26 @@
+* { margin:0; padding:0; }
+html, body
+{
+	width:100%; height:100%;
+    position: fixed;
+    font: 1em Verdana, Geneva, sans-serif;
+}
+
+canvas
+{
+	padding-left: 0;
+	padding-right: 0;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display:block;
+    -ms-touch-action: none;
+}
+body {
+    background-color: #fff8d5;
+}
+@font-face
+{
+	font-family: LuckiestGuy-Regular;
+	src: url(LuckiestGuy-Regular.ttf) format('truetype');
+}

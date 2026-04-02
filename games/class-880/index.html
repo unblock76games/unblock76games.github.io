@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta charset="utf-8">
+
+    <title>Bubble Shoot V2.3</title>
+    <meta name="robots" content="noindex,nofollow" />
+
+    <style>
+        canvas {
+            background-color:#FF7800;
+        }
+
+        body {
+            background-color:#ffffff;
+        }
+    </style>
+
+     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
+<script src = "/poki-sdk.js"></script>
+    <script type="text/javascript" src="estatica.js"></script>
+     <script type="text/javascript" src="game.min.js"></script>
+    <script type="text/javascript" src="pokiSystem.js"></script>
+
+    <script type="text/javascript" src="fondoManager.js"></script>
+    <script type="text/javascript" src="coreFunctions.js"></script>
+ 
+
+ </head>
+ <body>
+  
+   <script type="text/javascript">
+	var soundOff      = false;
+       //SET LEVELS
+     (
+		function() {
+			"use strict";
+			/**
+			 * The message types that comes to us from the eazeGame client.
+			 * @readonly
+			 * @enum {string}
+			 */
+			var scope          = {};
+
+			
+		Object.defineProperties(window, {
+				
+				 quickstartGame : {
+					value : function() {
+						skipMenu = true;							
+						if (game != null && game.system != null && game.system.rutaGame != null)
+                            _GLOBALE._CORE.quickStart();
+						console.log("game quick start");
+						}
+				},			
+				getScore : {
+					value : function() {
+							return window._globalScore;
+					}
+				},
+				muteGame : {
+					value : function() {
+						if (game != null && game.system != null && game.system.rutaGame != null)			  	
+						{
+							game.audio.muteSound();
+							game.audio.muteMusic();						
+							 game.system.rutaGame.assets.soundOn.visible = false;
+                                    game.system.rutaGame.assets.soundOff.visible = true;
+							game.system.rutaGame.muteSound = true;
+							soundOff = true;
+						}	
+					}
+				},
+				unmuteGame : {
+					value : function() {
+						if (game != null && game.system != null && game.system.rutaGame != null)			  	  
+						{
+							game.audio.unmuteSound();
+							game.audio.unmuteMusic();
+							game.system.rutaGame.assets.soundOn.visible = true;
+                                    game.system.rutaGame.assets.soundOff.visible = false;
+							game.system.rutaGame.muteSound = false;
+							soundOff = false;
+						}       
+					}
+				},
+				quickstopGame : {
+					value : function() {
+							if (game != null && game.system != null && game.system.rutaGame != null)			  	
+							   game.system.rutaGame.finalForzado();
+					}
+				},				
+				setTimeToEnd : {
+					value : function(time) {
+						
+						if (game != null && game.system != null && game.system.rutaGame != null)			
+							game.system.rutaGame.setTime(time);						
+						else				
+							setTimeout(window.setTimeToEnd.bind(window,time), 60);						
+					}
+				},
+				
+				onGameUpdate : {
+					value : function(scoreAdded) {
+						if (window.gameFinished) return;
+						console.log("GAME score UPDATED WAS CALLED!!! " + scoreAdded, getScore());
+					}
+				},
+				onGameLoad : {
+					value : function onGameLoad(time) {
+						if (window.gameFinished) return;
+						console.log("GAME LOAD WAS CALLED!!! ", time);
+						
+					}
+				},
+
+				onGameStart : {
+					value : function onGameStart() {
+						if (window.gameFinished) return;						
+						if (soundOff) {						
+							game.audio.muteSound();
+                                    game.audio.muteMusic();
+                                    game.system.rutaGame.assets.soundOn.visible = false;
+                                    game.system.rutaGame.assets.soundOff.visible = true;
+                                    game.system.rutaGame.muteSound = true;						
+						} else {
+							game.audio.unmuteSound();
+                                    game.audio.unmuteMusic();
+                                    game.system.rutaGame.assets.soundOn.visible = true;
+                                    game.system.rutaGame.assets.soundOff.visible = false;
+                                    game.system.rutaGame.muteSound = false;
+						}
+						console.log("GAME START WAS CALLED!!! ");
+					}
+				},
+
+				onGameEnd : {
+					value : function onGameEnd() {
+						if (window.gameFinished) return;
+						console.log("GAME END WAS CALLED!!! ", getScore());
+						Object.defineProperty(window, "gameFinished", {
+							value : true
+						});
+					}
+				}
+			});
+
+
+			//end eazegames functions
+		}
+	)();
+
+      // SetLevels("1");
+
+     
+       var anchoGame = 1080;
+       var altoGame = 1920;
+    
+        var LANGS_OBJ    = {
+		"en" : 0,
+		"de" : 1,
+		"nl" : 2
+	};
+	var selectedLang = LANGS_OBJ.en;
+	try {
+		var search       = location.search.substring(1);
+		var searchParams = JSON.parse(
+			"{\"" + decodeURI(search).replace(/"/g, "\\\"").replace(/&/g, "\",\"").replace(/=/g, "\":\"") + "\"}");
+
+		selectedLang = LANGS_OBJ[ searchParams.locale ] || LANGS_OBJ.en;
+	} catch (e) {}
+
+	//lang
+	var lenguajeManual = true;
+	var lenguajeEl     = selectedLang;
+	//end lang
+  
+
+       var hiloCargaInicial = null;     
+        hiloCargaInicial = setInterval(cargaInicial,100);
+		 iniPoki();
+	  PokiSDK.gameLoadingStart();			
+  //quickstartGame();
+       function cargaInicial()
+       {
+           clearInterval(hiloCargaInicial);
+        
+           if(isset(game) && isset(game.system) && game.system != null)
+           {             
+               if (game.system.juegoCargado)
+               {
+            
+                   if(isset(game.system.escenaMain)) {                       
+                        game.system.setScene(game.system.escenaMain);                     
+                       clearInterval(hiloCargaInicial);
+				  onGameLoad();
+				  PokiSDK.gameLoadingFinished();	
+                       return;
+                   }
+               }
+           }
+           hiloCargaInicial = setInterval(cargaInicial,100);
+       }
+    
+  
+       function isset(variable) {
+           return typeof variable !== typeof undefined;
+       }
+      
+
+  
+
+       document.addEventListener("pause", onPause, false);
+       document.addEventListener("resume", onResume, false);
+
+         function onPause() {
+           // Handle the pause event
+           console.log("en pause!!");
+           if(game != null)
+           {
+               if(game.system.rutaGame != null) {
+                    if(!game.system.rutaGame.muteSound)
+                   {
+                       game.audio.muteSound();
+                       game.audio.muteMusic();
+                    }
+                  
+               }
+           }
+       }
+     
+      function onResume() {
+           // Handle the resume event
+           console.log("en resumen!!");
+           if(game != null)
+           {
+               if(game.system.rutaGame != null) {
+                   if(!game.system.rutaGame.muteSound)
+                   {
+                       game.audio.unmuteSound();
+                       game.audio.unmuteMusic();
+                    }
+                    
+               }
+           }
+       }
+
+
+       //window.onblur=function()
+       window.onblur = function()
+       {
+
+//           console.log("en pause!!");
+           if(game != null)
+           {
+               if(game.system.rutaGame != null) {
+                    if(!game.system.rutaGame.muteSound)
+                   {
+                       game.audio.muteSound();
+                       game.audio.muteMusic();
+                    }
+                  
+               }
+           }
+
+       }
+       window.onclick = function() {
+
+           this.focus();
+
+       }
+
+       //window.onfocus=function()
+       window.onfocus = function()
+       {
+//           console.log("en resumen!!");
+           if(game != null)
+           {
+               if(game.system.rutaGame != null) {
+                   if(!game.system.rutaGame.muteSound)
+                   {
+                       game.audio.unmuteSound();
+                       game.audio.unmuteMusic();
+                    }
+                 
+               }
+           }
+
+       }
+	   window.isMobile   = {
+		Android : function() {
+			return navigator.userAgent.match(/Android/i);
+		},
+		BlackBerry : function() {
+			return navigator.userAgent.match(/BlackBerry/i);
+		},
+		iOS : function() {
+			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+		},
+		Opera : function() {
+			return navigator.userAgent.match(/Opera Mini/i);
+		},
+		Windows : function() {
+			return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+		},
+		any : function() {
+			return (
+				isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()
+			);
+		}
+	}
+
+
+
+   </script>
+ <div id = "overlay" >
+        <div id = "gameDiv" >
+			<canvas id="canvas"></canvas>
+        </div>          
+</div>
+ </body>
+ </html>

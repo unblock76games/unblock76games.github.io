@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>paint_test</title>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	
+	<!-- Made with Construct, the game and app creator :: https://www.construct.net -->
+	<meta name="generator" content="Scirra Construct">
+
+
+
+	<link rel="manifest" href="appmanifest.json">
+
+	<meta name="theme-color" content="#cc8bff">
+	<link rel="stylesheet" href="style.css">
+
+
+<script src="/poki-sdk.js"></script>
+<style>
+
+    canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #ffc639;
+    }
+
+    #custom-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+		background-color: #d799f7;
+        z-index: 1000;
+        transition: opacity 0.5s;
+        opacity: 1;
+		background-image: url('bgTile.png');
+    }
+	
+	
+	body {
+	 	display: flex;
+	 	justify-content: center;
+	 	align-items: center;
+	  	height: 100vh;
+	  	width: 100vw;
+	  	margin: 0;
+ 	 	padding: 0;
+	  	background: #357196;
+	}
+	.loading-bar-container {
+ 		position: absolute;
+ 		width: 70%;
+ 		height: 20px;
+ 	 	top: 70%;
+ 	 	left: 15%;
+		border: solid 0.2em #e060e0;
+		border-radius: 0.3em;
+		background: linear-gradient(rgba(25, 28, 35, 0.4), rgba(45, 51, 65, 0.4));
+	}
+
+	.loading-bar {
+ 	 	height: 100%;
+ 	 	width: 0%;
+ 	 	background-color: #72ea36;
+ 	 	border-radius: 2px; /* Add this line to round the corners of the loading bar */
+	}
+	
+	.fade-out {
+  		opacity: 1;
+  		transition: opacity 0.5s ease-in-out;
+	}
+	
+	#loading-img {
+        position: absolute;
+        bottom: 20px; /* Регулируйте эту величину по желанию */
+        left: calc(50% - 25px); /* Регулируйте эту величину по желанию (ширина картинки 50px) */
+        width: 50px; /* Регулируйте эту величину по желанию (ширина картинки 50px) */
+        height: 50px; /* Регулируйте эту величину по желанию (высота картинки 50px) */
+        animation: spin 1s linear infinite; /* Анимация вращения */
+    }
+
+    /* Анимация вращения */
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+	
+	#logo {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+		width: 350px;
+		transform:translate(-50%,-50%);
+    }
+	
+	.progress-text-container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#progress-text {
+		color: #fff;
+		font-size: 16px;
+		font-weight: 600;
+		font-family: "Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+		margin-bottom: 42px;
+	}
+
+	
+</style>
+
+<body>
+	<div id="custom-loader">
+		<div class="loading-bar-container">
+			<div class="loading-bar" id="loading-bar"></div>
+			<div class="progress-text-container">
+				<div id="progress-text">0%</div>
+			</div>
+		</div>
+		<img src="logo.png" id="logo">
+		<img src="loading.png" id="loading-img">
+	</div>
+</body>
+	
+<script>
+
+window.addEventListener('keydown', ev => {
+    if (['ArrowDown', 'ArrowUp', ' '].includes(ev.key)) {
+        ev.preventDefault();
+    }
+});
+window.addEventListener('wheel', ev => ev.preventDefault(), { passive: false });
+
+    let prog = 0;
+    let start_load = 0;
+    let full_load = 0;
+    let poki_init = false;
+	
+	
+	function load_prog(numb) {
+		prog = numb;
+		if (prog != 1) { 
+			updateProgress(Math.floor(prog * 85) + start_load);
+		}
+		if (full_load == 1) { 
+			updateProgress(Math.floor(prog * 85) + start_load);
+		}
+		
+	}
+	
+	function updateProgress(percent) {
+        document.getElementById('progress-text').innerText = percent + '%';
+		document.getElementById('loading-bar').style.width = percent + '%';
+    }
+	
+	function onGameLoaded() {
+	
+			full_load = 1;
+			updateProgress(Math.floor(100));
+            var customLoader = document.getElementById('custom-loader');
+            customLoader.style.opacity = '0';
+			poki_gameLoadingFinished()
+            setTimeout(() => {
+                customLoader.style.display = 'none';
+            }, 500);
+     }
+	 
+	function next_lay() {
+		if (poki_init) {
+			c3_callFunction("start");
+		}
+	}
+	 
+	PokiSDK.init().then(() => {
+    	console.log("Poki SDK successfully initialized");
+	poki_init = true;
+		}).catch(() => {
+    console.log("Initialized, something went wrong, load you game anyway");
+		poki_init = true;
+	});
+	
+	function poki_gameLoadingFinished() {
+    if (poki_init) {
+        PokiSDK.gameLoadingFinished();
+    } else {
+        const checkInitInterval = setInterval(function() {
+            if (poki_init) {
+                clearInterval(checkInitInterval);
+                PokiSDK.gameLoadingFinished();
+            }
+        }, 100); 
+      }
+    }
+	
+	
+	function poki_gameplayStart() {
+		PokiSDK.gameplayStart();
+	}
+
+	function poki_gameplayStop() {
+		PokiSDK.gameplayStop();
+	}
+	
+	function poki_rewardedBreak(tag) {
+		c3_callFunction("gameplayStop");
+		PokiSDK.rewardedBreak(() => {
+		c3_callFunction("rewardedBreakStart");
+	}).then((success) => {
+		if(success) {
+		c3_callFunction("rewardedBreakComplete", tag);
+	} else {
+
+	}
+		c3_callFunction("rewardedBreakFinish");
+		});
+	}
+	
+	function poki_commercialBreak() {
+		
+		PokiSDK.commercialBreak(() => {
+		  c3_callFunction("pokiCommercialBreak", ["start"]);
+		}).then(() => {
+		  c3_callFunction("pokiCommercialBreak", ["finish"]);
+		  c3_callFunction("gameplayStart");
+		});
+	}
+	
+		async function loadExternalResources() {
+        try {
+            await Promise.all([
+                fetch('scripts/main.js').then(response => {
+                    if (response.ok) {
+                        start_load += 3;
+                        updateProgress(Math.floor(prog * 85) + start_load);
+                    } else {
+                    }
+                }),
+                fetch('data.json').then(response => {
+                    if (response.ok) {
+                        start_load += 2;
+                        updateProgress(Math.floor(prog * 85) + start_load);
+                    } else {
+                    }
+                }),
+                fetch('scripts/c3main.js').then(response => {
+                    if (response.ok) {
+                        start_load += 10;
+                        updateProgress(Math.floor(prog * 85) + start_load);
+                    } else {
+                    }
+                })
+            ]);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    loadExternalResources();
+
+		
+
+</script>
+</head> 
+ 
+<body>
+
+	
+
+<script>
+if (location.protocol.substr(0, 4) === "file")
+{
+	alert("Web exports won't work until you upload them. (When running on the file: protocol, browsers block many features from working for security reasons.)");
+}
+</script>
+	
+	<noscript>
+		<div id="notSupportedWrap">
+			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
+			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+		</div>
+	</noscript>
+	<script src="scripts/modernjscheck.js"></script>
+	<script src="scripts/supportcheck.js"></script>
+	<script src="scripts/main.js" type="module"></script>
+
+
+</body> 
+</html>

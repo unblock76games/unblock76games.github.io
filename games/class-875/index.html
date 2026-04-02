@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <link rel="stylesheet" href="src/css/style.css" />
+    <meta name="robots" content="noindex,nofollow" />
+    <script src="src/js/vendor/ruffle/ruffle.js"></script>
+    <script src="/poki-sdk.js"></script>
+    <script src="src/js/vendor/GameAnalytics/GameAnalytics.min.js"></script>
+    <script src="src/js/analytics.js"></script>
+    <script src="src/js/ads.js"></script>
+    <script src="src/js/gamepad.js"></script>
+  </head>
+  <body>
+    <div id="container" class="container" onclick="fsTest()">
+      <div id="loadingAnim" class="loading-anim"><img src="./loading/loading.gif" /></div>
+      <div id="game" class="game"></div>
+      <div id="gamepadBG" class="gamepad-bg"></div>
+      <canvas id="gamepad" class="gamepad"> Your browser does not support the HTML canvas tag.</canvas>
+    </div>
+
+    <script>
+      ads.gameLoadingStart();
+      window.addEventListener("load", (event) => {
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+          publicPath: undefined,
+          polyfills: true,
+          autoplay: "on",
+          unmuteOverlay: "hidden",
+          backgroundColor: "#000000",
+          wmode: "window",
+          letterbox: "fullscreen",
+          warnOnUnsupportedContent: false,
+          contextMenu: "off",
+          showSwfDownload: false,
+          upgradeToHttps: window.location.protocol === "https:",
+          maxExecutionDuration: 15,
+          logLevel: "error",
+          base: null,
+          menu: true,
+          salign: "",
+          scale: "showAll",
+          forceScale: false,
+          frameRate: null,
+          quality: "high",
+          splashScreen: true,
+          preferredRenderer: null,
+          openUrlMode: "allow",
+          allowNetworking: "all",
+        };
+
+        const ruffle = window.RufflePlayer.newest();
+        const player = ruffle.createPlayer();
+        const container = document.getElementById("game");
+        container.appendChild(player);
+        player.load({ url: "src/swf/FixingTime.swf", parameters: getParams(), allowScriptAccess: true });
+        player.style.display = "none";
+        document.getElementById("gamepad").style.display = "none";
+        player.addEventListener("loadeddata", () => {
+          document.getElementById("loadingAnim").style.display = "none";
+          player.style.display = "block";
+          ads.gameLoadingFinished();
+          if (isTouchDevice()) {
+            document.getElementById("gamepadBG").style.bottom = "0";
+          }
+        });
+        player.style.width = "100%";
+        player.style.height = "100%";
+        ads.player = player;
+        if (isTouchDevice()) {
+          gamepad.draw(document.getElementById("gamepad"), container, player);
+          document.getElementById("gamepad").style.display = "block";
+
+          player.style.height = "85%";
+        } else {
+          // addEventListener("blur", () => {
+          //   onPlayerFocusOut(player);
+          // });
+        }
+      });
+    </script>
+  </body>
+</html>

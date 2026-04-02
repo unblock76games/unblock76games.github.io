@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="robots" content="noindex,nofollow" />
+        <title>GEAR MADNESS</title>
+        <link rel="stylesheet" href="css/reset.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" type="text/css">
+        <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
+        <link rel="stylesheet" href="css/ios_fullscreen.css" type="text/css">
+        <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico'/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+        <meta name="msapplication-tap-highlight" content="no"/>
+        <script src="/poki-sdk.js"></script>
+        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="js/createjs.min.js"></script>
+        <script type="text/javascript" src="js/howler.min.js"></script>
+        <script type="text/javascript" src="js/platform.js"></script>
+        <script type="text/javascript" src="js/ios_fullscreen.js"></script>
+        <script type="text/javascript" src="js/screenfull.js"></script>
+        <script type="text/javascript" src="js/ctl_utils.js"></script>
+        <script type="text/javascript" src="js/sprite_lib.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/CLang.js"></script>
+        <script type="text/javascript" src="js/CCurtain.js"></script>
+        <script type="text/javascript" src="js/CPreloader.js"></script>
+        <script type="text/javascript" src="js/CLocalStorage.js"></script>
+        <script type="text/javascript" src="js/CMain.js"></script>
+        <script type="text/javascript" src="js/CTextButton.js"></script>
+        <script type="text/javascript" src="js/CToggle.js"></script>
+        <script type="text/javascript" src="js/CGfxButton.js"></script>
+        <script type="text/javascript" src="js/CTweenController.js"></script>
+        <script type="text/javascript" src="js/CMenu.js"></script>
+        <script type="text/javascript" src="js/CModeMenu.js"></script>
+        <script type="text/javascript" src="js/CLevelBut.js"></script>
+        <script type="text/javascript" src="js/CGame.js"></script>
+        <script type="text/javascript" src="js/CInterface.js"></script>
+        <script type="text/javascript" src="js/CMapTrack.js"></script>
+        <script type="text/javascript" src="js/CVsPanel.js"></script>
+        <script type="text/javascript" src="js/CHelpPanel.js"></script>
+        <script type="text/javascript" src="js/CCreditsPanel.js"></script>
+        <script type="text/javascript" src="js/CMsgBox.js"></script>
+        <script type="text/javascript" src="js/CAreYouSurePanel.js"></script>
+        <script type="text/javascript" src="js/CNextLevelPanel.js"></script>
+        <script type="text/javascript" src="js/CRetryPanel.js"></script>
+        <script type="text/javascript" src="js/CEndPanel.js"></script>
+        <script type="text/javascript" src="js/CShopPanel.js"></script>
+        <script type="text/javascript" src="js/CUpgradeButton.js"></script>
+        <script type="text/javascript" src="js/CHUD.js"></script>
+        <script type="text/javascript" src="js/CGearAreaView.js"></script>
+        <script type="text/javascript" src="js/CBackground.js"></script>
+        <script type="text/javascript" src="js/CStreet.js"></script>
+        <script type="text/javascript" src="js/carsettings.js"></script>
+        <script type="text/javascript" src="js/CCar.js"></script>
+        <script type="text/javascript" src="js/CEngine.js"></script>
+        <script type="text/javascript" src="js/CAI.js"></script>
+        <script type="text/javascript" src="js/CGearButton.js"></script>
+        <script type="text/javascript" src="js/CTremble.js"></script>
+        <script type="text/javascript" src="js/CScoreText.js"></script>
+    </head>
+    <body ondragstart="return false;" ondrop="return false;">
+        <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+        <script>
+            $(document).ready(function() {
+                var oMain = new CMain({
+
+                    //////////////////////////////////////////////////PLAYER UPGRADE PARAMS/////////////////////////////////////////////////////
+
+                    //////////GEAR (HERE BELOW, YOU WILL FIND ALL PARAMS OF GEAR UPGRADE)///////////
+                    ///WIDTH IN DEGREE OF GREEN AREA IN STARTING BATTLE BLASTOFF
+                    start_green_width: [20, //NO UPGRADE
+                    30, //LEVEL 1
+                    40, //LEVEL 2
+                    55 //LEVEL 3
+                    ],
+                    ///WIDTH IN DEGREE OF GREEN AREA DURING RACE
+                    in_race_green_width: [4, //NO UPGRADE
+                    6, //LEVEL 1
+                    8, //LEVEL 2
+                    12 //LEVEL 3
+                    ],
+                    ///DURATION (in milliseconds) OF STOP ACCELERATION IF PLAYER MISSES THE GEAR SHIFT
+                    wrong_change_gear_duration: [1500, //NO UPGRADE
+                    1350, //LEVEL 1
+                    1200, //LEVEL 2
+                    1000 //LEVEL 3
+                    ],
+
+                    //////////ENGINE SPEED (HERE BELOW, YOU WILL FIND ALL PARAMS OF ENGINE SPEED UPGRADE). THE "speed" PARAM STATES THE MAX SPEED (IN KM/H) ACHIEVABLE WITH A GEAR, AND THE "time" PARAM STATES HOW LONG DOES IT TAKE (IN MILLISECONDS) TO REACH THAT SPEED///////////
+                    player_engine: [///GEAR N           ///GEAR 1               //GEAR 2                //GEAR 3                //GEAR 4                    //GEAR 5                    //GEAR 6
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 6000
+                    }, {
+                        speed: 60,
+                        time: 7000
+                    }, {
+                        speed: 90,
+                        time: 8000
+                    }, {
+                        speed: 120,
+                        time: 9000
+                    }, {
+                        speed: 150,
+                        time: 10000
+                    }, {
+                        speed: 180,
+                        time: 11000
+                    }], //NO UPGRADE
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 5000
+                    }, {
+                        speed: 60,
+                        time: 6000
+                    }, {
+                        speed: 90,
+                        time: 7000
+                    }, {
+                        speed: 120,
+                        time: 8000
+                    }, {
+                        speed: 150,
+                        time: 9000
+                    }, {
+                        speed: 180,
+                        time: 10000
+                    }], //LEVEL 1
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 4000
+                    }, {
+                        speed: 60,
+                        time: 5000
+                    }, {
+                        speed: 90,
+                        time: 6000
+                    }, {
+                        speed: 120,
+                        time: 7000
+                    }, {
+                        speed: 150,
+                        time: 8000
+                    }, {
+                        speed: 180,
+                        time: 9000
+                    }], //LEVEL 2
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 40,
+                        time: 3800
+                    }, {
+                        speed: 70,
+                        time: 4800
+                    }, {
+                        speed: 100,
+                        time: 5800
+                    }, {
+                        speed: 130,
+                        time: 6800
+                    }, {
+                        speed: 160,
+                        time: 7800
+                    }, {
+                        speed: 200,
+                        time: 8800
+                    }]//LEVEL 3
+                    ],
+
+                    //////////NITRO (HERE BELOW, YOU WILL FIND ALL PARAMS OF NITRO UPGRADE)///////////
+                    ///DURATION (in milliseconds) OF NITRO POWER
+                    nitro_duration: [0, //NO UPGRADE
+                    1500, //LEVEL 1
+                    3000, //LEVEL 2
+                    4500 //LEVEL 3
+                    ],
+
+                    ////////////////////////////////////////////////////////OPPONENT UPGRADE PARAMS/////////////////////////////////////////////////
+
+                    /////////////OPPONENTS ENGINE SPEED PARAMS . THE "speed" PARAM STATES THE MAX SPEED (IN KM/H) ACHIEVABLE WITH A GEAR, AND THE "time" PARAM STATES HOW LONG DOES IT TAKE (IN MILLISECONDS) TO REACH THAT SPEED///////////
+                    opponent_engine: [//GEAR N            //GEAR 1                //GEAR 2                //GEAR 3                //GEAR 4                    //GEAR 5                    //GEAR 6
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 4500
+                    }, {
+                        speed: 50,
+                        time: 6200
+                    }, {
+                        speed: 75,
+                        time: 7800
+                    }, {
+                        speed: 110,
+                        time: 8000
+                    }, {
+                        speed: 120,
+                        time: 9000
+                    }, {
+                        speed: 150,
+                        time: 10000
+                    }], //OPPONENT 1
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 4000
+                    }, {
+                        speed: 50,
+                        time: 6000
+                    }, {
+                        speed: 75,
+                        time: 7500
+                    }, {
+                        speed: 110,
+                        time: 8000
+                    }, {
+                        speed: 130,
+                        time: 8500
+                    }, {
+                        speed: 160,
+                        time: 9000
+                    }], //OPPONENT 2
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 4800
+                    }, {
+                        speed: 60,
+                        time: 6900
+                    }, {
+                        speed: 90,
+                        time: 7700
+                    }, {
+                        speed: 130,
+                        time: 9300
+                    }, {
+                        speed: 150,
+                        time: 10500
+                    }, {
+                        speed: 180,
+                        time: 12000
+                    }], //OPPONENT 3
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 4000
+                    }, {
+                        speed: 50,
+                        time: 5500
+                    }, {
+                        speed: 75,
+                        time: 6900
+                    }, {
+                        speed: 110,
+                        time: 8000
+                    }, {
+                        speed: 130,
+                        time: 8500
+                    }, {
+                        speed: 160,
+                        time: 9000
+                    }], //OPPONENT 4
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 3900
+                    }, {
+                        speed: 55,
+                        time: 5300
+                    }, {
+                        speed: 80,
+                        time: 6500
+                    }, {
+                        speed: 100,
+                        time: 7000
+                    }, {
+                        speed: 120,
+                        time: 8000
+                    }, {
+                        speed: 150,
+                        time: 9000
+                    }], //OPPONENT 5
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 25,
+                        time: 5500
+                    }, {
+                        speed: 65,
+                        time: 6500
+                    }, {
+                        speed: 105,
+                        time: 6200
+                    }, {
+                        speed: 145,
+                        time: 6500
+                    }, {
+                        speed: 180,
+                        time: 7000
+                    }, {
+                        speed: 230,
+                        time: 8000
+                    }], //OPPONENT 6
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 30,
+                        time: 4000
+                    }, {
+                        speed: 65,
+                        time: 4800
+                    }, {
+                        speed: 100,
+                        time: 5300
+                    }, {
+                        speed: 130,
+                        time: 6000
+                    }, {
+                        speed: 150,
+                        time: 6700
+                    }, {
+                        speed: 180,
+                        time: 8000
+                    }], //OPPONENT 7
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 35,
+                        time: 3800
+                    }, {
+                        speed: 70,
+                        time: 4700
+                    }, {
+                        speed: 105,
+                        time: 5400
+                    }, {
+                        speed: 130,
+                        time: 5900
+                    }, {
+                        speed: 155,
+                        time: 6500
+                    }, {
+                        speed: 185,
+                        time: 7200
+                    }], //OPPONENT 8
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 35,
+                        time: 3700
+                    }, {
+                        speed: 70,
+                        time: 4600
+                    }, {
+                        speed: 105,
+                        time: 5200
+                    }, {
+                        speed: 130,
+                        time: 5700
+                    }, {
+                        speed: 155,
+                        time: 6300
+                    }, {
+                        speed: 185,
+                        time: 7000
+                    }], //OPPONENT 9
+                    [{
+                        speed: 0,
+                        time: 0
+                    }, {
+                        speed: 35,
+                        time: 3700
+                    }, {
+                        speed: 70,
+                        time: 4600
+                    }, {
+                        speed: 105,
+                        time: 5200
+                    }, {
+                        speed: 130,
+                        time: 5700
+                    }, {
+                        speed: 155,
+                        time: 6300
+                    }, {
+                        speed: 185,
+                        time: 7000
+                    }]//OPPONENT 10
+                    ],
+
+                    /////////////OPPONENTS SKILLS. SETS VARIOUS OPPONENT SKILL:///////////////////////
+                    // - wronggearchangeratio: SETS THE PROBABILITY THAT AN OPPONENT MISSES THE GEAR SHIFT
+                    // - wrongearduration: DURATION (in milliseconds) OF STOP ACCELERATION IF OPPONENT DO A WRONG GEAR CHANGE
+                    // - normalizednitroshottime: THE TIME WHEN OPPONENT SHOT THE NITRO CHARGE. THE TIME IS NORMALIZED, 0 MEAN THAT OPPONENT WILL SHOT NITRO IN THE BEGINNING OF THE RACE, 1 WILL SHOT IN THE END, 0.5 WILL SHOT IN THE MIDDLE OF THE RACE
+                    // - nitroduration: DURATION (in milliseconds) OF NITRO
+                    opponent_skills: [
+                    {
+                        wronggearchangeratio: 0.9,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0,
+                        nitroduration: 0
+                    }, //OPPONENT 1
+                    {
+                        wronggearchangeratio: 0.8,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0,
+                        nitroduration: 0
+                    }, //OPPONENT 2
+                    {
+                        wronggearchangeratio: 0.7,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0,
+                        nitroduration: 0
+                    }, //OPPONENT 3
+                    {
+                        wronggearchangeratio: 0.6,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0,
+                        nitroduration: 0
+                    }, //OPPONENT 4
+                    {
+                        wronggearchangeratio: 0.5,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0.25,
+                        nitroduration: 1500
+                    }, //OPPONENT 5
+                    {
+                        wronggearchangeratio: 0.4,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0,
+                        nitroduration: 0
+                    }, //OPPONENT 6
+                    {
+                        wronggearchangeratio: 0.3,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0.4,
+                        nitroduration: 2000
+                    }, //OPPONENT 7
+                    {
+                        wronggearchangeratio: 0.2,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0.4,
+                        nitroduration: 3000
+                    }, //OPPONENT 8
+                    {
+                        wronggearchangeratio: 0.1,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0.35,
+                        nitroduration: 3000
+                    }, //OPPONENT 9
+                    {
+                        wronggearchangeratio: 0,
+                        wrongearduration: 1500,
+                        normalizednitroshottime: 0.1,
+                        nitroduration: 4500
+                    }//OPPONENT 10
+                    ],
+
+                    ////////////////////////////////////////////////////////TRACK PARAMS/////////////////////////////////////////////////                   
+                    //LENGTH (IN METERS) OF A RACE TRACK
+                    track_meter_length: [300, //TRACK 1
+                    500, //TRACK 2
+                    1000, //TRACK 3
+                    300, //TRACK 4
+                    300, //TRACK 5
+                    1000, //TRACK 6
+                    500, //TRACK 7
+                    300, //TRACK 8
+                    1000, //TRACK 9
+                    500 //TRACK 10
+                    ],
+
+                    ////////////////////////////////////////////////////////REWARD PARAMS/////////////////////////////////////////////////
+
+                    /////////////FIRST TIME REWARD, FOR COMPLETING A TRACK  ///////////
+                    track_rewards: [100, //TRACK 1
+                    150, //TRACK 2
+                    200, //TRACK 3
+                    250, //TRACK 4
+                    300, //TRACK 5
+                    350, //TRACK 6
+                    500, //TRACK 7
+                    550, //TRACK 8
+                    600, //TRACK 9
+                    700 //TRACK 10
+                    ],
+
+                    /////////////BONUS REWARD EACH TIME YOU WIN A RACE. BASED ON THE LENGTH OF THE TRACK, AND MULTIPLIED BY THE VALUE BELOW///////////
+                    bonus_multiplier_length_reward: 2,
+
+                    /////////////BONUS REWARD EACH TIME YOU WIN A RACE. BASED ON THE OVERTAKING DISTANCE, AND MULTIPLIED BY THE VALUE BELOW///////////
+                    bonus_multiplier_overtaking_reward: 1.5,
+
+                    /////////////BONUS REWARD EACH TIME YOU WIN A RACE. BASED ON THE LEVEL TRUCK NUMBER, AND MULTIPLIED BY THE VALUE BELOW///////////
+                    bonus_multiplier_difficulty: 10
+
+                });
+
+                $(oMain).on("start_session", function(evt) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeStartSession();
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("end_session", function(evt) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeEndSession();
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("restart_level", function(evt, iLevel) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeRestartLevel({
+                            level: iLevel
+                        });
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("save_score", function(evt, iScore, szMode) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeSaveScore({
+                            score: iScore,
+                            mode: szMode
+                        });
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("start_level", function(evt, iLevel) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeStartLevel({
+                            level: iLevel
+                        });
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("end_level", function(evt, iLevel) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeEndLevel({
+                            level: iLevel
+                        });
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("show_interlevel_ad", function(evt) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeShowInterlevelAD();
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                $(oMain).on("share_event", function(evt, iTime) {
+                    if (getParamValue('ctl-arcade') === "true") {
+                        parent.__ctlArcadeShareEvent({
+                            img: TEXT_SHARE_IMAGE,
+                            title: TEXT_SHARE_TITLE,
+                            msg: TEXT_SHARE_MSG1 + iTime + TEXT_SHARE_MSG2,
+                            msg_share: TEXT_SHARE_SHARE1 + iTime + TEXT_SHARE_SHARE1
+                        });
+                    }
+                    //...ADD YOUR CODE HERE EVENTUALLY
+                });
+
+                if (isIOS()) {
+                    setTimeout(function() {
+                        sizeHandler();
+                    }, 200);
+                } else {
+                    sizeHandler();
+                }
+
+            });
+        </script>
+        <div class="check-fonts">
+            <p class="check-font-1">test 1</p>
+        </div>
+        <canvas id="canvas" class='ani_hack' width="1280" height="768"></canvas>
+        <div data-orientation="landscape" class="orientation-msg-container">
+            <p class="orientation-msg-text">Please rotate your device</p>
+        </div>
+        <div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+    </body>
+</html>

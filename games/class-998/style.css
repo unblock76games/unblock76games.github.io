@@ -1,0 +1,167 @@
+/* style.css */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #e5e6ee;
+}
+
+/* Include the custom font */
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("RobotoSlab-Bold.woff2") format("truetype");
+}
+
+#logo-base {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e5e6ee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+#loader {
+  z-index: 9999;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  background-color: #e5e6ee;
+  max-width: 350px;
+  /* max-height: 237px; */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#loading-text {
+  margin-top: 15px;
+  font-size: 1.1em;
+  color: #383843;
+  font-family: "Roboto Slab", serif;
+}
+
+#progress-bar-container {
+  width: 80%;
+  max-width: 200px;
+  height: 16px;
+  background-color: #c5c5d5;
+  border-radius: 11px;
+  margin-top: 20px;
+  position: relative;
+}
+
+#progress-bar {
+  width: 0;
+  height: 100%;
+  background-color: #383843;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+  position: relative;
+}
+
+#progress-icon {
+  position: absolute;
+  top: -6px;
+  left: -10px;
+  width: 22px;
+  height: 26px;
+  transition: left 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+#loader.hidden {
+  animation: fadeOut 0.2s forwards;
+}
+
+#logo-base.hidden {
+  animation: fadeOut 0.2s forwards;
+}
+
+#loader img {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+    -ms-touch-action: none;
+  }
+  
+  body, canvas, div {
+    display: block;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+  
+  /* Remove spin of input type number */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  
+  body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    margin: 0;
+  
+    cursor: default;
+    color: #888;
+    background-color: #333;
+  
+    text-align: center;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+  
+    display: flex;
+    flex-direction: column;
+  }
+  
+  canvas {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  
+  #GameDiv, #Cocos3dGameContainer, #GameCanvas {
+    width: 100%;
+    height: 100%;
+  }
+  
+  :root {
+    --safe-top: env(safe-area-inset-top);
+    --safe-right: env(safe-area-inset-right);
+    --safe-bottom: env(safe-area-inset-bottom);
+    --safe-left: env(safe-area-inset-left);
+  }
+  

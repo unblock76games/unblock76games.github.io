@@ -1,0 +1,366 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Coffee Shop</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+        <meta name="HandheldFriendly" content="true">
+        <link href="https://fonts.googleapis.com/css2?family=Glass+Antiqua&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+        <link href="./styles/main.css" rel="stylesheet">
+        <meta name="theme-color" content="#eca779">
+        <meta name="msapplication-navbutton-color" content="#eca779">
+        <meta name="apple-mobile-web-app-status-bar-style" content="#eca779">
+        <link rel="shortcut icon" href="./images/favicon.ico" type="image/vnd.microsoft.icon">
+        <script type="text/javascript" src="/cloak.js"></script>
+<meta name="robots" content="noindex,nofollow" />
+    </head>
+    <body>
+
+        <div id="game">
+
+            <section id="screen-main">
+			    <p class="logo"><img src="./images/logo.svg" alt=""></p>
+                <h1>Coffee Shop</h1>
+
+                <ul class="menu">
+                    <li><button type="button" class="coffee big" data-screen="screen-game"><span>Play</span></button></li>
+                    <li class="separated"><button type="button" class="coffee" data-screen="screen-credits"><span>Credits</span></button></li>
+                    <li class="separated highscore">Highscore: <b></b></li>
+                </ul>
+                <p class="caption">Developed by <i>Armor Games Inc.</i></p>
+                <p class="status">© Copyright 2007 Armor Games Inc.</p>
+                <img class="decor-top" src="./images/main/top.svg" alt="">
+                <img class="decor-bottom" src="./images/main/bottom.svg" alt="">
+                <p class="back"><button type="button" data-screen="screen-main"></button></p>
+            </section>
+
+            <section id="screen-credits" class="hidden">
+                <h2>Credits</h2>
+                <h3>Developed by <i>Armor Games</i></h3>
+                <ul>
+                    <li>Produced by . . . . . . . . . . .<b>Daniel McNeely & Jeff Wofford</b></li>
+                    <li>Programming . . . . . . . . . . . . . . . . . . . . . . . . . . . . .<b>Jeff Wofford</b></li>
+                    <li>Graphics . . . . . . . . . . . . . . . . . . .  . . . . . . . . . . . . . .<b>James Dalby</b></li>
+                    <li>Music . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .<b>Chris Branscome</b></li>
+                    <li>Sound Effects . . . . . . . . . <b>Chris Branscome & Jeff Wofford</b></li>
+                    <li>JavaScript Conversion . . . . . . . . . . . . . . . . .<b>Tomasz Grajewski</b></li>
+                </ul>
+            </section>
+
+            <section id="screen-game" class="hidden">
+                <canvas></canvas>
+                <p class="balance"></p>
+                <p class="reputation"><span class="bad"></span></p>
+                <div class="weather small"><p>
+                    <span class="day"></span> <span class="time"></span>
+                    <span class="temp"></span> <span class="temp-desc"></span>
+                </p></div>
+                <div class="weather big hidden"><p>
+                    <span class="day"></span> <span class="time"></span>
+                    <span class="temp"></span> <span class="temp-desc"></span>
+                </p></div>
+                <div class="prepare-outer">
+                    <ul class="tabs">
+                        <li class="active"><button type="button" data-tab="#game-tab-prepare">Adjustments</button></li>
+                        <li class="hidden"><button type="button" data-tab="#game-tab-stats">Stats</button></li>
+                    </ul>
+                    <div class="prepare" id="game-tab-prepare">
+                        <h4 class="side">Cups<br>Coffee<br>Milk<br>Sugar</h4>
+                        <div class="inventory">
+                            <h5>Inventory</h5>
+                            <h6>BUY</h6>
+                            <div>
+                                <div class="row">
+                                    <p class="unit"><b data-state="inventoryCups">0</b> units</p>
+                                    <p class="buy">
+                                        <span>cost: $2.00</span>
+                                        <button type="button" data-state="inventoryCups" data-qty="10" data-price="200">10</button>
+                                        <small>$0.20/unit</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $4.00</span>
+                                        <button type="button" data-state="inventoryCups" data-qty="25" data-price="400">25</button>
+                                        <small>$0.16/unit</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $6.00</span>
+                                        <button type="button" data-state="inventoryCups" data-qty="50" data-price="600">50</button>
+                                        <small>$0.12/unit</small>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="unit"><b data-state="inventoryCoffee">0</b> tsp</p>
+                                    <p class="buy">
+                                        <span>cost: $10.00</span>
+                                        <button type="button" data-state="inventoryCoffee" data-qty="20" data-price="1000">20</button>
+                                        <small>$0.50/tsp</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $14.00</span>
+                                        <button type="button" data-state="inventoryCoffee" data-qty="40" data-price="1400">40</button>
+                                        <small>$0.35/tsp</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $18.00</span>
+                                        <button type="button" data-state="inventoryCoffee" data-qty="60" data-price="1800">60</button>
+                                        <small>$0.30/tsp</small>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="unit"><b data-state="inventoryMilk">0</b> cups</p>
+                                    <p class="buy">
+                                        <span>cost: $1.00</span>
+                                        <button type="button" data-state="inventoryMilk" data-qty="10" data-price="100">10</button>
+                                        <small>$0.10/cup</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $1.80</span>
+                                        <button type="button" data-state="inventoryMilk" data-qty="20" data-price="180">20</button>
+                                        <small>$0.09/cup</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $2.00</span>
+                                        <button type="button" data-state="inventoryMilk" data-qty="40" data-price="200">40</button>
+                                        <small>$0.05/cup</small>
+                                    </p>
+                                </div>
+                                <div class="row">
+                                    <p class="unit"><b data-state="inventorySugar">0</b> tsp</p>
+                                    <p class="buy">
+                                        <span>cost: $3.00</span>
+                                        <button type="button" data-state="inventorySugar" data-qty="10" data-price="300">10</button>
+                                        <small>$0.30/tsp</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $5.00</span>
+                                        <button type="button" data-state="inventorySugar" data-qty="20" data-price="500">20</button>
+                                        <small>$0.25/tsp</small>
+                                    </p>
+                                    <p class="buy">
+                                        <span>cost: $8.00</span>
+                                        <button type="button" data-state="inventorySugar" data-qty="50" data-price="800">50</button>
+                                        <small>$0.16/tsp</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="recipe expanded">
+                            <h5>Recipe</h5>
+                            <div><div>
+                                <div class="row">
+                                    <p class="unit"><b>1</b> unit</p>
+                                </div>
+                                <div class="row">
+                                    <p class="slider" data-min="1" data-max="4" data-precision="1" data-state="recipeCoffee" data-display="#slider-recipe-coffee-value">
+                                        <span class="min-label">weak</span>
+                                        <span class="max-label">strong</span>
+                                        <span class="min-value">1</span>
+                                        <span class="max-value">4</span>
+                                        <button>1</button>
+                                    </p>
+                                    <p class="unit"><b id="slider-recipe-coffee-value">1.9</b> tsp</p>
+                                </div>
+                                <div class="row">
+                                    <p class="slider" data-min="0" data-max="2" data-precision="1" data-state="recipeMilk" data-display="#slider-recipe-milk-value">
+                                        <span class="min-label">black</span>
+                                        <span class="max-label">creamy</span>
+                                        <span class="min-value">0</span>
+                                        <span class="max-value">2</span>
+                                        <button>0</button>
+                                    </p>
+                                    <p class="unit"><b id="slider-recipe-milk-value">0.2</b> cups</p>
+                                </div>
+                                <div class="row">
+                                    <p class="slider" data-min="0" data-max="4" data-precision="1" data-state="recipeSugar" data-display="#slider-recipe-sugar-value">
+                                        <span class="min-label">bitter</span>
+                                        <span class="max-label">sweet</span>
+                                        <span class="min-value">0</span>
+                                        <span class="max-value">4</span>
+                                        <button>0</button>
+                                    </p>
+                                    <p class="unit"><b id="slider-recipe-sugar-value">2</b> tsp</p>
+                                </div>
+                            </div></div>
+                        </div>
+                        <div class="price">
+                            <h4>Price</h4>
+                            <p class="slider" data-scale="0.9" data-min="0.05" data-max="10" data-prefix="$" data-precision="2" data-rounding="20" data-state="price" data-state-multiplier="100">
+                                <span class="min-value">$0.05</span>
+                                <span class="max-value">$10.00</span>
+                                <button></button>
+                            </p>
+                        </div>
+                        <p class="servings">Servings: <span>0</span></p>
+                        <p class="limited">Limited by: <span>Cups</span></p>
+                        <button type="button" class="small-gray quit" data-screen="screen-confirmQuit"><span>Quit</span></button>
+                        <button type="button" class="small-gray undo" disabled><span>Undo Purchase</span></button>
+                    </div>
+                    <div class="stats" id="game-tab-stats">
+
+                        <ul class="legend">
+                            <li><button type="button" data-chart-line="daily-stats-money">Cash <span style="background: #05ed05"></span></button></li>
+                            <li><button type="button" data-chart-line="daily-stats-reputation">Reputation <span style="background: #0505ed"></span></button></li>
+                            <li><button type="button" data-chart-line="daily-stats-weather">Weather <span style="background: #ebebeb"></span></button></li>
+                            <li><button type="button" class="category">Finances</button>
+                                <ul>
+                                    <li><button type="button" data-chart-line="daily-stats-cupsSold">Cups Sold <span style="background: #058e05"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-price">Price <span style="background: #32ea51"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-expenditures">Expenditures <span style="background: #8e8e05"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-revenues">Revenues <span style="background: #8eea51"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-profitsLosses">Profits/Losses <span style="background: #05bc05"></span></button></li>
+                                </ul>
+                            </li>
+                            <li><button type="button" class="category">Recipe</button>
+                                <ul>
+                                    <li><button type="button" data-chart-line="daily-stats-recipeCoffee">Recipe - Coffee <span style="background: #050551"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-recipeMilk">Recipe - Milk <span style="background: #8e8eea"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-recipeSugar">Recipe - Sugar <span style="background: #9d9dea"></span></button></li>
+                                </ul>
+                            </li>
+                            <li><button type="button" class="category">Inventory</button>
+                                <ul>
+                                    <li><button type="button" data-chart-line="daily-stats-inventoryCups">Inventory - Cups <span style="background: #ea0532"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-inventoryCoffee">Inventory - Coffee <span style="background: #510505"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-inventoryMilk">Inventory - Milk <span style="background: #ea32bc"></span></button></li>
+                                    <li><button type="button" data-chart-line="daily-stats-inventorySugar">Inventory - Sugar <span style="background: #ea5105"></span></button></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="chart"></div>
+                        <p class="extra-legend">Days</p>
+
+                    </div>
+                    <button type="button" class="start-day" disabled>Loading…</button>
+                </div>
+
+                <div class="serve-price hidden"><div>
+                    <h4>Price</h4>
+                    <p class="slider" data-scale="0.6" data-min="0.05" data-max="10" data-prefix="$" data-precision="2" data-rounding="20" data-state="price" data-state-multiplier="100" data-display="#in-game-price">
+                        <span class="min-value">$0.05</span>
+                        <span class="max-value">$10.00</span>
+                        <button></button>
+                    </p>
+                    <p class="price" id="in-game-price"></p>
+                </div></div>
+
+                <button type="button" class="skip-day hidden">Skip to End of Day</button>
+
+                <div class="serve-inventory hidden"><div>
+                    <h5>Inventory</h5>
+                    <dl>
+                        <dt>Cups</dt><dd></dd>
+                        <dt>Coffee</dt><dd></dd>
+                        <dt>Milk</dt><dd></dd>
+                        <dt>Sugar</dt><dd></dd>
+                    </dl>
+                </div></div>
+            </section>
+
+            <section id="screen-day-stats" class="hidden">
+                <div>
+                    <h2></h2>
+                    <p class="summary"></p>
+                    <p class="loses"></p>
+                    <ul class="legend">
+                        <li><button type="button" data-chart-line="hourly-stats-money">Cash <span style="background: #05ed05"></span></button></li>
+                        <li><button type="button" data-chart-line="hourly-stats-reputation">Reputation <span style="background: #0505ed"></span></button></li>
+                        <li><button type="button" data-chart-line="hourly-stats-cupsSold">Cups Sold <span style="background: #048f04"></span></button></li>
+                        <li><button type="button" data-chart-line="hourly-stats-price">Price <span style="background: #32ec51"></span></button></li>
+                    </ul>
+
+                    <div class="chart"></div>
+
+                    <p class="forecast">Tomorrow's Forecast: <span class="temperature"></span></p>
+                </div>
+                <button type="button" class="gray continue"><span>Continue</span></button>
+            </section>
+
+            <section id="screen-tutorial1" class="tutorial hidden"><div>
+                <div class="page page-1">
+                    <h3>Getting Started</h3>
+                    <p>Congratulations! You've opened your own coffee stand, <b>Cafe Calypso</b>.</p>
+                    <p>Your goal is to make as much money as you can in 14 days.</p>
+                </div>
+                <div class="page page-2 hidden">
+                    <h3>Starting the Day</h3>
+                    <p>Each day begins in <b>Prep Mode</b>. In Prep Mode you buy <b>ingredients</b>, adjust your <b>recipe</b>, and set your <b>price</b>.</p>
+                </div>
+                <div class="page page-3 hidden">
+                    <h3>Ingredients</h3>
+                    <p>Before you can make coffee you have to buy the ingredients that go into it. Coffee has just four ingredients:</p>
+                    <ul>
+                        <li><b>Cups</b> - You can't sell coffee without a cup to serve it in!</li>
+                        <li><b>Coffee</b> - Dark-roasted ground coffee beans keep customers coming.</li>
+                        <li><b>Milk</b> - Customers like their coffee creamy.</li>
+                        <li><b>Sugar</b> - What's a cup of coffee without a little sweetener?</li>
+                    </ul>
+                    <p>Click <b>Next</b> to look at your inventory of ingredients and buy more.</p>
+                </div>
+                <p class="pages">
+                    <button type="button" class="show active">Show tutorial</button>
+                    <span class="number">1/3</span>
+                    <button type="button" class="back hidden"><span>Back</span></button>
+                    <button type="button" class="next"><span>Next</span></button>
+                </p>
+            </div></section>
+
+            <section id="screen-tutorial2" class="tutorial hidden"><div>
+                <div class="page page-1">
+                    <p>Move your mouse or tap the the <b>Inventory</b> area to buy ingredients for the day.</p>
+                </div>
+            </div></section>
+
+            <section id="screen-tutorial3" class="tutorial hidden"><div>
+                <div class="page page-1">
+                    <h3>Stocked Up</h3>
+                    <p>Excellent! You bought enough inventory so that you can serve some coffee when customers start arriving.</p>
+                </div>
+                <div class="page page-2 hidden">
+                    <h3>Recipe and Price</h3>
+                    <p>Before leaving Prep Mode you'll want to adjust the <b>recipe</b> used to make your coffee, as well as the <b>price</b> you charge customers for each serving.</p>
+                </div>
+                <div class="page page-3 hidden">
+                    <h3>Recipe</h3>
+                    <p>Your <b>recipe</b> determines how expensive your coffee is to make. Your recipe also determines how well your customers like your coffee.</p>
+                    <p>You can adjust how much <b>coffee, milk</b>, and <b>sugar</b> you put into each <b>cup</b> of coffee.</p>
+                    <p>Generally speaking, customers like more of everything and are willing to pay a higher price for it!</p>
+                </div>
+                <div class="page page-4 hidden">
+                    <h3>Price</h3>
+                    <p>Pay close attention to your <b>price</b>. This is the amount you charge for each cup of coffee.</p>
+                    <p>High-priced coffee earns you more money, but customers won't buy your coffee if they think it's too expensive.</p>
+                    <p>They'll pay more on cold days and less on warm ones.</p>
+                    <p>Adjusting your price each day is crucial skill in running a successful business!</p>
+                </div>
+                <div class="page page-5 hidden">
+                    <h3>Starting the Day</h3>
+                    <p>Try adjusting your recipe and price now. Then, when you're ready, just click <b>Start the Day</b> to open your shop and start selling coffee!</p>
+                </div>
+                <p class="pages">
+                    <button type="button" class="show active">Show tutorial</button>
+                    <span class="number">1/5</span>
+                    <button type="button" class="back hidden"><span>Back</span></button>
+                    <button type="button" class="next"><span>Next</span></button>
+                </p>
+            </div></section>
+
+            <section id="screen-confirm-quit" class="hidden">
+                <h5>Abort Game?</h5>
+                <div>
+                    <p>Do you want to abort the game?</p>
+                    <p>Choosing "Yes" will abort the current game and return you to the main menu. Any progress you have made in this game will be lost.</p>
+                    <p>Choosing "No" will resume the current game.</p>
+                    <p>
+                        <button type="button" class="coffee quit"><span>Yes</span></button>
+                        <button type="button" class="coffee close"><span>No</span></button>
+                    </p>
+                </div>
+            </section>
+
+        </div>
+
+        <script src="./game.js"></script>
+    </body>
+</html>

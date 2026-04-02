@@ -1,0 +1,10 @@
+{
+	"name": "Cubies",
+	"short_name": "Cubies",
+	"description": "",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "landscape",
+	"background_color": "#ffffff",
+	"icons": []
+}

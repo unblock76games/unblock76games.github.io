@@ -1,0 +1,17 @@
+/*
+	Include fonts using @font-face, as below:
+	Be sure to have fonts in .eot, .woff, .ttf and .svg formats.
+	Where possible, fonts can be optimised by using the unicode-range property to load only specific characters, reducing the load. Check out http://www.w3.org/TR/css3-fonts/#font-prop-desc
+	Fonts can sometimes play up due to cross-domain restrictions - see http://www.w3.org/TR/css3-fonts/#font-fetching-requirements
+*/
+@font-face {
+  font-family: 'testFont';
+  src: url("../font/font.woff") format("woff"), url("../font/font.ttf") format("truetype"), url("../font/font.svg") format("svg");
+  /* Optional properties */
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: condensed;
+  unicode-range: U+0-7F;
+}
+
+/*# sourceMappingURL=font.css.map */

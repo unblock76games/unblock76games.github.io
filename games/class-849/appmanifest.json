@@ -1,0 +1,12 @@
+{
+	"name": "paint_test",
+	"short_name": "paint_test",
+	"description": "",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "any",
+	"background_color": "#cc8bff",
+	"icons": [],
+	"screenshots": [],
+	"theme_color": "#cc8bff"
+}

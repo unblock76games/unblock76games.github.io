@@ -1,0 +1,48 @@
+var CANVAS_WIDTH = 1024;
+var CANVAS_HEIGHT = 768;
+
+var DISABLE_SOUND_MOBILE = false;
+
+var EDGEBOARD_X = 0;
+var EDGEBOARD_Y = 84;
+
+var FONT_GAME = "impactregular";
+var FONT_GAME2 = "Digital-7";
+
+var STATE_LOADING = 0;
+var STATE_MENU    = 1;
+var STATE_HELP    = 1;
+var STATE_GAME    = 3;
+
+var ON_MOUSE_DOWN  = 0;
+var ON_MOUSE_UP    = 1;
+var ON_MOUSE_OVER  = 2;
+var ON_MOUSE_OUT   = 3;
+var ON_DRAG_START  = 4;
+var ON_DRAG_END    = 5;
+
+var TOTAL_SCENES = 5;
+
+var BALL_SIZE = 73; //  sprite diameter in pixels
+var BALL_ROTATION_SPEED = 3;
+
+var CAM_DISTANCE = 1;
+
+var PLAYER_HEIGHT = 768;
+var PLAYER_WIDTH = 408;
+var CART_HEIGHT = 329;
+var CART_WIDTH = 356;
+var SHOTGUI_SIZE = 229;
+var SHOTBALL_SIZE = 48;
+var CART_DEPTH_INDEX;
+
+var ERROR_MULT;
+var TIME_AVAILABLE;
+var NUM_SHOT_PER_SCENE = 5;
+var SELECTOR_SPEED;
+var POINT_FOR_BALL;
+var POINT_FOR_SPECIAL_BALL;
+
+var SOUNDTRACK_VOLUME_IN_GAME = 0;
+var ENABLE_FULLSCREEN;
+var ENABLE_CHECK_ORIENTATION;

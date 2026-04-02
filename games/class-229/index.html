@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="viewport" content="user-scalable=no, width=device-width,initial-scale=1,maximum-scale=1"/>
+    <title>Flags Quiz</title>
+
+    <script src="/poki-sdk.js"></script>
+    <script src="api/api.js"></script>
+
+    <script>
+
+        var config = new EasyApiConfig();
+
+
+        config.set(EasyApiConfig.DEBUG, false);
+        config.set(EasyApiConfig.APP_SRC_ROOT, "game/");
+        config.set(EasyApiConfig.APP_API_ROOT, "api/");
+
+        config.set(EasyApiConfig.APP_WIDTH, 768);
+        config.set(EasyApiConfig.APP_HEIGHT, 1364);
+
+        config.set(EasyApiConfig.APP_BG_COLOR, "#00A187");
+        config.set(EasyApiConfig.APP_PRELOADER, false);
+
+        config.set(EasyApiConfig.APP_LANGUAGE, "en");
+        config.set(EasyApiConfig.APP_JS,
+            [
+                "game.js"
+            ]);
+
+        var API;
+        API = new EasyApi(config);
+
+    </script>
+</head>
+<body style="padding: 0px; margin: 0px;"></body>
+</html>

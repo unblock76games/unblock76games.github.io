@@ -1,0 +1,10 @@
+{
+	"name": "poki_whois_landscape",
+	"short_name": "poki_whois_landscape",
+	"description": "",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "landscape",
+	"background_color": "#ffffff",
+	"icons": []
+}

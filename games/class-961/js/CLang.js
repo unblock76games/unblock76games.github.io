@@ -1,0 +1,38 @@
+TEXT_GAMEOVER  = "CONGRATULATIONS, YOU WON ALL THE RACES!";
+TEXT_LOSE      = "RACE LOST";
+TEXT_WIN       = "RACE WIN";
+TEXT_ARE_SURE = "ARE YOU SURE?";
+TEXT_KMH = "mph";
+TEXT_M = "m";
+TEXT_GEAR_N = "N";
+TEXT_CURRENCY = "$";
+TEXT_VS = "Vs";
+TEXT_PERFECT = "PERFECT";
+var TEXT_PRELOADER_CONTINUE = "START";
+
+TEXT_SHOP = "SHOP";
+
+TEXT_SELECT_STAGE = "SELECT STAGE";
+TEXT_TOTAL_SCORE = "TOTAL SCORE";
+
+TEXT_FIRST_WIN = "FIRST WIN";
+TEXT_PRIZE = "PRIZE";
+TEXT_BONUS = "BONUS";
+TEXT_BONUS_TRACK_LENGTH = "TRACK LENGTH";
+TEXT_BONUS_OVERTAKING = "OVERTAKING DISTANCE";
+TEXT_BONUS_DIFFICULTY = "LEVEL DIFFICULTY";
+
+TEXT_BONUS_ONLY = "BONUS ONLY!";
+
+TEXT_HELP1     = "PRESS AND HOLD ACCELERATOR TO KEEP THE REV NEEDLE IN THE GREEN AREA AND MAKE A PERFECT START";
+TEXT_HELP2     = "PRESS THE GEAR AT THE RIGHT TIME FOR AN EXCELLENT GEAR SHIFT";
+
+TEXT_SAVE_REMOVE = "THIS WILL REMOVE ALL YOUR ACHIEVEMENTS! DO YOU WANT TO PROCEED?"
+TEXT_IOS_PRIVATE = 'Your web browser does not support storing settings locally. In Safari, the most common cause of this is using "Private Browsing Mode". Some info may not save or some features may not work properly';
+
+TEXT_SHARE_IMAGE = "200x200.jpg";
+TEXT_SHARE_TITLE = "Congratulations!";
+TEXT_SHARE_MSG1 = "You completed the race in <strong>";
+TEXT_SHARE_MSG2 = " seconds</strong>!<br><br>Share your score with your friends!";
+TEXT_SHARE_SHARE1 = "My time is ";
+TEXT_SHARE_SHARE2 = " seconds! Can you do better";

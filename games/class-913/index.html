@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Driver'z Ed</title>
+        <meta name="robots" content="noindex,nofollow" />
+        <script async src="/poki-sdk.js"></script>
+
+        <!-- Favicons -->
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png" />
+        <link rel="manifest" href="./site.webmanifest" />
+      <script async type="module" crossorigin src="./assets/index-Dukr0Ocp.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <div id="joystick-container">
+            <div id="joystick-container-inner"></div>
+        </div>
+        <div id="splash-screen" class="bg-layer">
+            <div id="splash-pylons" class="bg-layer"></div>
+            <div id="splash-car" class="bg-layer"></div>
+        </div>
+        <div id="ui-root"></div>
+        <div id="loading-root"></div>
+        <span
+            id="loading-icon"
+            style="position: fixed; bottom: 0; left: 50%; transform: translate(-50%, 0); padding: 10px; z-index: 101"
+            >⌛</span
+        >
+
+        <script>
+            // Wait for the background image to load
+            const splashScreen = document.getElementById("splash-screen");
+            const bgImage = new Image();
+            const pylonImage = new Image();
+            const carImage = new Image();
+
+            // Set the image source based on screen size
+            bgImage.src = window.innerWidth < 768 ? "ui/splash/BG_MOBILE.jpg" : "ui/splash/BG.jpg";
+            pylonImage.src = "ui/splash/pylons.png";
+            carImage.src = "ui/splash/car.png";
+
+            let loadedChildren = 0;
+
+            // const checkIfAllChildrenLoaded = () => {
+            //     if (loadedChildren === splashScreen.childNodes.length) {
+            //         splashScreen.classList.add("animate"); // Start animations once the background is loaded
+            //     }
+            // };
+
+            // splashScreen.childNodes.forEach((child) => {
+            //     child.onload = () => {
+            //         loadedChildren++;
+            //         checkIfAllChildrenLoaded();
+            //     };
+            // });
+
+            [bgImage, carImage, pylonImage].forEach((imgContainer) => {
+                imgContainer.onload = () => {
+                    loadedChildren++;
+                    if (loadedChildren === 3) {
+                        splashScreen.classList.add("animate"); // Start animations once the background is loaded
+                    }
+                };
+            });
+        </script>
+    </body>
+</html>
+
+<style>
+    /* Basic Styles */
+    #splash-screen {
+        background-color: #242424;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 100;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .bg-layer {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    #splash-car {
+        background-image: url("ui/splash/car.png");
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    #splash-pylons {
+        background-image: url("ui/splash/pylons.png");
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        margin-left: -70px;
+        margin-top: 20px;
+        z-index: 1;
+    }
+
+    /* Hide animations until background is loaded */
+    #splash-car,
+    #splash-pylons {
+        opacity: 0;
+    }
+
+    /* Start animations only when `animate` class is added */
+    .animate #splash-car {
+        animation: carTranslate 7s ease-out infinite;
+    }
+
+    .animate #splash-pylons {
+        animation: pylonsFly 7s ease-out infinite;
+    }
+
+    /* Keyframes for Car Animation */
+    @keyframes carTranslate {
+        0% {
+            opacity: 0;
+            transform: translateX(0) scale(1);
+        }
+        10% {
+            opacity: 1;
+        }
+        95% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(300px) translateY(-80px) scale(1.5);
+            opacity: 0;
+        }
+    }
+
+    /* Keyframes for Pylons Animation */
+    @keyframes pylonsFly {
+        0% {
+            opacity: 0;
+            transform: translateY(0) rotate(0deg) scale(1);
+        }
+        25% {
+            opacity: 0;
+        }
+        40% {
+            opacity: 1;
+        }
+        95% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(-150px) translateY(0px) rotate(-15deg) scale(1.8);
+            opacity: 0;
+        }
+    }
+
+    /* Adjustments for mobile screens */
+    @media (max-width: 768px) {
+        #splash-screen {
+            background-image: url("ui/splash/BG_MOBILE.jpg");
+        }
+    }
+    @media (min-width: 768px) {
+        #splash-screen {
+            background-image: url("ui/splash/BG.jpg");
+        }
+    }
+</style>

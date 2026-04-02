@@ -1,0 +1,17 @@
+{
+  "name": "Village Craft",
+  "short_name": "Village Craft",
+  "theme_color": "#ffd6a4",
+  "background_color": "#fff1e0",
+  "display": "fullscreen",
+  "scope": "/",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "icons": [
+    {
+      "src": "/images/icons-512.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ]
+}

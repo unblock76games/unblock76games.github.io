@@ -1,0 +1,37 @@
+{
+  "name": "Kingdom Heroes",
+  "description": "Kingdom Heroes is idle game where you have to build up a medieval town",
+  "iarc_rating_id": "0be6dc21-47ae-483e-ab10-3dfa9278fa87",
+  "orientation": "any",
+  "lang": "en",
+  "short_name": "Kingdom Heroes",
+  "categories": ["games"],
+  "theme_color": "#ffd6a4",
+  "background_color": "#fff1e0",
+  "display": "fullscreen",
+  "scope": "/",
+  "id": "/?source=pwa",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "icons": [
+    {
+      "src": "/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icons-512.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screen1.jpeg",
+      "sizes": "877x512",
+      "type": "image/jpg",
+      "platform": "wide"
+    }
+  ]
+}

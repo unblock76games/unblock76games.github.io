@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="description"
+        content="Vectaria.io: A free browser game similar to Minecraft. Engage in building, crafting, digging, and much more." />
+
+    <meta name="keywords" content="Vectaria.io, browser game, Minecraft-like, crafting, building, online multiplayer" />
+    <title>Vectaria.io</title>
+    <meta property="og:title" content="Vectaria.io" />
+    <meta property="og:description"
+        content="Explore, build, and create in Vectaria.io, a browser game reminiscent of Minecraft-like." />
+    <meta property="og:image" content="/preview-og.webp" />
+    <meta property="og:url" content="https://vectaria.io" />
+
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "VideoGame",
+        "name": "Vectaria.io",
+        "description": "A browser-based game reminiscent of Minecraft. Build, craft, and embark on adventures in Vectaria.io.",
+        "image": "/preview-og.webp",
+        "url": "https://www.vectaria.io"
+      }
+    </script>
+
+    <!-- GameAnalytics -->
+    <script>
+        ;(function (w, d, a, m) {
+        var s = "script"
+        var g = "GameAnalytics"
+        ;(w[g] =
+          w[g] ||
+          function () {
+            ;(w[g].q = w[g].q || []).push(arguments)
+          }),
+          (a = d.createElement(s)),
+          (m = d.getElementsByTagName(s)[0])
+        a.async = 1
+        a.src = "https://download.gameanalytics.com/js/GameAnalytics-4.4.5.min.js"
+        m.parentNode.insertBefore(a, m)
+      })(window, document)
+
+      GameAnalytics("setEnabledInfoLog", true)
+      GameAnalytics("setEnabledVerboseLog", true)
+      GameAnalytics("configureBuild", "web 1.0.0")
+      GameAnalytics("initialize", "1fb9e532fc62f07f7f075310da25de51", "63781222e1d43f96557fd7ebc318cad6d5c7898b")
+    </script>
+    <!-- End GameAnalytics -->
+    <script type="module" crossorigin src="./assets/index-921a5d90.js"></script>
+    <link rel="stylesheet" href="./assets/index-3054bae9.css">
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
+        integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
+        data-cf-beacon='{"rayId":"8363cf626f4f0958","version":"2023.10.0","token":"08a46637120a404a963395dd86986b4f"}'
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

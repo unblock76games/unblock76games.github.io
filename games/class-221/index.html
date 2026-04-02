@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Chess Grandmaster</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=9">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Chess Grandmaster">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, minimal-ui" />
+    
+    <style>
+
+        * { -webkit-tap-highlight-color:rgba(0,0,0,0); }
+
+        body {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+            background: rgb(0, 0, 0);
+        }
+
+        #content {
+            margin: 0 auto;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        #orientation {
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(assets/rotate-device.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgb(0, 0, 0);
+            z-index: 999;
+            display: none;
+        }
+
+        @font-face {
+            font-family: "Roboto Slab Bold";
+            font-style: regular;
+            src: url("assets/fonts/RobotoSlab-Bold.ttf");
+        }
+
+        @font-face {
+            font-family: "Roboto Slab Regular";
+            font-style: regular;
+            src: url("assets/fonts/RobotoSlab-Regular.ttf");
+        }
+
+        @font-face {
+            font-family: "Roboto Slab Light";
+            font-style: regular;
+            src: url("assets/fonts/RobotoSlab-Light.ttf");
+        }
+
+        @font-face {
+            font-family: "Exo SemiBold";
+            font-style: regular;
+            src: url("assets/fonts/Exo-SemiBold.ttf");
+        }
+
+        @font-face {
+            font-family: "Exo Light";
+            font-style: regular;
+            src: url("assets/fonts/Exo-Light.ttf");
+        }
+
+    </style>
+
+    <script src="/poki-sdk.js"></script>
+    <script src="dist/chess.min.js"></script>
+    <script src="dist/engine.js"></script>
+    <script src="dist/bundle.js"></script>
+    <script src="dist/Poki Sitelock v2.2.js"></script>
+</head>
+<body>
+
+    <div id="content"></div>
+    <div id="orientation"></div>
+
+</body>
+</html>

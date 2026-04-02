@@ -1,0 +1,10 @@
+{
+	"name": "UnpuzzleR",
+	"short_name": "UnpuzzleR",
+	"description": "Unpuzzler - anti-puzzle game",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "landscape",
+	"background_color": "#000000",
+	"icons": []
+}

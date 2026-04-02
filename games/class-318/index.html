@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="robots" content="noindex,nofollow" />
+<script type="text/javascript" src="./js/components.js"></script>
+<script type="text/javascript" src="./js/game.js"></script>
+<script type="text/javascript" src="./js/game_framework.js"></script>
+<script type="text/javascript" src="./audio/audio_manifest.js"></script>
+<script type="text/javascript" src="./images/image_manifest.js"></script>
+<script type="text/javascript" src="./images/spritesheet_manifest.js"></script>
+<script type="text/javascript" src="./xml/xml.js"></script>
+<script type="text/javascript" src="./json/json.js"></script>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Peppa Pig House Builder</title>
+
+<link rel="stylesheet" type="text/css" href="./css/font.css" />
+<style type="text/css">
+
+		@font-face {
+			
+			font-family: "FixedSys";
+			src: url(fonts/peppa.otf) format("opentype"),
+        		url('fonts/peppa.woff') format('woff'),
+        		url('fonts/peppa.ttf') format('truetype');
+		}
+	</style>
+</head>
+<body style="margin: 0; padding:0; background-color: black; z-index: -1; overflow: hidden;">
+<div style="width:140px; height:18px;display:block;z-index: 9999999;position: absolute;text-align: right;right: 10px;"><a target="_blank" href="http://vseigru.net/" title="Ð’ÑÐµ Ð˜Ð³Ñ€Ñ‹ - ÐžÐ½Ð»Ð°Ð¹Ð½"><img src="http://g.vseigru.net/dasha1/111.png" width="140" height="18" style="cursor: pointer;" title alt="Ð’ÑÐµ Ð˜Ð³Ñ€Ñ‹ - ÐžÐ½Ð»Ð°Ð¹Ð½"></a></div>
+<video id="intro" style="position: absolute; top:-2000px" muted preload="auto">
+<source src="video/640x360/cutscenes/1.webm" type="video/webm">
+<source src="video/640x360/cutscenes/1.mp4" type="video/mp4">
+<source src="video/640x360/cutscenes/1.ogv" type="video/ogg">
+</video>
+<video id="outro" style="position: absolute; top:-2000px" muted preload="auto">
+<source src="video/640x360/cutscenes/2.webm" type="video/webm">
+<source src="video/640x360/cutscenes/2.mp4" type="video/mp4">
+<source src="video/640x360/cutscenes/2.ogv" type="video/ogg">
+</video>
+
+
+<script type="text/javascript">
+		
+		getUrlVars = function() {
+			
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				
+				vars[key] = value;
+			});
+			
+			return vars;
+		}
+		
+		window.onload = function() {
+			
+			setTimeout(function() {
+				
+				GAME.setup();
+			}, 1);
+		}
+		
+		document.ontouchstart = function(event) {
+			
+			event.preventDefault();
+		}
+		
+		document.touchmove = function(event) {
+			
+    		event.preventDefault();
+		}
+		
+	</script>
+</body>
+</html>

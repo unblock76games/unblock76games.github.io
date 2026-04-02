@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="robots" content="noindex,nofollow" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Kubi Pets</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="./index.0951e0b3.css">
+        <script src="/poki-sdk.js"></script>
+        <meta name="title" content="Kubi Pets">
+        <meta name="description" content="Unwrap and merge pets, expand your island and purchase upgrades!">
+        <meta name="keywords" content="kubi, pets, merge, game, pixijs">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="revisit-after" content="1 days">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Kubi Pets">
+        <meta property="og:description" content="Unwrap and merge pets, expand your island and purchase upgrades!">
+        <meta property="og:image" content="https://kubipets.netlify.app/meta.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Kubi Pets">
+        <meta name="twitter:description" content="Unwrap and merge pets, expand your island and purchase upgrades!">
+        <meta name="twitter:image" content="https://kubipets.netlify.app/meta.png">
+        <link rel="icon" type="image/png" href="./favicon.06d23341.png">
+        <meta name="theme-color" content="#4D88FC">
+    </head>
+    <body oncontextmenu="event.preventDefault()">
+        <div id="gui">
+            <div id="cornerIcons">
+                <canvas id="settingsButton" width="48" height="48"></canvas>
+                <canvas id="blobShowIcon" width="48" height="48"></canvas>
+                <canvas id="wardrobeIcon" width="48" height="48"></canvas>
+            </div>
+            <h1 id="coinBalance" style="transform:translateY(-300px)">
+                <canvas id="coinBalanceIcon" width="48" height="48"></canvas>
+                <span id="coinBalanceText">0</span>
+                <span id="groundCoinText">(0/50)</span>
+            </h1>
+            <h1 id="marbleBalance" style="transform:translateY(-300px)">
+                <canvas id="marbleBalanceIcon" width="48" height="48"></canvas>
+                <span id="marbleBalanceText">0</span>
+            </h1>
+            <div id="shipmentGuiContainer">
+                <div id="shipmentGui" style="display:none;transform:translateY(120px)">
+                    <div id="shipmentNumbers">
+                        <canvas id="shipmentNumbersIcon" width="48" height="48"></canvas>
+                        <h1 id="shipmentNumbersText">0/3</h1>
+                    </div>
+                    <div id="shipmentLoading">
+                        <div id="shipmentProgress">
+                            <canvas id="shipmentProgressThrottledIcon" width="32" height="32"></canvas>
+                            <div id="shipmentProgressThrottled"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="questGui" style="display:none">
+                <canvas id="questIcon"></canvas>
+                <div id="questContainer">
+                    <div id="questBar"></div>
+                    <p id="questText" class="blackborder"></p>
+                </div>
+                <p id="questReward" class="blackborder" style="display:none">
+                    +<span id="questRewardText"></span>
+                    <canvas id="questRewardIcon"></canvas>
+                </p>
+            </div>
+            <div id="desktopButtonPressContainer" style="display:none">
+                <canvas id="desktopButtonPressTutorial"></canvas>
+            </div>
+            <div id="specialActiveWindow" style="display:none">
+                <canvas id="specialActiveIcon"></canvas>
+                <span id="specialActiveTime"></span>
+            </div>
+            <div id="revealContainer">
+                <h1 id="revealText"></h1>
+                <div id="revealStage" style="display:none"></div>
+            </div>
+            <div id="mobileControlsContainer">
+                <div id="mobileActionButtonContainer">
+                    <canvas id="mobileActionButton"></canvas>
+                </div>
+            </div>
+            <div id="settingsMenu" style="display:none">
+                <canvas id="settingsClose" class="closeButton"></canvas>
+                <h1 class="blackborder title" id="settingsTitle"></h1>
+                <hr class="line">
+                <div id="settingsLanguages"></div>
+                <div class="toggle" id="settingsAutoPickup">
+                    <canvas></canvas>
+                    <label id="settingsAutoPickupTitle" class="blackborder"></label>
+                </div>
+                <div class="toggle" id="settingsShipmeter">
+                    <canvas></canvas>
+                    <label id="settingsShipmeterTitle" class="blackborder"></label>
+                </div>
+                <div class="toggle" id="settingsTutorline">
+                    <canvas></canvas>
+                    <label id="settingsTutorlineTitle" class="blackborder"></label>
+                </div>
+                <label class="blackborder">
+                    <span id="settingsVolumeTitle"></span>
+                    : <span id="settingsVolumePercentage">100</span>
+                    %
+                </label>
+                <input id="settingsVolume" type="range" min="0" max="1" step="0.01">
+                <label class="blackborder">
+                    <span id="settingsMusicTitle"></span>
+                    : <span id="settingsMusicPercentage">50</span>
+                    %
+                </label>
+                <input id="settingsMusic" type="range" min="0" max="1" step="0.01">
+                <hr class="line">
+                <button class="danger" id="resetProgress"></button>
+            </div>
+            <div id="blobShowWindow" style="display:none">
+                <canvas id="blobShowClose" class="closeButton"></canvas>
+                <div id="blobShow"></div>
+            </div>
+            <div id="beginPrestigeWindow" style="display:none">
+                <canvas id="beginPrestigeClose" class="closeButton"></canvas>
+                <h1 class="title" id="beginPrestigeTitle"></h1>
+                <p class="centered">
+                    <span id="beginPrestigeYouWill1"></span>
+                    <span class="blackborder red" id="beginPrestigeLose"></span>
+                    :
+                </p>
+                <p>
+                    <canvas id="prestigeCoinIcon"></canvas>
+                    <span id="prestigeCoinCount"></span>
+                    <span id="beginPrestigeCoins"></span>
+                </p>
+                <p>
+                    <canvas id="prestigePetIcon" class="outlinedIcon"></canvas>
+                    <span id="beginPrestigeAllPets"></span>
+                </p>
+                <p>
+                    <canvas id="prestigeUpgradeIcon"></canvas>
+                    <span id="beginPrestigeAllUpgrades"></span>
+                </p>
+                <p class="centered">
+                    <span id="beginPrestigeYouWill2"></span>
+                    <span class="blackborder green" id="beginPrestigeGet"></span>
+                    :
+                </p>
+                <p>
+                    <canvas id="prestigeMarbleIcon"></canvas>
+                    <span id="prestigeMarbleCount"></span>
+                    <span id="beginPrestigeMarbles"></span>
+                </p>
+                <p>
+                    <canvas id="prestigeWorkerIcon" class="outlinedIcon"></canvas>
+                    <span id="beginPrestigeWorkers"></span>
+                </p>
+                <p>
+                    <canvas id="prestigeChancesIcon"></canvas>
+                    <span id="beginPrestigePermaUpgrades"></span>
+                </p>
+                <p>
+                    <canvas id="prestigeMultiplierIcon"></canvas>
+                    +<span id="prestigeMultiplierCount"></span>
+                    % <span id="beginPrestigeCoinsMultiplier"></span>
+                </p>
+                <div id="prestigeActions">
+                    <button class="prestigeButton" id="beginPrestigeButton">Prestige</button>
+                    <button class="prestigeButton" id="cancelPrestigeButton">Not yet</button>
+                </div>
+            </div>
+            <div id="workerPurchaseMenu" style="display:none">
+                <canvas id="workerPurchaseClose" class="closeButton"></canvas>
+                <div id="workerPurchaseHeader">
+                    <canvas id="workerPurchaseLogo"></canvas>
+                    <span id="workerPurchaseTitle" class="blackborder">
+                        <span style="color:#ff0">Petro's</span>
+                        <br>
+                        <span style="color:#cc764b" id="workerShopText"></span>
+                    </span>
+                </div>
+                <hr class="line">
+                <div class="workerPurchaseItem" id="workerPurchaseItemCollect">
+                    <canvas id="workerFaceCollect" class="workerFaceImg"></canvas>
+                    <div class="workerPurchaseItemInfo">
+                        <span class="blackborder workerItemTitle" style="color:#f93e37">
+                            <span id="workerTypeTextCollect"></span>
+                            : <span id="workerOwnCollect"></span>
+                        </span>
+                        <br>
+                        <canvas class="workerPriceIcon" id="workerPriceIconCollect"></canvas>
+                        <span id="workerPriceTextCollect" class="blueborder workerPriceText"></span>
+                    </div>
+                </div>
+                <hr class="line">
+                <div class="workerPurchaseItem" id="workerPurchaseItemUnwrap">
+                    <canvas id="workerFaceUnwrap" class="workerFaceImg"></canvas>
+                    <div class="workerPurchaseItemInfo">
+                        <span class="blackborder workerItemTitle" style="color:#33e754">
+                            <span id="workerTypeTextUnwrap"></span>
+                            : <span id="workerOwnUnwrap"></span>
+                        </span>
+                        <br>
+                        <canvas class="workerPriceIcon" id="workerPriceIconUnwrap"></canvas>
+                        <span id="workerPriceTextUnwrap" class="blueborder workerPriceText"></span>
+                    </div>
+                </div>
+                <hr class="line">
+                <div class="workerPurchaseItem" id="workerPurchaseItemMerge">
+                    <canvas id="workerFaceMerge" class="workerFaceImg"></canvas>
+                    <div class="workerPurchaseItemInfo">
+                        <span class="blackborder workerItemTitle" style="color:#4800fc">
+                            <span id="workerTypeTextMerge"></span>
+                            : <span id="workerOwnMerge"></span>
+                        </span>
+                        <br>
+                        <canvas class="workerPriceIcon" id="workerPriceIconMerge"></canvas>
+                        <span id="workerPriceTextMerge" class="blueborder workerPriceText"></span>
+                    </div>
+                </div>
+                <hr class="line">
+                <div class="workerPurchaseItem" id="workerPurchaseItemSpeed">
+                    <canvas id="workerIconSpeed"></canvas>
+                    <div class="workerPurchaseItemInfo">
+                        <span class="blackborder workerItemTitle" style="color:#f6d014">
+                            <span id="workerTypeTextSpeed"></span>
+                            : <span id="workerOwnSpeed"></span>
+                            %
+                        </span>
+                        <br>
+                        <canvas class="workerPriceIcon" id="workerPriceIconSpeed"></canvas>
+                        <span id="workerPriceTextSpeed" class="blueborder workerPriceText"></span>
+                    </div>
+                </div>
+            </div>
+            <div id="endPrestigeConfirmationMenu" style="display:none">
+                <canvas id="endPrestigeConfirmationClose" class="closeButton"></canvas>
+                <span>
+                    <span id="endPrestigeConfirmationTextBefore"></span>
+                    <canvas id="endPrestigeMarbleIcon">
+                        <span id="endPrestigeConfirmationTextAfter"></span>
+                    </canvas>
+                </span>
+                <button id="endPrestigeConfirmationButton"></button>
+            </div>
+            <div id="specialAdblockWindow" style="display:none">
+                <canvas id="specialAdblockImg"></canvas>
+                <p id="specialAdblockMessage"></p>
+                <button id="specialAdblockReload"></button>
+                <button id="specialAdblockTimer"></button>
+            </div>
+            <div id="deleteProgressWindow" style="display:none">
+                <div id="deleteProgressFlex">
+                    <h2 class="blackborder">Are you sure you want to delete all your progress?</h2>
+                    <div>
+                        <button id="deleteProgressCancel">Cancel</button>
+                        <button id="deleteProgressConfirm" class="danger">Yes</button>
+                    </div>
+                </div>
+            </div>
+            <div id="specialWindow" style="display:none">
+                <canvas id="specialWindowClose" class="closeButton"></canvas>
+                <h1>
+                    <canvas id="specialWindowIcon"></canvas>
+                    Special!
+                </h1>
+                <div class="specialChoice" id="regularReward">
+                    <canvas id="regularRewardIcon" class="rewardIcon"></canvas>
+                    <h2 id="regularRewardText" class="rewardText"></h2>
+                    <h2 id="regularRewardDetails" class="rewardDetails"></h2>
+                    <canvas id="regularRewardCollect" class="rewardCollect"></canvas>
+                </div>
+                <div class="specialChoice" id="videoReward">
+                    <canvas id="videoRewardIcon" class="rewardIcon"></canvas>
+                    <h2 id="videoRewardText" class="rewardText"></h2>
+                    <h2 id="videoRewardDetails" class="rewardDetails"></h2>
+                    <canvas id="videoRewardCollect" class="rewardCollect"></canvas>
+                </div>
+                <button id="specialDone"></button>
+            </div>
+            <div id="wardrobeWindow" style="display:none">
+                <canvas id="wardrobeWindowClose" class="closeButton"></canvas>
+                <div id="wardrobeSubWindow"></div>
+            </div>
+            <div id="maximumCoinsWindow" style="display:none">
+                <h2 class="blackborder" id="maximumCoinsTitle">
+                    <canvas id="maximumCoinsUpgradeIcon"></canvas>
+                    Maximum Coins 
+                </h2>
+                <p class="blackborder" id="maximumCoinsText">
+                    Buy the <span id="maximumCoinsUpgrade">Maximum Coin upgrade</span>
+                    .
+                </p>
+                <button class="blackborder" id="maximumCoinsDontShow">Don't show again</button>
+            </div>
+            <div id="prestigeNoticeWindow" style="display:none">
+                <p class="blackborder" id="prestigeNoticeText"></p>
+                <button id="prestigeNoticeButton"></button>
+            </div>
+        </div>
+        <script>
+            window.setLoaderProgress = function(e) {
+                updateLoadingScreen(e)
+            }
+            ;
+        </script>
+        <script>
+            PokiSDK.init().then((()=>{
+                window.adBlock = !1
+            }
+            )).catch((()=>{}
+            ));
+        </script>
+        <script>
+
+            function loadJS(url) {
+                PokiSDK.gameLoadingStart();
+                createLoadingScreen();
+
+                window.setLoaderProgress(0);
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4) {
+                        if (xhr.status == 200 || xhr.status == 0) {
+                            window.setLoaderProgress(maxProgress);
+                            eval(xhr.responseText);
+                        }
+                    }
+                }
+                xhr.open("GET", url, true);
+                xhr.send();
+
+                var maxProgress = 0.99;
+                xhr.onprogress = function(event) {
+                    var percentComplete = 0;
+                    if (event.lengthComputable) {
+                        percentComplete = event.loaded / event.total;
+                    } else {
+                        var total = 1600000;
+                        // 1.6MB uncompressed
+                        percentComplete = event.loaded / total;
+                    }
+                    window.setLoaderProgress(Math.min(maxProgress, percentComplete * maxProgress));
+                }
+            }
+
+            function rand_shuffle(arr) {
+                for (let i = 0; i < arr.length; i++) {
+                    let j = Math.floor(Math.random() * arr.length);
+                    [arr[i],arr[j]] = [arr[j], arr[i]];
+                }
+                ;
+                return arr;
+            }
+
+            let l_con;
+            let l_cvs;
+            let l_ctx;
+            let l_tex;
+            const colors = ["000000", "303030", "a0a0a0", "ffffff", "a001cb", "e42ece", "fb1b7e", "f93e37", "271706", "cc764b", "f9942c", "e8a885", "bc8430", "dea83e", "f6d014", "ffff00", "33e754", "0eff34", "06ff87", "96ff3e", "4800fc", "5272e3", "4d88fc"];
+            let loading_boxes = [];
+            let boxes_drawn = 0;
+
+            function createLoadingScreen() {
+                l_con = document.createElement('div');
+                l_con.id = 'loadingScreen';
+
+                l_cvs = document.createElement('canvas');
+                l_cvs.style.width = window.innerWidth / 2 + 'px';
+                l_cvs.style.height = window.innerWidth / 2 + 'px';
+                l_cvs.style.imageRendering = 'pixelated';
+                l_cvs.width = 10;
+                l_cvs.height = 10;
+
+                l_tex = document.createElement('p');
+                l_tex.innerText = '0%';
+                l_tex.classList.add('blackborderloading');
+
+                l_ctx = l_cvs.getContext('2d');
+
+                for (y = 0; y < 10; y++) {
+                    for (x = 0; x < 10; x++) {
+                        loading_boxes.push({
+                            x: x,
+                            y: y,
+                            color: colors[Math.floor(Math.random() * colors.length)]
+                        })
+                    }
+                }
+                ;loading_boxes = rand_shuffle(loading_boxes);
+
+                l_con.appendChild(l_cvs);
+                l_con.appendChild(l_tex);
+
+                document.body.appendChild(l_con);
+            }
+
+            function updateLoadingScreen(progress) {
+                const percentage = Math.floor(progress * 100);
+                let i = boxes_drawn;
+
+                for (let i = boxes_drawn; i < percentage; i++) {
+                    let box = loading_boxes[i];
+                    l_ctx.fillStyle = '#' + box.color;
+                    l_ctx.fillRect(box.x, box.y, 1, 1);
+                }
+                ;
+                l_tex.innerText = percentage + '%';
+            }
+
+            loadJS("./index.004b838a.js");
+        </script>
+    </body>
+</html>

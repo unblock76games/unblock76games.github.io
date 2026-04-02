@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN">
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html" />
+    <title>Tingly Game</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+    <link rel="stylesheet" type="text/css" media="screen" href="gamepage.css" />
+    <script src="/poki-sdk.js"></script>
+</head>
+
+<body>
+    <div class="loading_screen"></div>
+    <div class="game_screen" id="viewport" style="position:absolute; display: none; overflow:hidden">
+        <canvas id="canvasBackground" oncontextmenu="return false;" onselectstart="return false;"></canvas>
+    </div>
+    <script>
+        //init Poki SDK. Old Tingly games don't have a nice 'start' function, so we init Poki as soon as possible
+        //and then have it set a global flag as soon as it is done
+        __flagPokiInitialized = false;
+        PokiSDK.init().then(
+            () => {
+                // successfully initialized
+                console.log("PokiSDK initialized");
+                // continue to game
+                __flagPokiInitialized = true;
+            }
+        ).catch(
+            () => {
+                // initialized but the user has an adblock
+                console.log("Adblock enabled");
+                // feel free to kindly ask the user to disable AdBlock, like forcing weird usernames or showing a sad face; be creative!
+                // continue to the game
+                __flagPokiInitialized = true;
+            }
+        );
+        PokiSDK.setDebug(false);
+
+        //setup loading screen images
+        (function () {
+            var loadingDiv = document.getElementsByClassName("loading_screen")[0];
+            var createImg = function (id, src, target) {
+                var image = document.createElement("img");
+                image.id = id;
+                image.src = src;
+                image.style.display = "none";
+                target.appendChild(image);
+            };
+            createImg("throbber_image", "big/media/throbber.png", loadingDiv);
+        }())
+        //set game parameters
+        TG_InitSettings = {
+            size: "big"
+        };
+    </script>
+    <script type="text/javascript" src="scripts/TG_PublisherSettings.js"></script>
+    <script type="text/javascript" src="big/index.js"></script>
+    
+
+</body>
+
+</html>

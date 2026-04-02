@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8"/>
+        <meta name="robots" content="noindex,nofollow" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="/poki-sdk.js"></script>
+
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui"
+        />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        <style>
+            html {
+                /* Prevent scrollbars from causing a resize feedback loop. */
+                overflow: hidden;
+            }
+            html,
+            body {
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                touch-action: none;
+            }
+            #content {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                touch-action: none;
+
+                position: static;
+                z-index: 2;
+            }
+            .no-mobile {
+                display: none;
+                touch-action: none;
+            }
+
+            /* On small devices, fill the entire screen and hide the rest of the page. */
+            @media (max-device-width: 1in), (max-device-height: 1in) {
+                html {
+                    /* Prevent scrollbars from causing a resize feedback loop. */
+                    overflow: hidden;
+                }
+                html,
+                body {
+                    height: 100%;
+                    padding: 0;
+                    margin: 0;
+                    touch-action: none;
+                }
+                #content {
+                    height: 100%;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    box-shadow: none;
+                    touch-action: none;
+                    /* background-color: 0x255828; */
+
+                    /* image-rendering: crisp-edges; */
+                    /* image-rendering: pixelated; */
+
+                    position: static;
+                    z-index: 2;
+                }
+                .no-mobile {
+                    display: none;
+                    touch-action: none;
+                }
+            }
+
+            #bg {
+                /* Center and scale the image nicely */
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+
+                position: relative;
+
+                z-index: 1;
+            }
+
+            .noselect {
+                -webkit-touch-callout: none; /* iOS Safari */
+                -webkit-user-select: none; /* Safari */
+                -khtml-user-select: none; /* Konqueror HTML */
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+								supported by Chrome and Opera */
+            }
+        </style>
+
+        <title>Spider Solitaire Plus</title>
+    </head>
+
+    <body>
+        <div id="content"></div>
+    </body>
+
+    <script src="js/phaser-no-physics.min.js"></script>
+    <script src="js/game.js"></script>
+</html>

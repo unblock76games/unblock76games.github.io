@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Funny Eye Surgery</title>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+
+	<link rel="shortcut icon" type="image/png" href="./favicon.png">
+	
+	<script type="text/javascript" src="./lib/howler.min.js"></script>
+	<script type="text/javascript" src="./lib/pako.min.js"></script>
+	<script type="text/javascript" src="./lib/FileSaver.min.js"></script>
+	<script src="/poki-sdk.js"></script>
+	<script type="text/javascript" src="./funny_eye_surgery.js"></script>
+	
+	<script type="text/javascript">
+		var _0x1918=['top','indexOf','aHR0cHM6Ly9wb2tpLmNvbS9zaXRlbG9jaw==','hostname','length','location','LnBva2ktZ2RuLmNvbQ==','href'];(function(_0x4a02b5,_0x5c0c3d){var _0x56a85d=function(_0x375c0e){while(--_0x375c0e){_0x4a02b5['push'](_0x4a02b5['shift']());}};_0x56a85d(++_0x5c0c3d);}(_0x1918,0x1ae));var _0xcdc9=function(_0x4a02b5,_0x5c0c3d){_0x4a02b5=_0x4a02b5-0x0;var _0x56a85d=_0x1918[_0x4a02b5];return _0x56a85d;};(function checkInit(){/*var _0x151adb=['bG9jYWxob3N0','LnBva2kuY29t',_0xcdc9('0x0')];var _0x219654=![];var _0x558823=window[_0xcdc9('0x7')][_0xcdc9('0x5')];for(var _0x220888=0x0;_0x220888<_0x151adb[_0xcdc9('0x6')];_0x220888++){var _0x4a2f49=atob(_0x151adb[_0x220888]);if(_0x558823[_0xcdc9('0x3')](_0x4a2f49,_0x558823['length']-_0x4a2f49['length'])!==-0x1){_0x219654=!![];break;}}if(!_0x219654){var _0xcff8e8=_0xcdc9('0x4');var _0x3296f7=atob(_0xcff8e8);window['location'][_0xcdc9('0x1')]=_0x3296f7;this[_0xcdc9('0x2')][_0xcdc9('0x7')]!==this[_0xcdc9('0x7')]&&(this[_0xcdc9('0x2')][_0xcdc9('0x7')]=this[_0xcdc9('0x7')]);}*/}());
+	</script>
+	
+	<script>
+		window.addEventListener ("touchmove", function (event) { event.preventDefault (); }, { capture: false, passive: false });
+		if (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio > 2) {
+			var meta = document.getElementById ("viewport");
+			meta.setAttribute ('content', 'width=device-width, initial-scale=' + (2 / window.devicePixelRatio) + ', user-scalable=no');
+		}
+	</script>
+	
+	<style>
+		html,body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+		#openfl-content { background: #000000; width: 100%; height: 100%; }
+		@font-face {
+			font-family: 'Bombardier';
+			src: url('fonts/bombardier.eot?#iefix') format('embedded-opentype'),
+			url('fonts/bombardier.woff') format('woff'),
+			url('fonts/bombardier.ttf') format('truetype'),
+			url('fonts/bombardier.svg#Bombardier') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
+
+	</style>
+</head>
+<body>
+	<noscript>This webpage makes extensive use of JavaScript. Please enable JavaScript in your web browser to view this page.</noscript>
+	<div id="openfl-content"></div>
+	<script type="text/javascript">
+		pauseGame  = function(){};
+		resumeGame = function(){};
+
+		PokiSDK.init().then(
+			() => {
+				lime.embed ("funny_eye_surgery", "openfl-content", 0, 0, { parameters: {} });
+				console.log("PokiSDK initialized");
+			}   
+		).catch(
+			() => {
+				lime.embed ("funny_eye_surgery", "openfl-content", 0, 0, { parameters: {} });
+				//DataGame.isAdsBlock = true;
+				console.log("Adblock enabled");
+			}   
+		);
+		//PokiSDK.setDebug(true); //live disable
+
+		function showAdsPoki() {
+			pauseGame();
+			PokiSDK.commercialBreak().then(resumeGame);
+			console.log("SHOW ADS POKI");
+		}	
+	</script>	
+</body>
+</html>

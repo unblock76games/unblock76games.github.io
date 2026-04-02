@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="robots" content="noindex,nofollow" />
+	<title>Cyberpunk Ninja Runner</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width">
+	<!-- GameDistribution -->
+	<!-- <script>
+		window["GD_OPTIONS"] = {
+			"gameId": "661a7bd62ea743eb9110bb4dd30e7303",
+			"ga_tracking": true,
+			"onEvent": function(event) {
+				switch (event.name) {
+					case "SDK_READY":
+						console.log("GD SDK Ready");
+						setTimeout(function() {
+							gdsdk.showAd();
+						}, 200);
+						break;
+					case "SDK_GAME_START":
+						// advertisement done, resume game logic and unmute audio
+						this.game = window.game;
+						this.game.sound.mute = false;
+						break;
+					case "SDK_GAME_PAUSE":
+						// pause game logic / mute audio
+						this.game = window.game;
+						this.game.sound.mute = true;
+						break;
+					case "SDK_GDPR_TRACKING":
+						// this event is triggered when your user doesn't want to be tracked
+						window["GD_OPTIONS"]["ga_tracking"] = false;
+						break;
+					case "SDK_GDPR_TARGETING":
+						// this event is triggered when your user doesn't want personalised targeting of ads and such
+						break;
+				}
+			},
+		};
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s);
+			js.id = id;
+			js.src = 'https://html5.api.gamedistribution.com/main.min.js';
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'gamedistribution-jssdk'));
+	</script> -->
+	<!-- End GameDistribution -->
+	<!-- GameAnalytics -->
+	<!--
+	<script>
+		(function (w, d, a, m) {
+		   var s = 'script';
+		   var g = 'GameAnalytics';
+		   var scriptUrl = '//download.gameanalytics.com/js/GameAnalytics-3.0.1.min.js';
+		   w[g] = w[g] || function () {
+			  (w[g].q = w[g].q || []).push(arguments)
+		   }, a = d.createElement(s), m = d.getElementsByTagName(s)[0];
+		   a.async = 1;
+		   a.src = scriptUrl;
+		   m.parentNode.insertBefore(a, m)
+		})(window, document);
+	  </script> -->
+	<!-- End GameAnalytics -->
+
+	<!-- Poki -->
+	<script src="/poki-sdk.js"></script>
+	<!-- End Poki -->
+	<style>
+		* {
+			border: 0;
+			margin: 0;
+			padding: 0;
+			outline: 0;
+		}
+
+		canvas {
+			/*transition: width 0.3s, height 0.3s;*/
+		}
+
+		#container-2d, #container-3d {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			height: 100vh;
+			width: 100vw;
+		}
+
+		#container-3d canvas {
+			background: #000;
+		}
+
+		body {
+			background: #000;
+			height: 100vh;
+			width: 100vw;
+		}
+
+		body.loading {
+			background: linear-gradient(45deg, #000000, #33b3f2);
+			background-size: 400% 400%;
+			-webkit-animation: loadingAnim 7s ease infinite;
+			-moz-animation: loadingAnim 7s ease infinite;
+			animation: loadingAnim 7s ease infinite;
+		}
+
+		@-webkit-keyframes loadingAnim {
+			0%{background-position:0 100%}
+			50%{background-position:100% 0}
+			100%{background-position:0 100%}
+		}
+		@-moz-keyframes loadingAnim {
+			0%{background-position:0 100%}
+			50%{background-position:100% 0}
+			100%{background-position:0 100%}
+		}
+		@keyframes loadingAnim {
+			0%{background-position:0 100%}
+			50%{background-position:100% 0}
+			100%{background-position:0 100%}
+		}
+
+		html {
+			font-display: block;
+		}
+	</style>
+</head>
+<body class="loading">
+	<div id="container-3d"></div>
+	<div id="container-2d"></div>
+<script type="text/javascript" src="phaser~main_086514a293d5b1613dc3.js"></script><script type="text/javascript" src="three~main_69b22e8c06805dcf7cf5.js"></script><script type="text/javascript" src="vendors~main_27aed353c4ba9c0587b3.js"></script><script type="text/javascript" src="main_6e50bb0736779ba097c6.js"></script></body>
+</html>

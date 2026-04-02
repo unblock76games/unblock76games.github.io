@@ -1,0 +1,45 @@
+var CANVAS_WIDTH = 1024;
+var CANVAS_HEIGHT = 1400;
+
+var EDGEBOARD_X = 128;
+var EDGEBOARD_Y = 188;
+
+var DISABLE_SOUND_MOBILE = false;
+
+var PRIMARY_FONT = "arialbold";
+var FPS_TIME      = 1000/24;
+
+var STATE_LOADING = 0;
+var STATE_MENU    = 1;
+var STATE_HELP    = 1;
+var STATE_GAME    = 3;
+
+var ON_MOUSE_DOWN = 0;
+var ON_MOUSE_UP   = 1;
+var ON_MOUSE_OVER = 2;
+var ON_MOUSE_OUT  = 3;
+var ON_DRAG_START = 4;
+var ON_DRAG_END   = 5;
+
+var GRID_COLS = 8; 
+var GRID_ROWS = 13; 
+var GRID_SIZE;
+var GRID_OFFSET_X = 195;
+var GRID_OFFSET_Y = 2 + EDGEBOARD_Y;
+var TIME_SHOW_NEW_BLOCK;
+var NUM_COLORS = 6;
+var BLOCK_SPEED;
+var BLOCK_DOWN_SPEED;
+
+var BLOCK_EMPTY  = 0; 
+var BLOCK_LINE   = 3; //MINIMUM NUBER OF BLOCKS TO GET A MATCH
+
+var STATE_MOVE = 1; 
+var STATE_LINE = 2; 
+var STATE_FALL = 3; 
+var NUM_LIVES = 3;
+
+var BUT_LEFT_X   = 40;
+var BUT_LEFT_Y   = 400;
+var BUT_RIGHT_X  = 280;
+var BUT_RIGHT_Y  = 400;

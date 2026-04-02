@@ -1,0 +1,92 @@
+var CANVAS_WIDTH = 1280;
+var CANVAS_HEIGHT = 768;
+
+var CANVAS_WIDTH_HALF = CANVAS_WIDTH * 0.5;
+var CANVAS_HEIGHT_HALF = CANVAS_HEIGHT * 0.5;
+
+var EDGEBOARD_X = 90;
+var EDGEBOARD_Y = 95;
+
+var DISABLE_SOUND_MOBILE = false;
+var FONT_GAME = "arialrounded";
+
+var FPS = 30;
+
+var FPS_DESKTOP = 60;
+
+var FPS_TIME = 1 / FPS;
+
+var ROLL_BALL_RATE = 60 / FPS;
+
+var STATE_LOADING = 0;
+var STATE_MENU = 1;
+var STATE_HELP = 1;
+var STATE_GAME = 3;
+
+var ON_MOUSE_DOWN = 0;
+var ON_MOUSE_UP = 1;
+var ON_MOUSE_OVER = 2;
+var ON_MOUSE_OUT = 3;
+var ON_DRAG_START = 4;
+var ON_DRAG_END = 5;
+var ON_TWEEN_ENDED = 6;
+var ON_BUT_NO_DOWN = 7;
+var ON_BUT_YES_DOWN = 8;
+
+var STEP_RATE = 1.5;
+
+var TEXT_SIZE = [80, 100, 130];
+
+var TEXT_EXCELLENT_COLOR = ["#fff", "#5d96fe"];
+
+var TEXT_COLOR = "#ffffff";
+var TEXT_COLOR_STROKE = "#000000";
+var TIME_INTERVAL_STROBE = 0.2;
+
+var PHYSICS_ACCURACY = 3;
+
+var MOBILE_OFFSET_GLOVES_X = -100;
+
+var BALL_VELOCITY_MULTIPLIER = 1;
+
+var PHYSICS_STEP = 1 / (FPS * STEP_RATE);
+
+var STATE_INIT = 0;
+var STATE_PLAY = 1;
+var STATE_FINISH = 2;
+var STATE_PAUSE = 3;
+
+var BALL_MASS = 0.5;
+var BALL_RADIUS = 1;
+var BALL_LINEAR_DAMPING = 0.2;
+var OFFSET_BALL_POS_X = 10;
+
+
+
+var MIN_BALL_VEL_ROTATION = 0.1;
+
+var TIME_RESET_AFTER_KEEPER_SAVED = 2;
+var TIME_RESET_AFTER_PERFECT_KEEPER_SAVED = 2;
+var TIME_BALL_IN_HAND = 1000;
+
+var FOV = 45;
+
+var HAND_KEEPER_ANGLE_RATE = 0.15;
+
+var LIMIT_HAND_RANGE_POS = {x: 22, zMax: 5.1, zMin: -8.5};
+
+
+var POSITION_BALL = {x: 0, y: 125, z: 5.5};
+var BALL_SPEED_FOR_RESET = 2;
+
+
+var HAND_KEEPER_SIZE = {width: 1.8, depth: 0.5, height: 1.5};
+var HAND_KEEPER_POSITION = {x: 0, y: 36, z: 0};
+
+
+var SHOW_3D_RENDER = false;
+var CAMERA_TEST = false;
+
+var NEAR = 10, FAR = 2000;
+var SOUNDTRACK_VOLUME_IN_GAME  = 0.2;
+

@@ -1,0 +1,72 @@
+
+.full_screen_popup_fg ::-webkit-scrollbar-thumb{
+    background-color:rgba(255,255,255,.85)!important
+}
+sub,sup{
+    font-size:16px
+}
+.popUpContainer{
+    background:rgba(0,0,0,.75);
+    text-align:center;
+    display:none;
+    -webkit-justify-content:center;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+    height:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    right:0;
+    width:100vw;
+    height:100vh;
+    z-index:9999
+}
+.popUpContainer .modal{
+    display:-webkit-flex;
+    display:flex;
+    -webkit-flex-direction:column;
+    flex-direction:column;
+    width:80%;
+    max-width:390px;
+    padding:40px 60px;
+    background:#fff;
+    border-radius:8px;
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,1);
+    box-shadow:0 0 10px rgba(0,0,0,1);
+    min-width:320px;
+    pointer-events:none;    
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+}
+.popUpContainer .modal .icon{
+    width:95px;
+    margin:15px auto;
+    pointer-events:none
+}
+.popUpContainer .modal .text,.popUpContainer .modal .title{
+    color:#555;
+    font-size:16px;
+    margin:auto;
+    margin:0;
+    font-weight:500;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    pointer-events:none
+}
+.popUpContainer .modal.iPhone{
+    width:85%;
+    max-width:420px
+}
+.popUpContainer .modal.iPhone .icon{
+    width:120px
+}
+.popUpContainer .modal.iPhone .text,.popUpContainer .modal.modal.iPhone .title{
+    font-size:24px
+}
+.popUpContainer .modal .title{
+    font-weight:900;
+    margin:15px 0
+}

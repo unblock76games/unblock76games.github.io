@@ -1,0 +1,10 @@
+{
+	"name": "BrainTest4_Poki",
+	"short_name": "BrainTest4_Poki",
+	"description": "",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "any",
+	"background_color": "#ffffff",
+	"icons": []
+}

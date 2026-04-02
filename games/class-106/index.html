@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,shrink-to-fit=no">
+        <meta name="robots" content="noindex,nofollow" />
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>puffy_cat 1.9.0</title>
+        <style type="text/css">
+            body {
+                position: fixed;
+                margin: 0;
+                padding: 0
+            }
+
+            .canvas-app-container {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden
+            }
+
+            .canvas-app-container:-webkit-full-screen {
+                width: auto;
+                height: auto
+            }
+
+            #canvas {
+                outline: 0;
+                border: 0;
+                width: 100%;
+                vertical-align: bottom
+            }
+
+            #canvas-container {
+                position: relative
+            }
+
+            canvas:active,canvas:focus {
+                outline: 0;
+                border: 0;
+                ie-dummy: expression(this.hideFocus=true);
+                -moz-outline-style: none
+            }
+
+            div {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none
+            }
+
+            .canvas-app-progress {
+                position: absolute;
+                background-color: #394046;
+                height: 6px;
+                margin-top: -6px;
+                width: 100%
+            }
+
+            .canvas-app-progress-bar {
+                font-size: 12px;
+                height: 6px;
+                color: #fff;
+                background-color: #1a72eb;
+                text-align: center;
+                line-height: 20px;
+                transition: transform 1s ease;
+                transform-origin: left;
+                transform: scaleX(1)
+            }
+
+            .button,.link {
+                font-family: sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0;
+                padding-top: 12px
+            }
+
+            .buttons-background {
+                background-color: #1e2226;
+                width: 100%;
+                height: 42px
+            }
+
+            body {
+                background-color: #1e2226
+            }
+
+            .canvas-app-container {
+                background: #24292e;
+                background: -moz-linear-gradient(-45deg,#24292e 0,#24292e 49%,#262b31 50%,#262b31 100%);
+                background: -webkit-gradient(left top,right bottom,color-stop(0,#24292e),color-stop(49%,#24292e),color-stop(50%,#262b31),color-stop(100%,#262b31));
+                background: -webkit-linear-gradient(-45deg,#24292e 0,#24292e 49%,#262b31 50%,#262b31 100%);
+                background: -o-linear-gradient(-45deg,#24292e 0,#24292e 49%,#262b31 50%,#262b31 100%);
+                background: -ms-linear-gradient(-45deg,#24292e 0,#24292e 49%,#262b31 50%,#262b31 100%);
+                background: linear-gradient(135deg,#24292e 0,#24292e 49%,#262b31 50%,#262b31 100%)
+            }
+
+            .canvas-app-canvas {
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-image: url(logo.png)
+            }
+        </style>
+        <link rel="preload" href="balloon.png" as="image">
+        <link rel="preload" href="logo.png" as="image">
+        <style type="text/css">
+            .canvas-app-container,body {
+                background: #ffde12
+            }
+
+            .canvas-app-canvas {
+                background-size: 60vmin;
+                background-image: url(logo.png)
+            }
+
+            .progress {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin-top: -15vh;
+                position: absolute;
+                width: 100%
+            }
+
+            .progress .t {
+                color: #333;
+                position: absolute;
+                width: 100%;
+                top: 0;
+                margin-top: -2em;
+                text-align: center;
+                font-family: "Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+                font-size: 3vh;
+                font-weight: 700;
+                font-variant-numeric: tabular-nums lining-nums
+            }
+
+            .progress .p {
+                align-items: center;
+                display: flex;
+                height: 7vh;
+                justify-content: center;
+                margin: .1vh;
+                width: 7vh
+            }
+
+            .progress .progress-dot {
+                background-image: url(balloon.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center bottom;
+                height: 100%;
+                filter: saturate(0);
+                transition: width .15s ease-out,height .15s ease-out,filter .3s ease-out;
+                width: 40%
+            }
+
+            .progress .progress-dot-100 {
+                filter: saturate(1)
+            }
+        </style>
+        <script src="/poki-sdk.js"></script>
+        <meta name="robots" content="noindex">
+        <style type="text/css">
+            body {
+                width: 100%;
+                height: 100%
+            }
+
+            #webgl-not-supported {
+                color: #fafcff;
+                display: none;
+                font-family: sans-serif;
+                font-size: 18px;
+                font-size: 3vh;
+                left: 50%;
+                line-height: 1.5em;
+                opacity: 0;
+                position: absolute;
+                text-align: center;
+                text-shadow: 0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000,0 0 2px #000;
+                top: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                transition: opacity .35s ease-out
+            }
+
+            #webgl-not-supported.visible {
+                opacity: 1
+            }
+
+            #webgl-not-supported .smile {
+                font-size: 500%;
+                line-height: 1em;
+                padding-bottom: .25em
+            }
+
+            #webgl-not-supported .webgl {
+                font-weight: 700
+            }
+
+            #webgl-not-supported button {
+                background-color: #13bcee;
+                border-radius: 1.5em;
+                border: 2px #000 solid;
+                color: #fff;
+                cursor: pointer;
+                display: inline-block;
+                font-size: 100%;
+                font-weight: 700;
+                margin: 3em auto 0;
+                padding: .5em 1.5em;
+                text-shadow: none;
+                transition: background-color .15s ease-out
+            }
+
+            #webgl-not-supported button:disabled,#webgl-not-supported button[disabled=disabled] {
+                background-color: #999
+            }
+
+            #webgl-not-supported span {
+                display: none
+            }
+        </style>
+        <script type="text/javascript">
+            navigator.getGamepads || navigator.webkitGetGamepads || (navigator.getGamepads = function() {
+                return []
+            }
+            ),
+            window.AudioContext || window.webkitAudioContext || (window.AudioContext = function() {
+                this.sampleRate = 44100,
+                this.destination = 0,
+                this.currentTime = 0,
+                this.state = "running"
+            }
+            ,
+            window.AudioContext.prototype.createBuffer = function() {
+                return {
+                    getChannelData: function() {
+                        return []
+                    }
+                }
+            }
+            ,
+            window.AudioContext.prototype.createBufferSource = function() {
+                return {
+                    connect: function() {},
+                    start: function() {}
+                }
+            }
+            );
+            var nowOffset, audioContext = window.AudioContext || window.webkitAudioContext;
+            audioContext.prototype.resume || (audioContext.prototype.resume = function() {}
+            ),
+            window.msCrypto && (window.crypto = window.msCrypto),
+            [Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, Float64Array].forEach(function(e) {
+                e.prototype.slice || Object.defineProperty(e.prototype, "slice", {
+                    value: function(t, n) {
+                        return new e(this.subarray(t, n))
+                    }
+                })
+            }),
+            "performance"in window == 0 && (window.performance = {}),
+            Date.now = Date.now || function() {
+                return (new Date).getTime()
+            }
+            ,
+            "now"in window.performance == 0 && (nowOffset = Date.now(),
+            performance.timing && performance.timing.navigationStart && (nowOffset = performance.timing.navigationStart),
+            window.performance.now = function() {
+                return Date.now() - nowOffset
+            }
+            ),
+            -1 < navigator.userAgent.indexOf("SMART-TV") && [window.WebGLRenderingContext, window.WebGL2RenderingContext].forEach(function(t) {
+                var e;
+                t && (e = t.prototype.getSupportedExtensions,
+                t.prototype.getSupportedExtensions = function() {
+                    var t = e.call(this)
+                      , n = t.indexOf("OES_EGL_image_external");
+                    return -1 < n && t.splice(n, 1),
+                    t
+                }
+                )
+            })
+        </script>
+    </head>
+    <body>
+        <div id="app-container" class="canvas-app-container">
+            <div id="running-from-file-warning" style="display:none;margin:3em">
+                <h1>Running from local file ⚠️</h1>
+                <p>
+                    It seems like you have opened this file by double-clicking on it. In order to test your build in a browser <b>you need to load this file from a web server</b>
+                    . You can either upload this file and the rest of the files from a Defold HTML5 bundle to a web hosting service OR host them using a local web server on your home network.
+                </p>
+                <p>
+                    <a href="https://defold.com/manuals/html5/#testing-html5-build" target="_blank">Learn more about running a local web server in the Defold HTML5 manual</a>
+                    .
+                </p>
+            </div>
+            <div id="webgl-not-supported" merge="keep">
+                <div class="smile">😢
+</div>
+                <span class="i18n-en">
+                    Can't run the game: <b>WebGL</b>
+                    is disabled in your browser. Enable <b>WebGL</b>
+                    or open the game in another browser.
+                </span>
+                <span class="i18n-ru">
+                    Невозможно запустить игру: в вашем браузере выключен <b>WebGL</b>
+                    . Включите <b>WebGL</b>
+                    или откройте игру в другом браузере.
+                </span>
+                <span class="i18n-tr">
+                    Oyun çalıştırılamıyor: tarayıcında <b>WebGL</b>
+                    devre dışı. <b>WebGL</b>
+                    'yi etkinleştir veya oyunu başka bir tarayıcıda aç.
+                </span>
+                <button onclick="return this.disabled=!0,location.reload(),!0">
+                    <span class="i18n-en">Restart</span>
+                    <span class="i18n-ru">Перезапустить</span>
+                    <span class="i18n-tr">Tekrar Oyna</span>
+                </button>
+            </div>
+            <div id="canvas-container" class="canvas-app-canvas-container">
+                <canvas id="canvas" class="canvas-app-canvas" tabindex="1" width="1000" height="1500"></canvas>
+            </div>
+            <div class="buttons-background"></div>
+            <script id="webgl-detect" type="text/javascript">
+                var detectWebGLRenderer;
+                !function() {
+                    var r, e, t, n;
+                    if (!(detectWebGLRenderer = function() {
+                        if (void 0 !== r)
+                            return r;
+                        var e = !1;
+                        try {
+                            var t, n = document.createElement("canvas"), o = n.getContext("webgl") || n.getContext("experimental-webgl");
+                            o && o instanceof WebGLRenderingContext && (e = o.getParameter(o.RENDERER),
+                            e = (e = (t = o.getExtension("WEBGL_debug_renderer_info")) ? o.getParameter(t.UNMASKED_RENDERER_WEBGL) || e : e) || "Unknown WebGL 1.0")
+                        } catch (e) {
+                            console.log("An error occurred while detecting WebGL support: " + e)
+                        }
+                        return r = e
+                    }
+                    )())
+                        throw (e = document.getElementById("webgl-not-supported")).style.display = "block",
+                        setTimeout(function() {
+                            e.className = "visible"
+                        }, 0),
+                        document.getElementById("canvas").style.display = "none",
+                        Array.prototype.forEach.call(document.getElementsByClassName("buttons-background"), function(e) {
+                            e.style.display = "none"
+                        }),
+                        t = (navigator.language || navigator.userLanguage || "en").substr(0, 2).toLowerCase(),
+                        n = 0,
+                        Array.prototype.forEach.call(e.getElementsByClassName("i18n-" + t), function(e) {
+                            n++,
+                            e.style.display = "block"
+                        }),
+                        n || Array.prototype.forEach.call(e.getElementsByClassName("i18n-en"), function(e) {
+                            e.style.display = "block"
+                        }),
+                        "No WebGL"
+                }()
+            </script>
+        </div>
+        <script id="engine-loader" type="text/javascript" src="dmloader.js"></script>
+        <script id="engine-setup" type="text/javascript">
+            !function() {
+                "undefined" != typeof ProgressView && (ProgressView.addProgress = function(e) {
+                    for (var s = ProgressView, t = (e.insertAdjacentHTML("afterend", '<div id="' + s.progress_id + '" class="progress"><div class="t">0%</div><div class="p"><div class="progress-dot"></div></div><div class="p"><div class="progress-dot"></div></div><div class="p"><div class="progress-dot"></div></div></div>'),
+                    s.progress = document.getElementById(s.progress_id),
+                    s.items = [],
+                    document.getElementsByClassName("progress-dot")), r = 0; r < t.length; r++)
+                        s.items.push(t[r]);
+                    s.prevPercentage = 0,
+                    s.textProgress = document.getElementsByClassName("t")[0],
+                    s.updateProgress(0)
+                }
+                ,
+                ProgressView.updateProgress = function(e) {
+                    if (!isNaN(e))
+                        for (var s = ProgressView, t = (e = Math.min(Math.max(s.prevPercentage, e), 100),
+                        s.prevPercentage = e,
+                        s.items.length), r = 100 / t, o = parseInt("1600000") / 1024 / 1024, d = (s.textProgress.textContent = Math.floor(e) + "% (" + o.toFixed(2) + "MB)",
+                        0), i = 0; i < t; i++) {
+                            var n, a = "40%";
+                            d + r <= e ? a = "100%" : 0 < (n = e - d) && (a = Math.round(40 + n / r * 60) + "%"),
+                            s.items[i].style.width != a && (s.items[i].style.width = a,
+                            s.items[i].className = "progress-dot progress-dot-" + a.substr(0, a.length - 1)),
+                            d += r
+                        }
+                }
+                ),
+                document.getElementById("canvas").addEventListener("webglcontextlost", function(e) {
+                    try {
+                        PokiSDK.captureError("WebGL context lost.")
+                    } catch (e) {}
+                    location.reload()
+                });
+                var t = {};
+                Module.printErr = function(e) {
+                    console.error(e);
+                    try {
+                        var s;
+                        !e || t[e] || (t[e] = !0,
+                        s = "PUFFY:" + e,
+                        console.log(s))
+                    } catch (e) {
+                        console.warn("Can't capture the error", e)
+                    }
+                }
+            }()
+        </script>
+        <script id="engine-start" type="text/javascript" merge="keep">
+            !function() {
+                function e(n, i) {
+                    i && "undefined" != typeof Sentry && Sentry.configureScope(function(e) {
+                        e.setTag(n, i)
+                    })
+                }
+                var n, o, i;
+                (i = detectWebGLRenderer()) && (e("screen.pixel_ratio", window.devicePixelRatio),
+                e("screen.width", window.screen.width),
+                e("screen.height", window.screen.height),
+                e("gl_info.renderer", i),
+                Module.__debugInfoWebGLRenderer = i,
+                Module.hasWebGLSupport = function() {
+                    return !0
+                }
+                ,
+                n = CUSTOM_PARAMETERS.can_not_download_file_callback,
+                CUSTOM_PARAMETERS.can_not_download_file_callback = function(e) {
+                    var i, t;
+                    i = "Can't download file",
+                    t = {
+                        file: e
+                    },
+                    "undefined" != typeof Sentry && Sentry.withScope(function(n) {
+                        Object.keys(t).forEach(function(e) {
+                            n.setExtra(e, t[e])
+                        }),
+                        Sentry.captureMessage(i, "info")
+                    }),
+                    console.error(i, JSON.stringify(t)),
+                    "function" == typeof n && n.call(this, e)
+                }
+                ,
+                o = window.devicePixelRatio || 1,
+                CUSTOM_PARAMETERS.engine_arguments.push("--config=display.high_dpi=0"),
+                CUSTOM_PARAMETERS.resize_window_callback = function() {
+                    /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream && window.scrollTo(0, 0);
+                    var e = document.getElementById("app-container")
+                      , n = document.getElementById("canvas")
+                      , i = window.innerWidth
+                      , t = +window.innerHeight;
+                    -1 == i && -1 == t || (width = i,
+                    height = t,
+                    e.style.width = width + "px",
+                    e.style.height = height + 0 + "px",
+                    n.width = Math.floor(width * o),
+                    n.height = Math.floor(height * o))
+                }
+                ,
+                i = document.getElementById("running-from-file-warning"),
+                window.location.href.startsWith("file://") ? i.style.display = "block" : (EngineLoader.load("canvas", "puffy_cat"),
+                i.parentNode.removeChild(i)))
+            }()
+        </script>
+        <script id="reszip-setup" type="text/javascript">
+            !function() {
+                function A(r) {
+                    for (var t = "", n = 7; 0 <= n; n--)
+                        t += "0123456789abcdef".charAt(r >> 4 * n & 15);
+                    return t
+                }
+                function M(r, t) {
+                    var n = (65535 & r) + (65535 & t);
+                    return (r >> 16) + (t >> 16) + (n >> 16) << 16 | 65535 & n
+                }
+                function F(r, t) {
+                    return r << t | r >>> 32 - t
+                }
+                window._HashSHA1 = function(r) {
+                    for (var n, a, e, i, c = function(r) {
+                        for (var t = 1 + (r.length + 8 >> 6), n = new Array(16 * t), a = 0; a < 16 * t; a++)
+                            n[a] = 0;
+                        for (a = 0; a < r.length; a++)
+                            n[a >> 2] |= r.charCodeAt(a) << 24 - a % 4 * 8;
+                        return n[a >> 2] |= 128 << 24 - a % 4 * 8,
+                        n[16 * t - 1] = 8 * r.length,
+                        n
+                    }(r), l = new Array(80), u = 1732584193, o = -271733879, d = -1732584194, f = 271733878, p = -1009589776, s = 0; s < c.length; s += 16) {
+                        for (var h = u, _ = o, v = d, S = f, y = p, g = 0; g < 80; g++)
+                            l[g] = g < 16 ? c[s + g] : F(l[g - 3] ^ l[g - 8] ^ l[g - 14] ^ l[g - 16], 1),
+                            t = M(M(F(u, 5), (a = o,
+                            e = d,
+                            i = f,
+                            (n = g) < 20 ? a & e | ~a & i : !(n < 40) && n < 60 ? a & e | a & i | e & i : a ^ e ^ i)), M(M(p, l[g]), (n = g) < 20 ? 1518500249 : n < 40 ? 1859775393 : n < 60 ? -1894007588 : -899497514)),
+                            p = f,
+                            f = d,
+                            d = F(o, 30),
+                            o = u,
+                            u = t;
+                        u = M(u, h),
+                        o = M(o, _),
+                        d = M(d, v),
+                        f = M(f, S),
+                        p = M(p, y)
+                    }
+                    return A(u) + A(o) + A(d) + A(f) + A(p)
+                }
+            }();
+            var old_callMain = Module._callMain
+              , reszip_preloadingStarted = !1;
+            Module._callMain = function() {
+                var r = DMSYS.GetUserPersistentDataRoot()
+                  , t = _HashSHA1("puffy_cat");
+                try {
+                    FS.unlink(r + "/." + t + "/liveupdate.arcd")
+                } catch (r) {}
+                try {
+                    FS.unlink(r + "/." + t + "/liveupdate.arci")
+                } catch (r) {}
+                try {
+                    FS.unlink(r + "/." + t + "/liveupdate.arci.tmp")
+                } catch (r) {}
+                try {
+                    FS.unlink(r + "/." + t + "/liveupdate.mounts")
+                } catch (r) {}
+                reszip_preloadingStarted || (_dmResZipRequestFileAsync("resources_1715186785.zip"),
+                reszip_preloadingStarted = !0),
+                old_callMain()
+            }
+        </script>
+        <script id="poki-sdk-setup" type="text/javascript">
+            var data = {}
+              , isLoadFinished = !1;
+            Progress.addListener(function(i) {
+                data.percentageDone = i / 100,
+                isLoadFinished || PokiSDK.gameLoadingProgress(data),
+                100 != i || isLoadFinished || (PokiSDK.gameLoadingFinished(),
+                isLoadFinished = !0)
+            }),
+            Module.onRuntimeInitialized = function() {
+                PokiSDK.init().then(()=>{
+                    Module.runApp("canvas")
+                }
+                ).catch(()=>{
+                    Module.runApp("canvas")
+                }
+                )
+            }
+        </script>
+    </body>
+</html>

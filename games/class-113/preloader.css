@@ -1,0 +1,12 @@
+#progress_text {
+	position: absolute;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	top: 40%;
+	left: 0px;
+	padding-top: 12px;
+}
+
+#rurl { position:absolute;	background:#000000; z-index:-1;}

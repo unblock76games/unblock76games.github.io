@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta content="utf-8" http-equiv="encoding">
+		<meta name="robots" content="noindex,nofollow" />
+		<meta name="viewport" content="width=device-width">
+		<script type="importmap">
+		{
+			"imports": {
+				"three": "../deps/three/build/three.module.js"
+			}
+		}
+		</script>
+		<script type="module" src="bundle/main-6835fc19.js"></script>
+		<link rel="preload" href="draco/draco_wasm_wrapper.js" as="fetch" crossorigin />
+		<link rel="preload" href="draco/draco_decoder.wasm" as="fetch" crossorigin />
+		<style>
+			body, html {
+				position: relative;
+				margin: 0;
+				height: 100%;
+				user-select: none;
+				-webkit-user-select: none;
+				-webkit-touch-callout: none;
+				overflow: hidden;
+				container: page / size;
+				--not-black: rgb(40, 40, 40);
+			}
+			@font-face {
+				font-family: 'Fredoka One';
+				font-style: normal;
+				font-weight: 700;
+				font-display: swap;
+				src: local('Fredoka One'), local('FredokaOne-Regular'), url(./static/FredokaOne.woff2) format('woff2');
+			}
+			body, html, button {
+				font-family: Fredoka One, Helvetica, Arial, sans-serif;
+				font-weight: 900;
+			}
+
+			#loadingScreen {
+				background-color: white;
+				position: absolute;
+				z-index: 100;
+				inset: 0;
+				transition: opacity 0.5s, transform 0.5s;
+			}
+
+			#loadingScreen.hidden {
+				opacity: 0;
+				transform: scale(1.1);
+			}
+
+			#slideshowDots {
+				z-index: 102;
+				position: absolute;
+				inset: 0;
+				background-image: radial-gradient(rgba(0, 0, 0, 0.05) 20%, transparent 40%);
+				background-size: 7px 7px;
+				transform: rotate(20deg) scale(1.5);
+			}
+
+			#slideshowGradient {
+				z-index: 101;
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(circle, transparent, rgba(9, 33, 119, 0.744)), linear-gradient(30deg, rgb(104 139 207) 0%, rgb(146 237 255) 80%, rgb(255 255 255) 100%);
+				mix-blend-mode: hard-light;
+			}
+
+			#slideshowContainer {
+				z-index: 100;
+				position: absolute;
+				overflow: hidden;
+				inset: 0;
+			}
+
+			.loading-slideshow-image {
+				position: absolute;
+				object-fit: cover;
+				width: 100%;
+				height: 100%;
+				animation: slideshow-image 5s both;
+			}
+
+			@keyframes slideshow-image {
+				0% {
+					opacity: 0;
+					transform: scale(1);
+				}
+
+				20% {
+					opacity: 1;
+				}
+
+				100% {
+					transform: scale(1.1);
+				}
+			}
+
+			#loadingcontainer {
+				position: absolute;
+				z-index: 200;
+				left: 50%;
+				transform: translateX(-50%);
+				bottom: 20px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 10px;
+			}
+
+			#loadingPercentage {
+				text-align: center;
+				display: flex;
+			}
+			#loadingPercentage span {
+				display: block;
+				width: 8.5px;
+			}
+
+			progress[value] {
+				width: 200px;
+				height: 30px;
+				appearance: none;
+				background-color: var(--not-black);
+				border: none;
+				border-radius: 50px;
+				padding: 5px;
+				box-sizing: border-box;
+				--fill-color: #ff7b22;
+				--shadow-color: #ea6d1b;
+				--highlight-color: #ffa65d;
+			}
+
+			progress[value]::-moz-progress-bar{
+				background-color: var(--fill-color);
+				border-radius: 50px;
+				box-shadow: inset 0px -3px var(--shadow-color), inset 0px 1px var(--highlight-color);
+			}
+
+			progress[value]::-webkit-progress-bar {
+				background-color: var(--not-black);
+				border-radius: 50px;
+			}
+
+			progress[value]::-webkit-progress-value {
+				background-color: var(--fill-color);
+				border-radius: 50px;
+				box-shadow: inset 0px -3px var(--shadow-color), inset 0px 1px var(--highlight-color);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen">
+			<div id="slideshowDots"></div>
+			<div id="slideshowGradient"></div>
+			<div id="slideshowContainer"></div>
+			<div id="loadingcontainer">
+				<div id="loadingPercentage">0%</div>
+				<progress id="loadingProgress" min="0" max="1" value="0"></progress>
+			</div>
+		</div>
+		<div id="gameContainer"></div>
+		<script>
+			let loadingScreenHidden = false;
+
+			function setPercentage(percentage) {
+				loadingProgress.value = percentage;
+				const percentageText = Math.floor(percentage * 100) + "%";
+				loadingPercentage.innerHTML = percentageText.split("").map(c => `<span>${c}</span>`).join("");
+			}
+
+			function loop() {
+				if (loadingScreenHidden) return;
+				const speed = 800;
+				const percentage = 1 - (speed / (performance.now() + speed));
+				setPercentage(percentage);
+				requestAnimationFrame(loop);
+			}
+			loop();
+
+			async function slideshowLoop() {
+				const imageCount = 2;
+				let currentImage = 0;
+				let zIndex = 100;
+				let previousImg = null;
+				while (!loadingScreenHidden) {
+					const img = new Image();
+					img.classList.add("loading-slideshow-image");
+					img.src = `static/images/screenshots/${currentImage}.webp`;
+					img.style.zIndex = zIndex;
+					await new Promise(r => {
+						img.onload = () => {
+							r();
+						}
+					});
+					if (loadingScreenHidden) return;
+					slideshowContainer.appendChild(img);
+					await new Promise(r => {
+						setTimeout(() => r(), 5_000);
+					});
+					if (previousImg) previousImg.remove();
+					previousImg = img;
+					currentImage++;
+					zIndex++;
+					currentImage = currentImage % imageCount;
+				}
+			}
+			slideshowLoop();
+
+			function hideLoadingScreen() {
+				loadingScreenHidden = true;
+				loadingScreen.classList.add("hidden");
+				setPercentage(1);
+				setTimeout(() => {
+					loadingScreen.remove();
+				}, 1000)
+			}
+		</script>
+	</body>
+</html>

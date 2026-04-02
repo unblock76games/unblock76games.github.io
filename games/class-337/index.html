@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta name="robots" content="noindex,nofollow" />
+        <link rel="stylesheet" href="css/reset.css" type="text/css">
+        <link rel="stylesheet" href="css/main.css" type="text/css">
+        <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <meta name="msapplication-tap-highlight" content="no"/>
+
+        <script src="/poki-sdk.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/createjs.min.js"></script>
+        <script type="text/javascript" src="js/screenfull.js"></script>
+        <script type="text/javascript" src="js/howler.min.js"></script>
+        <script type="text/javascript" src="js/ctl_utils.js"></script>
+        <script type="text/javascript" src="js/sprite_lib.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+        <script type="text/javascript" src="js/CLang.js"></script>
+        <script type="text/javascript" src="js/CPreloader.js"></script>
+        <script type="text/javascript" src="js/CMain.js"></script>
+        <script type="text/javascript" src="js/CTextButton.js"></script>
+        <script type="text/javascript" src="js/CGfxButton.js"></script>
+        <script type="text/javascript" src="js/CToggle.js"></script>
+        <script type="text/javascript" src="js/CMenu.js"></script>
+        <script type="text/javascript" src="js/CMenuMode.js"></script>
+        <script type="text/javascript" src="js/CGame.js"></script>
+        <script type="text/javascript" src="js/CInterface.js"></script>
+        <script type="text/javascript" src="js/CHelpPanel.js"></script>
+        <script type="text/javascript" src="js/CTweenController.js"></script>
+        <script type="text/javascript" src="js/CLevelSettings.js"></script>
+        <script type="text/javascript" src="js/CBezier.js"></script>
+        <script type="text/javascript" src="js/CCar.js"></script>
+        <script type="text/javascript" src="js/CLevelMenu.js"></script>
+        <script type="text/javascript" src="js/CLevelBut.js"></script>
+        <script type="text/javascript" src="js/CCreditsPanel.js"></script>
+        <script type="text/javascript" src="js/CAlertSavingBox.js"></script>
+        <script type="text/javascript" src="js/CVector2.js"></script>
+        <script type="text/javascript" src="js/CMath.js"></script>
+        <script type="text/javascript" src="js/CEasing.js"></script>
+        <script type="text/javascript" src="js/CCollisionRectangle.js"></script>
+        <script type="text/javascript" src="js/CRectangle.js"></script>
+        <script type="text/javascript" src="js/CDebugRectangle.js"></script>
+        <script type="text/javascript" src="js/CButModeMenu.js"></script>
+        <script type="text/javascript" src="js/CMenuDifficulty.js"></script>
+        <script type="text/javascript" src="js/CCountdown.js"></script>
+        <script type="text/javascript" src="js/CRaceOverPanel.js"></script>
+        <script type="text/javascript" src="js/CCarInfoPanel.js"></script>
+        <script type="text/javascript" src="js/CMenuSelectCar.js"></script>
+        <script type="text/javascript" src="js/CGUIExpandible.js"></script>
+        <script type="text/javascript" src="js/CAreYouSurePanel.js"></script>
+        <script type="text/javascript" src="js/CCarSelectionMsgBox.js"></script>
+        <script type="text/javascript" src="js/CEndRaceAnim.js"></script>
+        <script type="text/javascript" src="js/CButPlayerMobile.js"></script>
+    </head>
+    <body ondragstart="return false;" ondrop="return false;" >
+    <div style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%"></div>
+          <script>
+            $(document).ready(function(){
+                     var oMain = new CMain({
+                                                acceleration:1,    //CAR ACCELERATION. INCREASE THIS VALUE TO REACH MAXIMUM SPEED FASTER
+                                                deceleration:0.85, //CAR DECELERATION. INCREASE THIS VALUE TO DECREASE CAR DECELERATION
+                                                max_speed:100,     //MAXIMUM CAR SPEED. 
+                                                key_code_1:18,     //KEY CODE FOR CAR 1 IF GAME IS PLAYED ON THE DESKTOP. HERE A COMPLETE LIST:https://css-tricks.com/snippets/javascript/javascript-keycodes/#article-header-id-1
+                                                key_code_2:17,     //KEY CODE FOR CAR 2 IF GAME IS PLAYED ON THE DESKTOP. HERE A COMPLETE LIST:https://css-tricks.com/snippets/javascript/javascript-keycodes/#article-header-id-1
+                                                num_laps:8,        //NUMBER OF LAPS
+                                        });
+
+                     
+                     $(oMain).on("start_session", function(evt) {
+                            if(getParamValue('ctl-arcade') === "true"){
+                                parent.__ctlArcadeStartSession();
+                                console.log("start_session");
+                            }
+                            //...ADD YOUR CODE HERE EVENTUALLY
+                     });
+                     
+                    $(oMain).on("end_session", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeEndSession();
+                               console.log("end_session");
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("save_score", function(evt,iScore) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeSaveScore({score:iScore});
+                               console.log("save_score: "+iScore);
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("start_level", function(evt, iLevel) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeStartLevel({level:iLevel});
+                               console.log("start_level "+iLevel);
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("end_level", function(evt, iLevel) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeEndLevel({level:iLevel});
+                               console.log("end_level "+iLevel);
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+
+                    $(oMain).on("show_interlevel_ad", function(evt) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShowInterlevelAD();
+                               console.log("show_interlevel_ad ");
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+                    
+                    $(oMain).on("share_event", function(evt, iScore) {
+                           if(getParamValue('ctl-arcade') === "true"){
+                               parent.__ctlArcadeShareEvent({   img: TEXT_SHARE_IMAGE,
+                                                                title: TEXT_SHARE_TITLE,
+                                                                msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+                                                                msg_share: TEXT_SHARE_SHARE1 + iScore + TEXT_SHARE_SHARE1
+                                                            });
+                                console.log("share_event "+iScore);                            
+                           }
+                           //...ADD YOUR CODE HERE EVENTUALLY
+                    });
+                     
+                    if(isIOS()){
+                        setTimeout(function(){sizeHandler();},200); 
+                    }else{ 
+                        sizeHandler(); 
+                    } 
+           });
+
+        </script>
+        
+        <div class="check-fonts">
+            <p class="check-font-1">test 1</p>
+        </div> 
+        
+        <canvas id="canvas" class='ani_hack' width="960" height="540"> </canvas>
+        <div data-orientation="landscape" class="orientation-msg-container"><p class="orientation-msg-text">Please rotate your device</p></div>
+        <div id="block_game" style="position: fixed; background-color: transparent; top: 0px; left: 0px; width: 100%; height: 100%; display:none"></div>
+    
+
+    
+</body>
+</html>

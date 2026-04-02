@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="robots" content="noindex,nofollow" />
+        <meta charset="utf-8"/>
+        <title>Sniper Code 2 by Softlitude </title>
+        <meta content="user-scalable=0,maximum-scale=1" name="viewport"/>
+        <!-- <meta http-equiv="Content-Security-Policy"  content="default-src 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />-->
+        <meta charset="utf-8"/>
+        <link as="font" crossorigin="anonymous" href="resources/fonts/zekton.woff" rel="preload"/>
+        <link href="libs/toastify.css" rel="stylesheet" type="text/css"/>
+        <link href="libs/engine.css" rel="stylesheet" type="text/css"/>
+        <style>
+            html, body {
+                margin: 0px;
+                height: 0px;
+            }
+
+            body {
+                overflow-x: hidden;
+                overflow-y: hidden;
+                text-align: center;
+                background-color: #1B2637;
+            }
+
+            @font-face {
+                font-family: "zekton";
+                src: url(resources/fonts/zekton.woff) format('woff');
+            }
+
+            .toastify {
+                font-family: 'zekton';
+                user-select: none;
+                cursor: default;
+                font-size: 1.2rem;
+            }
+
+            #loader {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                background: black;
+                left: 0;
+                right: 0;
+            }
+
+            #loader>div {
+                color: white;
+                font-family: 'zekton';
+                top: 50%;
+                position: relative;
+                text-align: center;
+                margin: 0 auto;
+                user-select: none;
+                font-size: 2rem;
+                transform: translate(0, -50%);
+            }
+        </style>
+        <script src="/poki-sdk.js"></script>
+        <script src="libs/toastify.js"></script>
+        <script src="libs/fontfaceobserver.js"></script>
+        <script src="libs/pixi-legacy.min.js"></script>
+        <script src="libs/pixi-sound.js"></script>
+        <script src="libs/gsap.min.js"></script>
+        <script src="libs/pixiplugin.min.js"></script>
+        <script src="libs/pixi-filters.js"></script>
+        <script src="index.7454028.js"></script>
+    </head>
+    <body>
+        <div id="loader">
+            <div>
+                <img src="resources/game-icon.png" style="width:12rem;border-radius: 50px;"/>
+                <div>
+                    <b>Sniper Code 2   </b>
+                    <p style="font-size:1.6rem;margin-top: 12px;display:none;">by Softlitude   </p>
+                </div>
+                <div id="loading-percentage" style="font-size:1.5rem;margin-top:2.4rem;">Loading...  </div>
+            </div>
+        </div>
+        <div class="popUpContainer d-flex" id="orientationContainer">
+            <div class="modal f-v-mid iPhone">
+                <img src='data:image/svg+xml;charset=UTF-8, &lt;svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="256px" height="256px" viewBox="0 0 256 256"&gt; &lt;defs&gt; &lt;g id="Layer0_0_FILL"&gt; &lt;path fill="%23bbbbbb" stroke="none" d=" M 188.55 42.6 Q 176.2 35.85 162.4 33.35 162.526171875 33.254296875 154.1 31.95 150.64609375 31.6220703125 149.4 33.15 148.963671875 33.593359375 148.7 33.95 147.1 36.15 148.65 38.25 149.9041015625 40.0076171875 154.15 40.5 L 161.85 41.2 Q 161.8150390625 41.2056640625 161.75 41.2 182.3171875 44.8796875 198.55 59.45 215.15 74.25 220.85 94.85 219.3 94.1 214.75 91.35 211 89.05 208.55 88.05 205.8 86.8 204.15 89.8 202.45 92.85 204.85 94.55 207.65 96.6 212.75 99.55 218.8 103 220.8 104.3 226.55 107.75 228.35 104.45 234.85 94 238.85 86.75 240.3 84.3 238.05 82.2 235.9 80.05 233.45 81.5 231.85 82.8 230.3 85.4 228.7 88.5 227.8 89.9 221.7 72.15 210.3 59.75 201.1 49.45 188.55 42.6 M 162.2 42.95 L 162.2 43.1 162.3 43.1 Q 162.2552734375 43.02421875 162.2 42.95 M 236.45 121.85 Q 233.9 120.6 230.3 120.15 228.4 119.95 224 119.95 176.2 119.8 152.35 120.1 150.25 119.8 148.8 121.55 147.35 123.35 148.2 125.35 149 128 153.6 128 L 227.9 128 Q 231.9 127.9 235.25 130.45 238.7 133.05 239.55 136.95 240.05 139.9 240.05 144.35 L 239.9 151.75 Q 237.05 151.95 234.15 152.3 232.35 153.3 232.05 155.7 231.85 157.1 231.85 159.95 232 168.2 231.9 186.15 231.85 203.25 232.05 212.35 232.1 214.95 235 215.7 235.2 215.7 239.9 216.15 239.9 218.55 240 223.25 240.05 227.5 239.65 230.3 239 234.45 235.5 237.3 232.05 240.05 227.8 239.9 216.55 239.95 185.65 239.9 159.05 239.9 143.45 240.1 140.05 240.1 140.05 243.95 140.05 247.7 143.45 247.75 158.1 247.95 183.1 247.95 212.15 247.9 222.7 247.95 227.65 248.05 229.85 247.85 233.9 247.4 236.7 245.9 241.85 243.5 244.9 238.5 248.05 233.5 247.9 227.9 L 247.95 140.8 Q 248.25 134.85 245.05 129.6 241.85 124.3 236.45 121.85 M 133.65 18.6 Q 131.1 13.65 126 10.75 120.95 7.8 115.3 8 56.6 7.95 27.2 8.1 19.4 8.25 13.65 14.35 7.9 20.35 8.1 28.15 7.95 94.75 8.1 227.8 7.85 235.85 13.9 242 20.05 248.15 28.1 247.9 L 115.25 247.9 Q 123.5 248.4 129.9 242.2 136.3 236.05 135.95 227.8 135.95 99.8 136.05 35.85 135.95 27.1 135.9 27.05 135.6 22 133.65 18.6 M 125.9 21.25 Q 128.4 25.1 128.05 29.5 L 128.05 226.45 Q 128.3 230.3 126.5 233.7 124.6 237.2 121.2 238.75 118.95 239.7 115.7 239.9 111.9 239.95 110.05 239.95 55.5 240.05 28.25 239.9 23.3 240.1 19.6 236.4 15.9 232.65 16.1 227.8 L 16.1 29.5 Q 15.7 25.2 18 21.5 20.45 17.7 24.55 16.55 27.6 15.95 32.15 15.95 34.7 16 39.8 16.05 40.25 20.85 40.25 20.9 41.05 23.8 43.6 23.85 53.45 24.1 69.8 24.05 89.45 24 96 24.05 97.25 24 100.2 23.95 102.7 23.6 103.6 21.8 104 19.9 104.25 16 106.75 16.05 111.6 15.95 116 15.95 118.95 16.45 123.25 17.35 125.9 21.25 Z"/&gt; &lt;/g&gt; &lt;/defs&gt; &lt;g transform="matrix( 1, 0, 0, 1, 0,0) "&gt; &lt;use xlink:href="%23Layer0_0_FILL"/&gt; &lt;/g&gt; &lt;/svg&gt;' style="max-width:250px;margin:0 auto;" width="250px"/>
+                <div class="text margin_top_10" style="font-size: 30px;margin-top:40px;">Please rotate your device to Landscape mode.  </div>
+            </div>
+        </div>
+        <div id="splash-screen"></div>
+    </body>
+</html>

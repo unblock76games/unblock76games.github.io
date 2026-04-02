@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Zomblox.io</title>
+    <meta name="description" content="Zomblox.io - Multiplayer Shooter Game with Zombies" />
+    <meta name="robots" content="noindex,nofollow" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://zomblox.io">
+    <meta property="og:image" content="https://zomblox.io/textures/z_og.jpg">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000">
+
+
+    <script src="/poki-sdk.js"></script>
+    <script type="text/javascript">
+        (async () => {
+            try {
+                await PokiSDK.init();
+                console.log("Poki SDK successfully initialized");
+            } catch {
+                console.log("Initialized, something went wrong, loading game anyways");
+            }
+        })()
+
+        const showAd = async () => {
+            Howler.volume(0);
+            document.getElementById("connectingCover").style.display = "block";
+            await PokiSDK.commercialBreak();
+            window.noAdTime = performance.now();
+            Howler.volume(1);
+        };
+
+        const playOfflineBtnOnClick = async (lvl) => {
+            // await showAd();
+            window.clickedPlayOffline(lvl);
+        };
+        const playPVPBtnOnClick = async () => {
+            // await showAd();
+            window.clickedPlayPVP();
+        };
+        window.playOfflineBtnOnClick = (lvl) => playOfflineBtnOnClick(lvl);
+    </script>
+  <script type="module" crossorigin src="./assets/index-DK2ViWY3.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-eiC-W4P9.css">
+</head>
+
+<body>
+    <div id="loadingCover" class="canvasCover">
+        <img id="loadingImg" src="textures/logo.png" alt="Zomblox.io Logo" />
+        <div id="loadingBar">
+            <div id="loadingBarInner"></div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+{
+	"name": "Zooplop",
+	"short_name": "Zooplop",
+	"description": "",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "any",
+	"background_color": "#ffffff",
+	"icons": []
+}

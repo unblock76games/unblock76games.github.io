@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <meta name="robots" content="noindex,nofollow" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,minimal-ui,shrink-to-fit=no">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="robots" content="noindex">
+        <link rel="stylesheet" href="style.css?v=91.24">
+        <title>FANTASY SANDBOX</title>
+        <script src="/poki-sdk.js"></script>
+    </head>
+    <body class="platform_poki">
+        <canvas id="game"></canvas>
+        <div id="uiScale">
+            <div id="adTimer">
+                <div class="flex-column">
+                    <label>Реклама через 1</label>
+                    <progress value="500" max="1000"></progress>
+                </div>
+            </div>
+            <div id="playerList"></div>
+            <div id="settings" data-i18n="menu:settings.button">Настройки</div>
+            <div id="invite">
+                <span class="pulse" data-i18n="menu:invite.button">+ Пригласить</span>
+                <span data-i18n="menu:invite.players">Игроки:</span>
+            </div>
+            <div id="networkInfo">
+                <div id="chat" data-i18n="menu:chat.button">Чат</div>
+                <div id="networkReconnecting" data-i18n="menu:reconnecting">Переподключение...</div>
+            </div>
+            <div id="chatList"></div>
+            <div id="connect" class="panel">
+                <div id="startGame" class="button" data-i18n="menu:start.button">Играть</div>
+                <div id="publicGameBox">
+                    <input type="checkbox" id="publicGame" name="publicGame" checked="checked"/>
+                    <label for="publicGame" data-i18n="menu:start.public">Разрешить всем подключаться</label>
+                </div>
+                <div id="joinGame" class="button" data-i18n="menu:join.button">Подключиться</div>
+                <div id="setupButton" class="button" data-i18n="menu:setup.button">Внешний вид</div>
+            </div>
+            <div id="version">v1.0.0</div>
+            <div id="privacyLink">
+                <a href="https://www.indiesoft.by/fantasy-sandbox-privacy.html" target="_blank" data-i18n="menu:privacy">Privacy Policy</a>
+            </div>
+            <div id="join" class="panel">
+                <button id="closeJoinButton" class="button">X</button>
+                <div class="label" data-i18n="menu:join.enter_id">Введите ID сервера</div>
+                <input type="text" id="serverId" class="textfield" minlength="4" maxlength="4" required autocomplete="off" data-1p-ignore data-lpignore="true"/>
+                <div id="joinButton" class="button" data-i18n="menu:join.connect">Войти</div>
+                <div class="label selectRoom">
+                    <span data-i18n="menu:join.choose_room">Или выберите сервер</span>
+                    <div id="refreshRoomList"></div>
+                </div>
+                <div class="scrollableList">
+                    <div class="rtable rtable--3cols" id="roomList"></div>
+                    <div class="label refreshing" id="roomRefreshing" data-i18n="menu:join.room_list_refreshing">Загрузка...</div>
+                </div>
+            </div>
+            <div id="cancelButton" class="button" data-i18n="menu:join.cancel">Отмена</div>
+            <div id="inviteFriendPanel" class="overlay">
+                <div class="panel">
+                    <button id="closeInviteFriendButton" class="button">X</button>
+                    <div class="label" data-i18n="menu:invite.server_id">ID текущего сервера</div>
+                    <div id="serverLink">-----</div>
+                    <div class="label" data-i18n="menu:invite.send_the_link">Отправьте друзьям ссылку для подключения к вам:</div>
+                    <div id="inviteLink"></div>
+                    <div id="inviteButton" class="button" data-i18n="menu:invite.copy">Скопировать</div>
+                    <div id="shareButton" class="button" data-i18n="menu:invite.share">Поделиться</div>
+                </div>
+            </div>
+            <div id="setup" class="panel">
+                <div class="label" data-i18n="menu:setup.player_name">Имя игрока</div>
+                <input type="text" id="playerName" class="textfield" maxlength="20" autocomplete="off" data-1p-ignore data-lpignore="true"/>
+                <div class="configpanel">
+                    <div class="option">
+                        <div class="optionLabel" data-i18n="menu:setup.head">Голова</div>
+                        <select class="optionSelect" id="headSelect">
+                            <option value="a" data-i18n="menu:setup.a">A</option>
+                            <option value="b" data-i18n="menu:setup.b">B</option>
+                            <option value="c" data-i18n="menu:setup.c">C</option>
+                            <option value="d" data-i18n="menu:setup.d">D</option>
+                            <option value="grandpa" data-i18n="menu:setup.grandpa">Grandpa</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <div class="optionLabel" data-i18n="menu:setup.body">Тело</div>
+                        <select class="optionSelect" id="bodySelect">
+                            <option value="a" data-i18n="menu:setup.a">A</option>
+                            <option value="b" data-i18n="menu:setup.b">B</option>
+                            <option value="c" data-i18n="menu:setup.c">C</option>
+                            <option value="d" data-i18n="menu:setup.d">D</option>
+                            <option value="grandpa" data-i18n="menu:setup.grandpa">Grandpa</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <div class="optionLabel" data-i18n="menu:setup.arms">Руки</div>
+                        <select class="optionSelect" id="armsSelect">
+                            <option value="a" data-i18n="menu:setup.a">A</option>
+                            <option value="b" data-i18n="menu:setup.b">B</option>
+                            <option value="c" data-i18n="menu:setup.c">C</option>
+                            <option value="d" data-i18n="menu:setup.d">D</option>
+                            <option value="grandpa" data-i18n="menu:setup.grandpa">Grandpa</option>
+                        </select>
+                    </div>
+                    <div class="option">
+                        <div class="optionLabel" data-i18n="menu:setup.legs">Ноги</div>
+                        <select class="optionSelect" id="legsSelect">
+                            <option value="a" data-i18n="menu:setup.a">A</option>
+                            <option value="b" data-i18n="menu:setup.b">B</option>
+                            <option value="c" data-i18n="menu:setup.c">C</option>
+                            <option value="d" data-i18n="menu:setup.d">D</option>
+                            <option value="grandpa" data-i18n="menu:setup.grandpa">Grandpa</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="doneButton" class="button" data-i18n="menu:setup.save">Сохранить</div>
+            </div>
+            <div id="settingsPanel" class="overlay">
+                <div class="panel">
+                    <button id="closeButton" class="button">X</button>
+                    <div id="settingButtons">
+                        <div>
+                            <button id="soundButton" class="button"></button>
+                        </div>
+                        <div>
+                            <button id="musicButton" class="button"></button>
+                        </div>
+                    </div>
+                    <div id="guestSettingsLabel" class="label" data-i18n="menu:settings.only_for_hosts">Настройки сервера доступны только игроку-хосту.</div>
+                    <div id="serverSettingsLabel" class="label" data-i18n="menu:settings.server_settings">Настройки сервера</div>
+                    <div id="changeWorldSetting" class="setting label">
+                        <div class="settingLabel" data-i18n="menu:settings.editable_world">Друзья могут редактировать ваш мир</div>
+                        <div id="changeWorldButton" class="settingButton mapButton">Да</div>
+                    </div>
+                    <div id="resetMapButton" class="button" data-i18n="menu:settings.reset_map">Сбросить мир</div>
+                    <div id="exitMapButton" class="button" data-i18n="menu:settings.exit_map">Выйти из игры</div>
+                    <div id="aboutButton" class="button" data-i18n="menu:settings.about">Авторы</div>
+                </div>
+            </div>
+            <input id="chatinput" type="text" data-i18n="[placeholder]menu:chat.text_placeholder" placeholder="Текст сообщения" autocomplete="off" data-1p-ignore data-lpignore="true"/>
+            <input id="portalinput" type="text"/>
+            <div id="tooltip" class="displayNone"></div>
+            <div id="confirm" class="overlay">
+                <div class="popup">
+                    <label>Подтверждение</label>
+                    <div class="buttons">
+                        <div class="button no" data-i18n="menu:confirm.no">Нет</div>
+                        <div class="button yes" data-i18n="menu:confirm.yes">Да</div>
+                    </div>
+                </div>
+            </div>
+            <div id="alert" class="overlay">
+                <div class="popup">
+                    <label>Предупреждение</label>
+                    <div class="buttons">
+                        <div class="button ok" data-i18n="menu:alert.ok">OK</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="codePanel">
+            <div id="codeEditor"></div>
+            <div id="codeBar">
+                <div id="codeDownloadButton" class="mapButton">Download</div>
+                <div id="codeCancelButton" class="mapButton">Cancel</div>
+                <div id="codeSaveButton" class="mapButton">Save</div>
+            </div>
+        </div>
+        <div id="adOverlay" class="overlay hide"></div>
+        <div id="splash"></div>
+        <input id="fileInput" type="file" style="visibility:hidden"/>
+        <input id="modInput" type="file" style="visibility:hidden"/>
+        <script src="bundle.js?v=91.24"></script>
+    </body>
+</html>

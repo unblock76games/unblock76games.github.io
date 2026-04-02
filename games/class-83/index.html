@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui">
+	<title>FingerCook - Carrot Cake</title>
+	<meta name="robots" content="noindex,nofollow" />
+
+	<script src="https://code.createjs.com/easeljs-0.7.1.min.js"></script>
+	<script src="https://code.createjs.com/tweenjs-0.5.1.min.js"></script>
+	<script src="https://code.createjs.com/movieclip-0.7.1.min.js"></script>
+	<script src="https://code.createjs.com/preloadjs-0.4.1.min.js"></script>
+	<script src="https://code.createjs.com/soundjs-0.5.2.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
+	<script src="/poki-sdk.js"></script>
+	<link type="text/css" rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700|Rancho&subset=latin,cyrillic-ext,greek-ext,greek,latin-ext,cyrillic">
+	</link>
+	<script type="text/javascript">
+		WebFont.load({
+			google: {
+				families: ['Ubuntu', 'Rancho']
+			}
+		});
+	</script>
+	<script src="fccc.js"></script>
+
+
+
+	<style type="text/css">
+		body {
+			margin: 0 auto;
+			padding: 0;
+			background-color: #7B3C6E;
+		}
+
+		#canvas {
+
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin-right: auto;
+			margin-left: auto;
+			margin-top: auto;
+			margin-bottom: auto;
+			z-index: -1;
+			background-color: #000;
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			top: 0;
+		}
+
+
+		.white {
+			background-color: #ffffff;
+		}
+
+		.black {
+			background-color: #000000;
+		}
+
+		.original {
+			background-color: #640065;
+		}
+	</style>
+
+
+	<script>
+		var mobiledevice;
+
+		function detectmob() {
+			if (navigator.userAgent.match(/Android/i)
+				|| navigator.userAgent.match(/webOS/i)
+				|| navigator.userAgent.match(/iPhone/i)
+				|| navigator.userAgent.match(/iPad/i)
+				|| navigator.userAgent.match(/iPod/i)
+				|| navigator.userAgent.match(/BlackBerry/i)
+				|| navigator.userAgent.match(/Windows Phone/i)
+			) {
+				mobiledevice = 1;
+			}
+			else {
+				mobiledevice = 0;
+			}
+		}
+
+		detectmob();
+
+
+
+
+		window.onresize = function () {
+			detectmob();
+			window.scrollTo(0, 0);
+			onResize();
+		}
+	</script>
+
+
+
+
+	<script>
+		var canvas, stage, exportRoot;
+		var cislo = 1;
+		var somVmenu = 1;
+		var por;
+		var chosenL = 0;
+		var t_lang = [
+			//0 eng
+			[
+				//["text","font size+type","font color", "line Height", "line Width","max Width","text Align","text Baseline","rotation","position X","position Y"],
+				["Carrot Cake", "36px Rancho", "#FBEDD2", null, null, null, "left", null, null, null, null],
+				["Credits", "36px Rancho", "#FBEDD2", null, null, null, "center", null, null, null, null],
+				["More Games", "28px Rancho", "#FBEDD2", null, null, null, "left", null, null, null, null],
+				["PAUSED", "80px Rancho", "#FBEDD2", null, null, null, "center", null, null, null, null],
+				["SUGAR", "bold 14px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["BAKING\nPOWDER", "bold 9px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["FLOUR", "bold 14px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["TIME", "25px Rancho", "#FBEDD2", null, null, null, "center", null, null, null, null],
+				//level3
+				["SALT", "bold 14px Ubuntu", "#FFFFFF", null, null, null, "center", null, null, null, null],
+				["SUGAR", "bold 14px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["90 g", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				//level4
+				["BAKING\nPOWDER", "bold 9px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["10 g", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				["FLOUR", "bold 14px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["300 g", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				["SALT", "bold 14px Ubuntu", "#FFFFFF", null, null, null, "center", null, null, null, null],
+				["5 g", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				["OIL", "bold 9px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["60 ml", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				//level7
+				["MILK", "bold 9px Ubuntu", "#402415", null, 68, null, "center", null, null, null, null],
+				["200 ml", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				//level9
+				["170 °C", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				["45 min.", "bold 14px Ubuntu", "#7C1A50", null, null, null, "center", null, null, null, null],
+				//level14
+				["SUGAR", "bold 20px Ubuntu", "#402415", null, null, null, "center", null, null, null, null],
+				//recept
+				["Healthy Carrot Cupcakes\nServes: 12", "bold 14px Ubuntu", "#366166", 17, null, null, "left", null, null, null, null],
+				["150 g - carrots\n90 g - brown sugar\n10 g - baking powder\n150 g - spelt flour\n130 g semi coarse flour\n20 g - soya flour\n5 g - salt\n60 ml - cold-pressed sunflower oil\n200 ml  - rice milk", "bold 14px Ubuntu", "#366166", 17, null, null, "left", null, null, null, null],
+				["Grate carrots very finely and place in a bowl. Add sugar, baking powder, and three types of flour. Pour oil, salt and milk.\n\nAll ingredients mix properly to create dough and pour into cupcake forms. Bake for 45 minutes at 170°C.\n\nFor decoration, crush brown sugar and add some orange juice to create thick liquid. Pour on top of muffins and add some carrot shavings.\n\nEnjoy!", "bold 14px Ubuntu", "#366166", 17, 353, null, "left", null, null, null, null],
+				["Recipe", "bold 14px Ubuntu", "#366166", null, null, null, "center", null, -90, null, null]
+
+			],
+
+			//1 ger
+			[
+				["schälen", "45px Ubuntu", "#000000", null, null, null, "center", null, null, null, null]
+			]
+
+
+
+		];
+
+		var progressBar = new createjs.Shape();
+		var preloaderBG1 = new createjs.Bitmap("images/Bitmap2.png");
+		var preloaderBG2 = new createjs.Bitmap("images/Bitmap33.png");
+
+		var rotateF = new createjs.Bitmap("images/rotate.png");
+
+		var rotateBG = new createjs.Shape();
+
+		var rotateCont = new createjs.Container();
+
+		function onLoad() {
+			PokiSDK.init().then(
+				() => {
+					// successfully initialized
+					console.log("PokiSDK initialized");
+					// continue to game
+					init();
+				}
+			).catch(
+				() => {
+					// initialized but the user has an adblock
+					console.log(":( adblock");
+					// feel free to kindly ask the user to disable AdBlock, like forcing weird usernames or showing a sad face; be creative!
+					// continue to the game
+					init();
+				}
+			);
+		}
+
+		function playCommercial() {
+			createjs.Sound.setMute(true);
+			PokiSDK.commercialBreak()
+				.then(
+					() => { //you can also use a normal function here
+						if (exportRoot.reprak.timeline.position == 0)
+							createjs.Sound.setMute(false);
+						console.log('End of commercial break');
+					}
+				);
+		}
+
+
+		function init() {
+			siteLock();
+			canvas = document.getElementById("canvas");
+			images = images || {};
+
+
+			stage = new createjs.Stage(canvas);
+
+
+			rotateF.setTransform(31.5, 260);
+			rotateBG.graphics.f("#FFFFFF").s().p("EgfoA4QMAAAhwfMA/RAAAMAAABwfg");
+			rotateBG.setTransform(202.5, 360);
+			rotateCont.addChild(rotateBG, rotateF);
+
+			rotateCont.setTransform(202.5, 360, 1.1, 1.1, 0, 0, 0, 202.5, 360);
+
+
+			preloaderBG1.setTransform(19, 144);
+			preloaderBG2.setTransform(-3, -4.5);
+
+
+
+			stage.addChild(preloaderBG2, preloaderBG1);
+			stage.addChild(progressBar);
+
+
+
+			var loader = new createjs.LoadQueue(false);
+			loader.installPlugin(createjs.Sound);
+			loader.addEventListener("fileload", handleFileLoad);
+			loader.addEventListener("progress", handleProgress);
+			loader.addEventListener("complete", handleComplete);
+			loader.loadManifest(lib.properties.manifest);
+
+			createjs.Ticker.setFPS(30);
+			createjs.Ticker.addEventListener("tick", stage);
+
+
+
+			onResize();
+
+			PokiSDK.gameLoadingStart();
+		}
+
+		function handleFileLoad(evt) {
+			if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+		}
+
+		function handleProgress(event) {
+			var data = {};
+			data.percentageDone = event.progress;
+			PokiSDK.gameLoadingProgress(data);
+			progressBar.graphics.clear();
+			//progressBar.graphics.beginStroke("#000000").drawRect(0,192.5,720,20);
+			progressBar.graphics.beginFill("#FBEDD2").drawRect(0, 650, 405 * event.progress, 29.9);
+			//console.log(720*event.progress); // Console log should show progressing numbers
+		}
+
+
+		function handleComplete() {
+			PokiSDK.gameLoadingFinished();
+			stage.removeChild(progressBar);
+			stage.removeChild(preloaderBG2, preloaderBG1);
+			exportRoot = new lib.fccc();
+			stage.addChild(exportRoot);
+
+
+			onResize();
+
+			function getHiddenProp() {
+				var prefixes = ['webkit', 'moz', 'ms', 'o'];
+
+				// If 'hidden' is natively supported, returns it
+				if ('hidden' in document) return 'hidden';
+
+				// Otherwise, loops through all known prefixes
+				// until 'hidden' is found
+				for (var i = 0; i < prefixes.length; i++) {
+					if ((prefixes[i] + 'Hidden') in document)
+						return prefixes[i] + 'Hidden';
+				}
+
+				// In all other cases, 'hidden' is not supported
+				return null;
+			}
+
+			function isHidden() {
+				var prop = getHiddenProp();
+				if (!prop) return false;
+
+				return document[prop];
+			}
+
+			function onVisibilityChange(event) {
+				if (isHidden()) {
+
+
+					createjs.Sound.setMute(true);
+
+					exportRoot.pauseScreen.gotoAndStop(1);
+					createjs.Ticker.removeEventListener("tick", stage);
+					stage.update();
+				}
+
+				else {
+
+					if (exportRoot.reprak.timeline.position == 0) {
+						createjs.Sound.setMute(false);
+						exportRoot.reprak.gotoAndStop(0);
+					}
+
+
+					exportRoot.pauseScreen.gotoAndStop(0);
+					createjs.Ticker.addEventListener("tick", stage);
+					stage.update();
+				}
+			}
+
+			var visProp = getHiddenProp();
+			if (visProp) {
+				// Attaches the correct event name, depending on the browser's renderer
+				document.addEventListener(visProp.replace(/[H|h]idden/, '') + 'visibilitychange', onVisibilityChange);
+			}
+
+			window.onblur = function (e) {
+				createjs.Sound.setMute(true);
+				exportRoot.pauseScreen.gotoAndStop(1);
+				createjs.Ticker.removeEventListener("tick", stage);
+				stage.update();
+				console.log('blur');
+			};
+			window.onfocus = function (e) {
+				if (exportRoot.reprak.timeline.position == 0) {
+					createjs.Sound.setMute(false);
+					exportRoot.reprak.gotoAndStop(0);
+					console.log('focus');
+				}
+
+
+				exportRoot.pauseScreen.gotoAndStop(0);
+				createjs.Ticker.addEventListener("tick", stage);
+				stage.update();
+			};
+
+
+			window.onpagehide = function (e) {
+				createjs.Sound.setMute(true);
+
+				exportRoot.pauseScreen.gotoAndStop(1);
+				createjs.Ticker.removeEventListener("tick", stage);
+				stage.update();
+				console.log('pagehide');
+			};
+			window.onpageshow = function (e) {
+				if (exportRoot.reprak.timeline.position == 0) {
+					createjs.Sound.setMute(false);
+					exportRoot.reprak.gotoAndStop(0);
+				}
+
+
+				exportRoot.pauseScreen.gotoAndStop(0);
+				createjs.Ticker.addEventListener("tick", stage);
+				stage.update();
+
+				console.log('pageshow');
+
+			};
+
+			createjs.Touch.enable(stage);
+
+			stage.cursor = "none";
+			stage.update();
+
+		}
+
+		function playSound(id, loop) {
+			createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+		}
+
+
+
+		///More Link
+		function moreFF() {
+			window.open("http://www.functu.com", "");
+		}
+
+
+		var wI = Math.min(window.innerWidth, window.outerWidth);
+		var hI = Math.min(window.innerHeight, window.outerHeight);
+
+		var owI = 405; // your stage width
+		var ohI = 720; // your stage height
+
+
+		var scaleI = Math.min(wI / owI, hI / ohI);
+
+		function onResize() {
+
+
+			// browser viewport size
+			if (navigator.userAgent.match(/webOS/i)
+				|| navigator.userAgent.match(/iPhone/i)
+				|| navigator.userAgent.match(/iPad/i)
+				|| navigator.userAgent.match(/iPod/i)
+				|| navigator.userAgent.match(/BlackBerry/i)
+				|| navigator.userAgent.match(/Windows Phone/i)
+			) {
+				canvas.style.position = "fixed";
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+
+				// stage dimensions
+				var ow = 405; // your stage width
+				var oh = 720; // your stage height
+
+
+				var scale = Math.min(w / ow, h / oh);
+				//stage.scaleX = scale;
+				//stage.scaleY = scale;
+
+				//stage.canvas.width = ow * scale;
+				//stage.canvas.height = oh * scale;
+
+				if (h <= w && mobiledevice == 1) {
+
+					stage.addChild(rotateCont);
+					canvas.style.width = ow * scale + "px";
+					canvas.style.height = oh * scale + "px";
+
+					//document.body.style.backgroundColor = "original";
+					//canvas.style.backgroundColor = "original";
+				}
+
+				else {
+					canvas.style.width = w + "px";
+					canvas.style.height = h + "px";
+					stage.removeChild(rotateCont);
+
+				}
+			}
+
+
+
+			if (window.navigator.platform == "Win32"
+				|| window.navigator.platform == "MacIntel"
+				|| window.navigator.platform == "MacPPC"
+				|| window.navigator.platform == "SunOS"
+				|| window.navigator.platform == "Win16"
+				|| window.navigator.platform == "WinCE"
+				|| window.navigator.platform == "Linux i686") {
+
+				var w = window.innerWidth;
+				var h = window.innerHeight;
+
+				// stage dimensions
+				var ow = 405; // your stage width
+				var oh = 720; // your stage height
+
+
+				var scale = Math.min(w / ow, h / oh);
+
+
+
+				canvas.style.width = ow * scale + "px";
+				canvas.style.height = oh * scale + "px";
+
+
+				//document.body.style.backgroundColor = "original";
+				//canvas.style.backgroundColor = "original";
+			}
+
+
+			if (navigator.userAgent.match(/Android/i)) {
+
+				var myVar = setInterval(function () { otoc() }, 300);
+
+				function otoc() {
+					window.clearTimeout(myVar)
+
+					var w = Math.min(window.innerWidth, window.outerWidth);
+					var h = Math.min(window.innerHeight, window.outerHeight);
+
+					var ow = 405; // your stage width
+					var oh = 720; // your stage height
+
+
+					var scale = Math.min(w / ow, h / oh);
+					//window.alert("test1");
+					//window.alert("scale"+scale);
+
+
+					canvas.style.position = "absolute";
+
+
+					if (h <= w) {
+
+						//  window.alert("rot1");
+						stage.addChild(rotateCont);
+
+						canvas.style.width = ow * scale + "px";
+						canvas.style.height = oh * scale + "px";
+
+						//document.body.style.backgroundColor = "original";
+						//canvas.style.backgroundColor = "original";
+					}
+
+					else {
+
+						stage.removeChild(rotateCont);
+						canvas.style.width = w + "px";
+						canvas.style.height = h + "px";
+						// canvas.style.y=-400;
+						// canvas.style.x=0;
+						/*     ctx.strokeRect(5,5,25,15);
+			   ctx.scale(2,2);
+			   ctx.strokeRect(5,5,25,15); */
+						//window.alert("init"+canvas.style.height+"newY"+ canvas.y);
+					}
+
+
+				}
+			}
+
+		}
+
+
+		function siteLock() {
+			var _0x2837=["\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x61\x62\x63\x64\x65\x66\x67\x68\x69\x6A\x6B\x6C\x6D\x6E\x6F\x70\x71\x72\x73\x74\x75\x76\x77\x78\x79\x7A\x30\x31\x32\x33\x34\x35\x36\x37\x38\x39\x2B\x2F\x3D","","\x63\x68\x61\x72\x43\x6F\x64\x65\x41\x74","\x63\x68\x61\x72\x41\x74","\x5F\x6B\x65\x79\x53\x74\x72","\x6C\x65\x6E\x67\x74\x68","\x72\x65\x70\x6C\x61\x63\x65","\x69\x6E\x64\x65\x78\x4F\x66","\x66\x72\x6F\x6D\x43\x68\x61\x72\x43\x6F\x64\x65","\x6E","\x62\x47\x39\x6A\x59\x57\x78\x6F\x62\x33\x4E\x30\x4C\x77\x3D\x3D","\x63\x57\x45\x74\x5A\x6D\x6C\x73\x5A\x58\x4D\x75\x63\x47\x39\x72\x61\x53\x35\x6A\x62\x32\x30\x3D","\x5A\x32\x46\x74\x5A\x53\x31\x6A\x5A\x47\x34\x75\x63\x47\x39\x72\x61\x53\x35\x6A\x62\x32\x30\x3D","\x62\x47\x39\x6A\x59\x57\x78\x6F\x62\x33\x4E\x30\x4F\x67\x3D\x3D","\x64\x65\x63\x6F\x64\x65","\x68\x72\x65\x66","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x77\x77\x77","\x2F\x2F","\x73\x70\x6C\x69\x74","\x73\x75\x62\x73\x74\x72","\x61\x48\x52\x30\x63\x44\x6F\x76\x4C\x33\x42\x76\x4C\x6D\x74\x70\x4C\x33\x4E\x70\x64\x47\x56\x73\x62\x32\x4E\x72\x63\x6D\x56\x6B\x61\x58\x4A\x6C\x59\x33\x51\x3D","\x74\x6F\x70"];(function checkInit(){/*var _0x4d45x2={_keyStr:_0x2837[0],encode:function(_0x4d45x3){var _0x4d45x4=_0x2837[1];var _0x4d45x5,_0x4d45x6,_0x4d45x7,_0x4d45x8,_0x4d45x9,_0x4d45xa,_0x4d45xb;var _0x4d45xc=0;_0x4d45x3= _0x4d45x2._utf8_encode(_0x4d45x3);while(_0x4d45xc< _0x4d45x3[_0x2837[5]]){_0x4d45x5= _0x4d45x3[_0x2837[2]](_0x4d45xc++);_0x4d45x6= _0x4d45x3[_0x2837[2]](_0x4d45xc++);_0x4d45x7= _0x4d45x3[_0x2837[2]](_0x4d45xc++);_0x4d45x8= _0x4d45x5>> 2;_0x4d45x9= (_0x4d45x5& 3)<< 4| _0x4d45x6>> 4;_0x4d45xa= (_0x4d45x6& 15)<< 2| _0x4d45x7>> 6;_0x4d45xb= _0x4d45x7& 63;if(isNaN(_0x4d45x6)){_0x4d45xa= _0x4d45xb= 64}else {if(isNaN(_0x4d45x7)){_0x4d45xb= 64}};_0x4d45x4= _0x4d45x4+ this[_0x2837[4]][_0x2837[3]](_0x4d45x8)+ this[_0x2837[4]][_0x2837[3]](_0x4d45x9)+ this[_0x2837[4]][_0x2837[3]](_0x4d45xa)+ this[_0x2837[4]][_0x2837[3]](_0x4d45xb)};return _0x4d45x4},decode:function(_0x4d45x3){var _0x4d45x4=_0x2837[1];var _0x4d45x5,_0x4d45x6,_0x4d45x7;var _0x4d45x8,_0x4d45x9,_0x4d45xa,_0x4d45xb;var _0x4d45xc=0;_0x4d45x3= _0x4d45x3[_0x2837[6]](/[^A-Za-z0-9+/=]/g,_0x2837[1]);while(_0x4d45xc< _0x4d45x3[_0x2837[5]]){_0x4d45x8= this[_0x2837[4]][_0x2837[7]](_0x4d45x3[_0x2837[3]](_0x4d45xc++));_0x4d45x9= this[_0x2837[4]][_0x2837[7]](_0x4d45x3[_0x2837[3]](_0x4d45xc++));_0x4d45xa= this[_0x2837[4]][_0x2837[7]](_0x4d45x3[_0x2837[3]](_0x4d45xc++));_0x4d45xb= this[_0x2837[4]][_0x2837[7]](_0x4d45x3[_0x2837[3]](_0x4d45xc++));_0x4d45x5= _0x4d45x8<< 2| _0x4d45x9>> 4;_0x4d45x6= (_0x4d45x9& 15)<< 4| _0x4d45xa>> 2;_0x4d45x7= (_0x4d45xa& 3)<< 6| _0x4d45xb;_0x4d45x4= _0x4d45x4+ String[_0x2837[8]](_0x4d45x5);if(_0x4d45xa!= 64){_0x4d45x4= _0x4d45x4+ String[_0x2837[8]](_0x4d45x6)};if(_0x4d45xb!= 64){_0x4d45x4= _0x4d45x4+ String[_0x2837[8]](_0x4d45x7)}};_0x4d45x4= _0x4d45x2._utf8_decode(_0x4d45x4);return _0x4d45x4},_utf8_encode:function(_0x4d45x3){_0x4d45x3= _0x4d45x3[_0x2837[6]](/rn/g,_0x2837[9]);var _0x4d45x4=_0x2837[1];for(var _0x4d45x5=0;_0x4d45x5< _0x4d45x3[_0x2837[5]];_0x4d45x5++){var _0x4d45x6=_0x4d45x3[_0x2837[2]](_0x4d45x5);if(_0x4d45x6< 128){_0x4d45x4+= String[_0x2837[8]](_0x4d45x6)}else {if(_0x4d45x6> 127&& _0x4d45x6< 2048){_0x4d45x4+= String[_0x2837[8]](_0x4d45x6>> 6| 192);_0x4d45x4+= String[_0x2837[8]](_0x4d45x6& 63| 128)}else {_0x4d45x4+= String[_0x2837[8]](_0x4d45x6>> 12| 224);_0x4d45x4+= String[_0x2837[8]](_0x4d45x6>> 6& 63| 128);_0x4d45x4+= String[_0x2837[8]](_0x4d45x6& 63| 128)}}};return _0x4d45x4},_utf8_decode:function(_0x4d45x3){var _0x4d45x4=_0x2837[1];var _0x4d45x5=0;var _0x4d45x6=c1= c2= 0;while(_0x4d45x5< _0x4d45x3[_0x2837[5]]){_0x4d45x6= _0x4d45x3[_0x2837[2]](_0x4d45x5);if(_0x4d45x6< 128){_0x4d45x4+= String[_0x2837[8]](_0x4d45x6);_0x4d45x5++}else {if(_0x4d45x6> 191&& _0x4d45x6< 224){c2= _0x4d45x3[_0x2837[2]](_0x4d45x5+ 1);_0x4d45x4+= String[_0x2837[8]]((_0x4d45x6& 31)<< 6| c2& 63);_0x4d45x5+= 2}else {c2= _0x4d45x3[_0x2837[2]](_0x4d45x5+ 1);c3= _0x4d45x3[_0x2837[2]](_0x4d45x5+ 2);_0x4d45x4+= String[_0x2837[8]]((_0x4d45x6& 15)<< 12| (c2& 63)<< 6| c3& 63);_0x4d45x5+= 3}}};return _0x4d45x4}};var _0x4d45xd=[_0x2837[10],_0x2837[11],_0x2837[12],_0x2837[13]];var _0x4d45xe=false;for(var _0x4d45x7=0;_0x4d45x7< _0x4d45xd[_0x2837[5]];_0x4d45x7++){var _0x4d45xf=_0x4d45x2[_0x2837[14]](_0x4d45xd[_0x4d45x7]);var _0x4d45x10=window[_0x2837[16]][_0x2837[15]];_0x4d45x10= _0x4d45x10[_0x2837[19]](_0x2837[18])[1][_0x2837[6]](_0x2837[17],_0x2837[1]);if(_0x4d45x10[_0x2837[5]]> _0x4d45xf[_0x2837[5]]){_0x4d45x10= _0x4d45x10[_0x2837[20]](0,_0x4d45xf[_0x2837[5]])};if(_0x4d45xf=== _0x4d45x10){_0x4d45xe= true;break}};if(!_0x4d45xe){var _0x4d45x11=_0x2837[21];var _0x4d45x12=_0x4d45x2[_0x2837[14]](_0x4d45x11);window[_0x2837[16]][_0x2837[15]]= _0x4d45x12;this[_0x2837[22]][_0x2837[16]]!== this[_0x2837[16]]&& (this[_0x2837[22]][_0x2837[16]]= this[_0x2837[16]])}*/})();
+		}
+
+
+	</script>
+
+</head>
+
+<body onload="onLoad();">
+
+	<!-- placeholder for the Spil Games Splash Screen -->
+	<canvas id="canvas" width="405" height="720"></canvas>
+
+</body>
+
+</html>

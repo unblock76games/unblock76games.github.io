@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- poki start-->
+  <script src="/poki-sdk.js"></script>
+  <meta name="robots" content="noindex,nofollow" />
+  <script src="sparrow.js"></script>
+  <script>
+    PokiSDK.init().then(() => {
+        console.log("Poki SDK successfully initialized");
+        pokiInitDone = true;
+    }).catch(() => {
+        console.log("Initialized, something went wrong, load you game anyway");
+        pokiInitDone = true;
+    });
+  </script>
+
+  <!--<base href="/">-->
+  <base href="./">
+  <!-- poki-end -->
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Paint the Flag of nations around the world">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Flag Paint">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>puzzle1</title>
+  <link rel="manifest" href="manifest.json">
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = "789582556";
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
+</head>
+<body>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      //window.flutterWebRenderer="canvaskit";
+      window.flutterWebRenderer="html";
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        },
+        onEntrypointLoaded: async function(engineInitializer) {
+        let appRunner = await engineInitializer.initializeEngine({
+            canvasKitBaseUrl: "./canvaskit/"
+          });
+          appRunner.runApp();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

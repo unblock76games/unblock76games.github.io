@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+	<meta charset=UTF-8>
+	<title>Bubble Trouble</title>
+	<meta name="robots" content="noindex,nofollow" />
+	<meta name=viewport content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name=HandheldFriendly content=True>
+	<meta name=MobileOptimized content=320>
+	<meta http-equiv=cleartype content=on>
+	<meta name=format-detection content="telephone=no">
+	<style>
+		body {
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			background-color: #000;
+			overflow: hidden
+		}
+
+		:root {
+			--sat: env(safe-area-inset-top);
+			--sar: env(safe-area-inset-right);
+			--sab: env(safe-area-inset-bottom);
+			--sal: env(safe-area-inset-left)
+		}
+	</style>
+	<link rel=icon href="data:;base64,=">
+	<script src=/poki-sdk.js> </script> </head> <body style=background-color:#fff>
+		<div id=bt-preloader><div class=bt-loading><div class=bt-infotext>Loading...</div><div class=bt-infoAlmostDone>STARTING...</div><label class=bt-text>Completed!</label><div class=bt-progress-bar><div class=bt-progress></div></div></div><style>@import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100);#bt-preloader{font-family:Roboto;background:#ff5b01;width:100vw;height:100vh}.bt-loading{display:flex;min-height:100vh;flex-direction:column;flex-wrap:nowrap;align-content:center;align-items:center}.bt-infotext{color:#d4d909;font-size:18px;font-weight:400;text-align:center;bottom:62px;display:inline-flex;position:fixed}.bt-infoAlmostDone{color:#d6d90961;font-size:48px;font-weight:400;text-align:center;bottom:150px;display:none;position:fixed}.bt-progress-bar{width:100vw;height:20px;box-sizing:border-box;position:fixed;bottom:22px}.bt-progress{width:10px;height:20px;background:#d4d909}.bt-text{position:fixed;left:50vw;color:#d4d909;font-size:13px;letter-spacing:1px;line-height:21px;bottom:44px}</style><script>var opinions=["Loading BUBBLE COLORS...","Loading ICE WINE weapon...","Loading 2 PLAYER levels...","Loading SINGLE PLAYER levels...","Loading REVERSE GRAVITY...","Preparing VERTICAL SHOT math...","Loading THE last level...","Preparing INVINCIBILITY...","Preparing MEDAL item...","Loading DOUBLE HARPOON weapon...","Loading ESSENTIAL sounds...","Loading BASIC animations...","Loading animation LADDER SLIDING...","Loading ICE SKATING...","Loading TRAMPOLINE POWER...","Preparing FREEZE item...","Loading hit collision code..."];document.querySelector("#bt-preloader").style.background="#0090ff";var titleText=document.querySelector(".bt-infoAlmostDone");titleText.textContent="BUBBLE TROUBLE III",titleText.style.fontSize="24px",titleText.style.display="inline-flex"
+	</script>
+	<script>
+		var msgCounter=Math.floor(Math.random()*opinions.length),showAlmostDone=0,progressFunction=function(){++msgCounter>=opinions.length&&(msgCounter=0);var t=document.querySelector(".bt-infotext");if(null!=t){t.textContent=opinions[msgCounter],6<=++showAlmostDone&&(document.querySelector(".bt-infoAlmostDone").style.display="inline-flex");var o=document.querySelector(".bt-progress"),e=document.querySelector(".bt-text"),n=6*Math.random(),r=setInterval(function(){n+=4,o.style.width=n+"vw",100<=n?(e.style.display="block",e.textContent="100%",clearInterval(r),progressFunction()):e.textContent=Math.floor(n)+"%"},85+220*Math.random())}};progressFunction(),"undefined"!=typeof PokiSDK&&PokiSDK.gameLoadingStart()
+	</script>
+	</div>
+	<div id=bubble-trouble style=display:none></div>
+	<script type=text/javascript src=dist/vendors~app~vendor.js> </script> <script type=text/javascript
+		src=dist/vendors~app.js> </script> <script type=text/javascript src=dist/app.js> </script> <script
+		type=text/javascript src=dist/vendor.js> </script> </body> </html>

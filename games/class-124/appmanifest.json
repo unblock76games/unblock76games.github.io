@@ -1,0 +1,12 @@
+{
+	"name": "GlamGirlMakeover",
+	"short_name": "GlamGirlMakeover",
+	"description": "",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "any",
+	"background_color": "#ffaec8",
+	"icons": [],
+	"screenshots": [],
+	"theme_color": "#ffaec8"
+}

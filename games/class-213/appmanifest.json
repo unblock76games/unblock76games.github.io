@@ -1,0 +1,10 @@
+{
+	"name": "poki_puzzles",
+	"short_name": "poki_puzzles",
+	"description": "Fun puzzle solving game with hundreds of images",
+	"start_url": "index.html",
+	"display": "fullscreen",
+	"orientation": "any",
+	"background_color": "#ffffff",
+	"icons": []
+}

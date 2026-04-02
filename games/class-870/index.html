@@ -1,0 +1,326 @@
+<!doctypehtml>
+<html lang=en-us>
+    <head>
+        <meta charset=utf-8>
+        <meta content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" name=viewport>
+        <script src=/poki-sdk.js></script>
+        <title>Phox Forage</title>
+        <meta name="robots" content="noindex,nofollow" />
+        <style>
+            body {
+                margin: 0;
+                background-image: url('files/background.png')
+            }
+
+            .emscripten {
+                position: absolute;
+                top: 0;
+                left: 0;
+                margin: 0;
+                border: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                display: block
+            }
+
+            canvas {
+                outline: 0;
+                border: 0
+            }
+
+            @font-face {
+                font-family: Boleh;
+                src: url('files/boleh.otf')
+            }
+
+            #loadingContainer {
+                width: 100%;
+                height: 100%
+            }
+
+            .progress {
+                width: 60%;
+                height: 5%;
+                max-height: 15%;
+                background-color: #7f2247;
+                border-radius: 35px;
+                margin-bottom: 10px;
+                border: 7px solid #7f2247;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative
+            }
+
+            #progress-bar {
+                height: 100%;
+                transition: width .3s ease;
+                background-color: #fff;
+                border-radius: 100px
+            }
+
+            .logo {
+                height: 30%;
+                max-width: 640px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 15vh;
+                margin-top: 15vh
+            }
+
+            .head {
+                float: right;
+                transform: translate(10%,-78%);
+                height: 300%
+            }
+
+            #loadingText {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                text-shadow: 4px 4px 0 #7e2145;
+                color: #fff;
+                font-family: boleh;
+                font-size: 5vh;
+                margin-top: 30px
+            }
+
+            .dot-one {
+                animation: dot-one 2s infinite linear
+            }
+
+            .dot-two {
+                animation: dot-two 2s infinite linear
+            }
+
+            .dot-three {
+                animation: dot-three 2s infinite linear
+            }
+
+            .gelatine {
+                animation: gelatine 1.5s infinite
+            }
+
+            @keyframes gelatine {
+                from,to {
+                    transform: scale(1,1)
+                }
+
+                25% {
+                    transform: scale(.95,1.02)
+                }
+
+                50% {
+                    transform: scale(1.02,.95)
+                }
+
+                75% {
+                    transform: scale(.95,1.02)
+                }
+            }
+
+            .apple {
+                position: absolute;
+                right: 0;
+                height: 180%;
+                transform: translate(10%,-30%)
+            }
+
+            .appleGlow {
+                position: absolute;
+                right: 0;
+                height: 300%;
+                animation: rotateImage 8s linear infinite
+            }
+
+            @keyframes rotateImage {
+                from {
+                    transform: translate(30%,-34%) rotate(0)
+                }
+
+                to {
+                    transform: translate(30%,-34%) rotate(360deg)
+                }
+            }
+
+            @keyframes loadingAnimation {
+                0% {
+                    content: "Loading"
+                }
+
+                33% {
+                    content: "Loading."
+                }
+
+                66% {
+                    content: "Loading.."
+                }
+
+                100% {
+                    content: "Loading..."
+                }
+            }
+
+            @keyframes dot-one {
+                0% {
+                    opacity: 0
+                }
+
+                15% {
+                    opacity: 0
+                }
+
+                25% {
+                    opacity: 1
+                }
+
+                100% {
+                    opacity: 1
+                }
+            }
+
+            @keyframes dot-two {
+                0% {
+                    opacity: 0
+                }
+
+                25% {
+                    opacity: 0
+                }
+
+                50% {
+                    opacity: 1
+                }
+
+                100% {
+                    opacity: 1
+                }
+            }
+
+            @keyframes dot-three {
+                0% {
+                    opacity: 0
+                }
+
+                50% {
+                    opacity: 0
+                }
+
+                75% {
+                    opacity: 1
+                }
+
+                100% {
+                    opacity: 1
+                }
+            }
+
+            @media only screen and (max-width: 600px) {
+                .logo {
+                    width:70%;
+                    height: auto
+                }
+
+                .progress {
+                    height: 3vh;
+                    width: 90%
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class=emscripten>
+            <div id=loadingContainer>
+                <img class="gelatine logo" src=files/logo.png>
+                <div class=progress>
+                    <img class=appleGlow src=files/appleGlow.png>
+                    <img class=apple src=files/apple.png>
+                    <div id=progress-bar style=width:5%>
+                        <img class=head src=files/player.gif>
+                    </div>
+                </div>
+                <span id=loadingText>
+                    Loading<span class=dot-one>.</span>
+                    <span class=dot-two>.</span>
+                    <span class=dot-three>.</span>
+                    <br>
+                    <span id=loadingPercent>0%</span>
+                </span>
+            </div>
+        </div>
+        <canvas class=emscripten id=canvas tabindex=-1></canvas>
+        <script>
+            var Game = {
+                adPlaying: 0
+            };
+            function adStarted() {
+                Game.adPlaying = 1
+            }
+            function adFinished() {
+                Game.adPlaying = 0
+            }
+            PokiSDK.init().then(( () => {
+                console.log("Poki SDK successfully initialized")
+            }
+            )).catch(( () => {
+                console.log("Initialized, but the user likely has adblock")
+            }
+            ));
+            var loadingElement = document.getElementById("progress-bar")
+              , percentageElement = document.getElementById("loadingPercent")
+              , Module = {
+                preRun: [function() {}
+                ],
+                postRun: [],
+                print: function(e) {
+                    e = Array.prototype.slice.call(arguments).join(" "),
+                    console.log(e)
+                },
+                printErr: function(e) {
+                    e = Array.prototype.slice.call(arguments).join(" "),
+                    console.error(e)
+                },
+                canvas: function() {
+                    var e = document.getElementById("canvas");
+                    return e.addEventListener("webglcontextlost", (function(e) {
+                        alert("WebGL context lost. You will need to reload the page."),
+                        e.preventDefault()
+                    }
+                    ), !1),
+                    e
+                }(),
+                setStatus: function(e) {
+                    if (Module.setStatus.last || (Module.setStatus.last = {
+                        time: Date.now(),
+                        text: ""
+                    }),
+                    e !== Module.setStatus.last.text) {
+                        var t = e.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/)
+                          , n = Date.now();
+                        if (!(t && n - Module.setStatus.last.time < 5))
+                            if (Module.setStatus.last.time = n,
+                            Module.setStatus.last.text = e,
+                            t) {
+                                e = t[1];
+                                var o = parseInt(t[2] / t[4] * 98);
+                                o > 5 && (loadingElement.style.width = o + "%"),
+                                loadingPercent.innerHTML = o + "%"
+                            } else
+                                loadingElement.style.width = "95%"
+                    }
+                },
+                monitorRunDependencies: function(e) {},
+                onRuntimeInitialized: function() {
+                    loadingElement.style.width = "95%",
+                    document.getElementById("loadingContainer").hidden = !0
+                }
+            };
+            window.onerror = function() {
+                console.log("onerror: " + event),
+                document.getElementById("loadingText").textContent = "Loading Error: Please refresh the page!"
+            }
+        </script>
+        <script src=index.js async></script>
+    </body>
+</html>
